@@ -30,6 +30,12 @@ for a working, opinionated version.
 - About 30 minutes for first-time setup
 - *Optional:* a USAJobs API key if you want federal jobs (free, 2 min to get)
 
+## Docs
+
+- **[docs/SETUP.md](docs/SETUP.md)** — first-time setup (wizard or manual)
+- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — how the layers fit together
+- **[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)** — adding scrapers, the roadmap, design decisions
+
 ## Setup
 
 See [docs/SETUP.md](docs/SETUP.md) for the full walkthrough. Short version:
