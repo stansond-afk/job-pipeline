@@ -1,0 +1,19 @@
+# Production dependencies for job-pipeline.
+#
+# Versions are pinned to a minor floor (>=) — security patches flow through
+# without lockstep updates. If a future version breaks something,
+# downgrade locally and pin specifically.
+
+# Config loading — every script reads from config/*.yaml
+PyYAML>=6.0
+
+# Core HTTP — used by every scraper
+requests>=2.31.0
+
+# Scraping helpers
+beautifulsoup4>=4.12.0          # jobpipeline/manual_entry.py — HTML parsing
+python-jobspy>=1.1.78           # scripts/scrape_jobspy.py — Indeed/LinkedIn/etc.
+pandas>=2.0.0                   # scripts/scrape_jobspy.py — JobSpy returns DataFrames
+
+# Local manual-entry server + setup wizard.
+flask>=3.0.0
