@@ -1,6 +1,6 @@
 """Score all postings against the user's profile.
 
-Algorithm (unchanged from the original solongo-jobs v7; what changed is
+Algorithm (unchanged from the original v7; what changed is
 that every tunable now comes from config/*.yaml instead of being baked
 into this file):
 
@@ -23,7 +23,7 @@ NOTE on raw vs. 0-1: the YAML thresholds (`thresholds.strong = 0.75` etc.)
 are the *final* score tier boundaries on the 0-1 scale. The conversion
 above defines what "weight needed" maps to each tier. The internal
 strong_raw / good_raw values are derived from a heuristic that 6.0 raw =
-strong, 4.0 raw = good — that's the Solongo defaults, kept for now. If
+strong, 4.0 raw = good — that's the original defaults, kept for now. If
 you want to tune the curve, edit STRONG_RAW / GOOD_RAW below.
 
 Usage:

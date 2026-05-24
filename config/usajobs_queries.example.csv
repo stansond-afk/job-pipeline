@@ -1,0 +1,5 @@
+label,keywords,locations,remote,enabled
+"My city - my domain","",,false,false
+"My city - another role family","",,false,false
+"Remote - my domain","",,true,false
+"Remote - another role family","",,true,false

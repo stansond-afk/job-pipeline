@@ -1,0 +1,209 @@
+name: nightly-scrape
+
+# Triggered Mon/Wed/Fri at 7 AM UTC (≈2 AM ET) and on manual button push.
+# Runs all 5 scrapers (with per-scraper failure isolation), cleans up stale
+# postings, re-scores the DB, regenerates the static dashboard, and commits
+# the updated SQL dump + dashboard so Cloudflare auto-redeploys.
+
+on:
+  schedule:
+    # 7 AM UTC = 2 AM EST / 3 AM EDT. Mon/Wed/Fri.
+    # Cron syntax day-of-week: 0=Sun, 1=Mon, ..., 5=Fri, 6=Sat
+    - cron: '0 7 * * 1,3,5'
+  workflow_dispatch: {}  # manual button in the Actions tab
+
+# Don't queue duplicate runs; let in-flight ones finish.
+concurrency:
+  group: nightly-scrape
+  cancel-in-progress: false
+
+# We need write access to push commits back to main.
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45  # JobSpy alone can take 25+ min; this is the safety cap
+
+    steps:
+      - name: Checkout repo (full history for clean push)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Restore the working DB from the committed SQL dump. On the very
+      # first run there's no dump yet, so this falls back to creating an
+      # empty schema — that's expected and harmless.
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Restore DB from committed dump (or initialize fresh)
+        run: bash scripts/db_restore.sh
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Merge user writes from Cloudflare D1 into the local DB. This pulls
+      # any interest/status/apply events the user(s) recorded via
+      # the deployed dashboard since the last nightly run, and applies them
+      # to the master DB before scrapers run.
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Merge D1 events (user writes since last run)
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+        run: python scripts/merge_d1_events.py
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Scrapers — each gets its own step so per-source failures are visible
+      # in GitHub's UI without an orchestrator hiding them. continue-on-error
+      # lets one scraper failing not abort the whole run.
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Scrape Greenhouse
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python scripts/scrape_greenhouse.py
+
+      - name: Scrape Lever
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python scripts/scrape_lever.py
+
+      - name: Scrape GreenJobs.com (RSS)
+        continue-on-error: true
+        timeout-minutes: 3
+        run: python scripts/scrape_greenjobs.py
+
+      - name: Scrape USAJobs
+        continue-on-error: true
+        timeout-minutes: 5
+        env:
+          # USAJobs script reads from env first, then .env file.
+          # These come from repo secrets — set them in:
+          # GitHub → Settings → Secrets and variables → Actions → New repository secret
+          USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
+          USAJOBS_USER_AGENT: ${{ secrets.USAJOBS_USER_AGENT }}
+        run: python scripts/scrape_usajobs.py
+
+      - name: Scrape NEOGOV
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python scripts/scrape_neogov.py
+
+      - name: Scrape JobSpy (Indeed/LinkedIn/etc.)
+        continue-on-error: true
+        timeout-minutes: 30
+        run: python scripts/scrape_jobspy.py
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Stale-cleanup before scoring: removes postings older than 14 days
+      # that have no application; deactivates older ones that DO. Keeps
+      # the DB bounded over time without losing user state.
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Clean up stale postings (14-day cutoff)
+        run: python scripts/cleanup_stale.py --stale-days 14
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Score + regenerate. These must succeed — if scoring fails we don't
+      # want to commit a broken dashboard.
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Re-score postings under v7 + D26 logic
+        run: python scripts/score_postings.py
+
+      - name: Regenerate dashboard/index.html
+        run: python scripts/generate_dashboard.py
+
+      - name: Generate postings.json snapshot (for Worker Apply modal)
+        run: python scripts/generate_postings_snapshot.py
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Dump the updated DB back to db/jobs.sql.gz (this is what gets
+      # committed to git — the binary .db stays gitignored).
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Dump DB to compressed SQL for git
+        run: bash scripts/db_dump.sh
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Commit + push. Only commits if something actually changed. Uses
+      # rebase to handle race conditions with local pushes (./deploy.sh).
+      # Retries the push once if it conflicts.
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Commit and push if changed
+        run: |
+          set -euo pipefail
+
+          git config user.name  "job-pipeline-bot"
+          git config user.email "job-pipeline-bot@users.noreply.github.com"
+
+          # Stage potentially-changed files. Adding unchanged files is a no-op.
+          git add db/jobs.sql.gz dashboard/index.html dashboard/postings.json
+
+          if git diff --staged --quiet; then
+            echo "No changes — nothing to commit."
+            exit 0
+          fi
+
+          # Commit message includes posting count for at-a-glance audit.
+          POST_COUNT=$(sqlite3 db/jobs.db "SELECT COUNT(*) FROM postings WHERE is_active=1;" 2>/dev/null || echo "?")
+          DATE_TAG=$(date -u +"%Y-%m-%d")
+
+          git commit -m "nightly: ${DATE_TAG} (${POST_COUNT} active postings)"
+
+          # Push with one retry on conflict (handles race with manual ./deploy.sh).
+          if ! git push origin HEAD:main; then
+            echo "First push failed — likely a race with a manual ./deploy.sh push. Rebasing and retrying."
+            git pull --rebase origin main
+            if ! git push origin HEAD:main; then
+              echo "::error::Push failed twice. Manual intervention needed."
+              exit 1
+            fi
+            echo "Retry succeeded."
+          fi
+
+          echo "Pushed nightly update."
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Run summary — captures what happened. Visible on the Actions run page.
+      # ─────────────────────────────────────────────────────────────────────
+
+      - name: Run summary
+        if: always()
+        run: |
+          echo "### Nightly scrape summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Run completed at:** $(date -u +"%Y-%m-%d %H:%M UTC")" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f db/jobs.db ]; then
+            TOTAL=$(sqlite3 db/jobs.db "SELECT COUNT(*) FROM postings WHERE is_active=1;" 2>/dev/null || echo "?")
+            STRONG=$(sqlite3 db/jobs.db "SELECT COUNT(*) FROM postings WHERE is_active=1 AND fit_score >= 0.75;" 2>/dev/null || echo "?")
+            GOOD=$(sqlite3 db/jobs.db "SELECT COUNT(*) FROM postings WHERE is_active=1 AND fit_score >= 0.5 AND fit_score < 0.75;" 2>/dev/null || echo "?")
+            APPLIED=$(sqlite3 db/jobs.db "SELECT COUNT(*) FROM applications;" 2>/dev/null || echo "?")
+            echo "**Active postings:** ${TOTAL}" >> $GITHUB_STEP_SUMMARY
+            echo "**Strong fits (≥0.75):** ${STRONG}" >> $GITHUB_STEP_SUMMARY
+            echo "**Good fits (0.50–0.74):** ${GOOD}" >> $GITHUB_STEP_SUMMARY
+            echo "**Applications logged:** ${APPLIED}" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Live dashboard: https://${{ vars.DEPLOY_URL }}" >> $GITHUB_STEP_SUMMARY
