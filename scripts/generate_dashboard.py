@@ -869,6 +869,8 @@ def generate(postings, sources, weekly, sparkline, sparkline_ctx, funnel,
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Stanson Dobbs">
+<meta name="generator" content="job-pipeline (https://github.com/stansond-afk/job-pipeline)">
 <title>{html.escape(config.short_name())} — Job Pipeline</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1516,6 +1518,13 @@ def _build_css() -> str:
     font-family: var(--font-hand); font-size: 18px;
     color: var(--lilac-dk);
   }}
+  .page-credit {{
+    margin-top: 6px; text-align: center;
+    font-size: 10px; color: var(--sub);
+    letter-spacing: 0.3px; opacity: 0.65;
+  }}
+  .page-credit a {{ color: var(--sub); text-decoration: none; }}
+  .page-credit a:hover {{ color: var(--sky-dk); text-decoration: underline; }}
 
   /* ----- Confetti ----- */
   #confetti-container {{
@@ -1867,6 +1876,7 @@ def _build_body_html(**kw) -> str:
 </div>
 
 <div class="page-footer">{html.escape(config.footer_text())} · <span style="font-family: var(--font-sans); font-size: 11px;">generated {kw['generated_at']} · last scrape {kw['last_scraped']}</span></div>
+<div class="page-credit">originally by <a href="https://github.com/stansond-afk" target="_blank" rel="noopener">Stanson Dobbs</a> · MIT licensed · <a href="https://github.com/stansond-afk/job-pipeline" target="_blank" rel="noopener">source</a></div>
 """
 
 

@@ -74,6 +74,17 @@ job-pipeline/
 └── docs/                        # SETUP.md, ARCHITECTURE.md
 ```
 
+## Credits
+
+Originally built by **Stanson Dobbs** ([@stansond-afk](https://github.com/stansond-afk))
+as a personal job search system, then generalized into this template fork.
+Fork it, customize it, share it back if you make it better.
+
+If you fork this for your own use, please keep the LICENSE intact — that's
+the only attribution we ask for.
+
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE). You can use, modify, and distribute this
+freely for any purpose. The license requires you to keep the copyright
+notice with any copies you share.
