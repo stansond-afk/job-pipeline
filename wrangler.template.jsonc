@@ -1,0 +1,51 @@
+// wrangler.template.jsonc — committed template; values filled in by the
+// setup wizard which generates wrangler.jsonc (gitignored).
+//
+// The wizard reads from .env and config/profile.yaml to produce the
+// per-user wrangler.jsonc. If you ever need to regenerate, run:
+//   python scripts/setup.py --wrangler-only
+//
+// SETUP.md explains the Cloudflare account + token + D1 database creation
+// in step-by-step detail for a first-time user.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Worker name — used as the deploy URL prefix. Wizard derives from
+  // profile.yaml (slugified short_name or repo owner). Override in .env
+  // if you want a custom subdomain.
+  "name": "${WORKER_NAME}",
+  "main": "worker/index.js",
+  "compatibility_date": "${WRANGLER_COMPAT_DATE}",
+
+  // Static assets served from ./dashboard/.
+  // run_worker_first ensures the Worker handles /api/* routes before
+  // static assets are checked.
+  "assets": {
+    "directory": "./dashboard",
+    "not_found_handling": "single-page-application",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+
+  // D1 database for the events log. Wizard creates the DB via the
+  // Cloudflare API and writes the resulting UUID into D1_DATABASE_ID
+  // in your .env, which then substitutes into this template.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "${D1_DATABASE_NAME}",
+      "database_id": "${D1_DATABASE_ID}"
+    }
+  ],
+
+  // Cloudflare Access — protects the deployed dashboard behind your
+  // identity. Wizard creates the Access application and captures the AUD.
+  "vars": {
+    "ACCESS_AUD": "${ACCESS_AUD}",
+    "ACCESS_TEAM_DOMAIN": "${ACCESS_TEAM_DOMAIN}"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

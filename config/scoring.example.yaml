@@ -1,0 +1,97 @@
+# Scoring config — tunes how postings are ranked.
+#
+# Total score = (sum of matching keyword group weights) + geo adjustment
+#               (see geo_patterns.yaml for the geo half).
+#
+# A posting needs to:
+#   1. NOT match anything in role_blacklist
+#   2. Match at least one role_whitelist pattern
+#   3. Accumulate keyword weight from keyword_groups
+# ...to be scored above 0.
+#
+# Strong / Good / Medium / Low thresholds (below) are applied after
+# everything else. Tune them if you find your "Strong" tier is empty or
+# overflowing.
+
+# Score tiers (0-1 scale).
+thresholds:
+  strong: 0.75
+  good:   0.50
+  medium: 0.20
+
+# Role blacklist — postings whose ROLE TITLE matches any of these
+# substrings (case-insensitive) are filtered out (score = 0).
+# Use this to exclude levels you can't pursue (senior/principal) and
+# functions you don't want (legal, sales, clinical, etc).
+role_blacklist:
+  # Seniority levels (uncomment ones that don't fit your level)
+  # - "senior director"
+  # - "vp"
+  # - "vice president"
+  # - "chief"
+  # - "head of"
+  # - "principal"
+
+  # Functions outside your target
+  - "registered nurse"
+  - "physician"
+  - "attorney"
+  - "paralegal"
+
+  # Clearance-required intel roles (very common false-positive in scrapers)
+  - "(TS/SCI)"
+  - "(Secret)"
+  - "Cleared "
+  - "Counterintelligence"
+  - "SIGINT"
+  - "HUMINT"
+  - "GEOINT"
+
+# Role whitelist — postings whose role title matches at least one of
+# these patterns will pass the role filter. Patterns are case-insensitive
+# substrings. Customize for your target families.
+role_whitelist:
+  - "analyst"
+  - "associate"
+  - "specialist"
+  - "coordinator"
+  - "consultant"
+  - "manager"            # if mid-level manager is in scope
+  - "advisor"
+  - "researcher"
+
+# Keyword groups — these drive the score itself. Weight is added to a
+# posting's score for every group whose keywords are found in the JD text.
+# Higher weight = stronger signal for your target.
+#
+# Tune for your domain. A few example groups (customize / remove / add):
+keyword_groups:
+  domain_core:
+    weight: 4.0
+    description: "Your primary subject-matter expertise"
+    keywords:
+      - "your primary domain keyword"
+      # e.g. "sustainability", "machine learning", "supply chain"
+
+  domain_adjacent:
+    weight: 2.0
+    description: "Adjacent areas you're qualified for"
+    keywords:
+      - "another keyword"
+
+  tools:
+    weight: 1.5
+    description: "Tools / technologies you're proficient with"
+    keywords:
+      - "Python"
+      - "SQL"
+      - "Excel"
+      - "Tableau"
+
+  soft_skills:
+    weight: 1.0
+    description: "Communication / leadership / facilitation signals"
+    keywords:
+      - "stakeholder"
+      - "cross-functional"
+      - "project management"

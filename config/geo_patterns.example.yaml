@@ -1,0 +1,57 @@
+# Geographic patterns config — drives the location half of scoring.
+#
+# Each tier matches against a posting's location string. Strategy:
+#   boost     → +0.15 added to score
+#   remote_us → +0.05 added to score (remote-friendly bias)
+#   other_us  → score × 0.5 (soft demote — visible but lower)
+#   foreign   → score = 0 (hard filter — they don't appear in any tier)
+#   unknown   → no adjustment (empty/missing locations passed through)
+#
+# Customize for your job-search reality:
+#   - List YOUR target metro area in `boost.patterns`
+#   - Adjust the multipliers if you want different strictness
+#   - Add to `foreign.patterns` if you see foreign cities leaking through
+#
+# Patterns are case-insensitive substrings. Matched against the lowercased
+# location string from the posting.
+
+boost:
+  weight: 0.15
+  description: "Your target metro — strong positive signal"
+  patterns:
+    # REPLACE these examples with your target metro's variations.
+    # Default below is DMV (Washington, DC area) for reference.
+    - "washington, dc"
+    - "washington, d.c."
+    - "washington, district of columbia"
+    - "arlington, va"
+    - "alexandria, va"
+    - "falls church, va"
+
+remote_us:
+  weight: 0.05
+  description: "Remote-US — counts as workable"
+  patterns:
+    - "remote"
+    - "remote - us"
+    - "remote, us"
+    - "remote (us)"
+    - "anywhere"
+
+other_us:
+  # Multiplier (negative numbers demote; -0.5 means score × 0.5).
+  weight: -0.5
+  description: "Anywhere else in the US — demoted but visible"
+  # No patterns — anything that's clearly US but not in boost/remote_us
+  # falls into this tier automatically. Detection uses state names + USPS
+  # codes in jobpipeline/geo.py.
+
+foreign:
+  # Hard filter (-1.0 means score = 0).
+  weight: -1.0
+  description: "Outside the US — filtered out entirely"
+  # Detection uses jobpipeline/geo.py (country names + city heuristics).
+  # Add to this list if you see specific foreign cities sneaking past.
+  extra_patterns: []
+    # - "buenos aires"
+    # - "kuala lumpur"

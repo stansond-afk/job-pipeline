@@ -1,0 +1,61 @@
+# Profile config — fill in your details, then save as config/profile.yaml
+# (the setup wizard does this for you on first launch).
+#
+# This file is the source of truth for personal information across the
+# dashboard, scrapers, and scoring logic. Anything that says "Solongo"
+# elsewhere in the original codebase reads from here in the generic fork.
+
+user:
+  # Your full legal name (appears in resume/cover letter filenames).
+  full_name: "Your Full Name"
+
+  # Short name for the dashboard greeting (e.g. "good morning, Alex").
+  short_name: "Your Name"
+
+  # Primary contact email — used in cover letter footer + scraper user-agent.
+  email: "you@example.com"
+
+  # Optional phone number for resume header. Leave blank to omit.
+  phone: ""
+
+  # Free-text career context that the tailoring system can reference.
+  # E.g. "career relaunch after 6-year break", "early-career, recent grad",
+  # "senior IC moving from engineering to product", etc.
+  context: ""
+
+location:
+  # Your geographic anchor. Drives the "boost" tier in scoring.yaml.
+  # Examples: "Washington, DC", "Seattle, WA", "Boston, MA", "Remote"
+  anchor: "Your City, ST"
+
+  # Open to remote-US roles? (true / false)
+  remote_ok: true
+
+  # Open to relocating elsewhere in the US? (true / false)
+  relocate_ok: false
+
+  # Open to international roles? (true / false)
+  international_ok: false
+
+dashboard:
+  # The mascot — purely aesthetic. Default is "Pip" the capybara from the
+  # original design. You can rename to anything (Boots, Huckleberry, etc.).
+  mascot:
+    name: "Pip"
+    species: "capybara"        # affects copy ("Pip the capybara")
+
+  # Hand-written footer text shown at the bottom of every dashboard page.
+  footer_text: "made with care · for {short_name}"
+
+  # Daily-app target. Drives the weekly goal ring.
+  weekly_goal: 15
+
+# Optional: paths to your tailored-document outputs. The dashboard auto-
+# discovers matching files when you click Apply. Default is ~/Downloads
+# (override here if you save resumes to a different folder).
+tailored_files:
+  watch_dir: "~/Downloads"
+  # File-naming pattern marker — files containing this substring are
+  # eligible for auto-discovery. The default expects filenames like:
+  #   Brattle_ESG-Analyst_yourname_0524_v1_resume.docx
+  marker: "_{short_name_slug}_"
