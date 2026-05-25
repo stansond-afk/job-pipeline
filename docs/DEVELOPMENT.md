@@ -126,46 +126,63 @@ high-quality postings if they're in your domain.
 Pattern: each becomes a `scripts/scrape_<source>.py`. Some need an
 allowlisted user agent; document in `.env.example`.
 
-### Phase 3b: ATS slug auto-discovery (1-2 sessions)
+### Phase 3b: ATS slug auto-discovery — **SHIPPED**
 
-**This is the S&P 500 scraper conceptually** — except smarter.
+**The S&P 500 scraper, generalized.** Lives at
+`scripts/discover_company_universe.py`. Aggregates ~650 companies from
+Wikipedia (S&P 500 + largest US by revenue + largest private), probes
+each against Greenhouse + Lever APIs, verifies hits by fetching board
+metadata and inspecting actual posting content. False-positive rate
+~5% post-verification.
 
-The original built a one-time `scripts/discover_greenhouse_slugs.py`
-that probes plausible slugs against the Greenhouse API. That gets
-you new tenants but you have to know the company names first.
+Usage:
 
-A better version, **already half-shipped via URL telemetry (D32):**
+```bash
+# Re-scrape Wikipedia sources (quarterly is fine)
+python scripts/discover_company_universe.py refresh
 
-1. The `url_telemetry` table records *every* URL that lands in the DB,
-   tagged with `ats_guess` (greenhouse / lever / workday / icims / …)
-   and `ats_slug` where extractable.
-2. `scripts/analyze_telemetry.py` already surfaces "slug gaps" —
-   companies seen via JobSpy at e.g. `boards.greenhouse.io/csis` that
-   are NOT in `config/targets.csv`. **Each gap is a free coverage win:
-   add one row to targets.csv, get all their open roles next scrape.**
-3. The S&P 500 extension: scrape Wikipedia's S&P 500 list (~500
-   companies), look up each via the telemetry analyzer's URL probe,
-   bulk-add the ones with Greenhouse/Lever boards. Repeat for
-   Fortune 1000, Inc. 5000, etc. Could 5-10x the direct-scraper
-   coverage without writing per-company integrations.
+# Probe each company (~60 min due to rate limiting)
+python scripts/discover_company_universe.py probe
 
-Implementation sketch:
+# Validate hits (~5 min)
+python scripts/discover_company_universe.py verify
 
-```python
-# scripts/discover_sp500_slugs.py
-1. Fetch S&P 500 list (Wikipedia HTML table is canonical, no API needed)
-2. For each company name, try Greenhouse slug guesses:
-     <slug> ∈ {company-name lowercased, company-acronym,
-               company-name with "the" stripped, …}
-3. For each guess, GET https://boards-api.greenhouse.io/v1/boards/<slug>
-4. If response is 200 + job_count > 0, mark as a hit
-5. Repeat for Lever (https://api.lever.co/v0/postings/<slug>)
-6. Output to config/targets_discovered.csv for manual review
-7. Once reviewed, the wizard's "add targets" step ingests them
+# Or all three:
+python scripts/discover_company_universe.py all
 ```
 
-Cost: a few thousand HTTPS HEAD/GET requests across ~500 companies.
-Run once, persist results.
+Output: `config/verified_universe.csv`. Review, copy `verdict=verified`
+rows into `config/targets.csv`, re-scrape, enjoy the coverage gain.
+
+**Yield benchmark (first real run, June 2026):** ~650 companies probed,
+~50-100 verified board hits, including major brands not in Solongo's
+original 248-company master list. False positives caught by the
+verifier (would have been silent disasters):
+
+- `greenhouse:national` claimed by 4+ different "National X" orgs
+  (correctly flagged duplicate)
+- `greenhouse:capital` is some EU tech company, NOT Capital One
+- `greenhouse:oliver` is OLIVER Agency, NOT Oliver Wyman
+- `greenhouse:rockymountain` is an orthopedic clinic, NOT RMI
+
+**Extending the universe** — to widen the candidate pool, add a new
+`fetch_<source>()` function to the script and include it in `SOURCES`.
+Good candidates:
+
+- Forbes Best Midsize Companies (~400 in $1-10B revenue range)
+- Crunchbase free tier (unicorn list — private $1B+ valuations)
+- SEC EDGAR XBRL data (every US-listed public company with revenue >$1B)
+- Inc. 5000 (fastest-growing US private — many are smaller but might
+  use Greenhouse)
+
+**Complementary signal — URL telemetry (D32):** the `url_telemetry`
+table also records observed `ats_slug` values from every URL we
+ingest via JobSpy. `scripts/analyze_telemetry.py` surfaces companies
+seen at `boards.greenhouse.io/<slug>` that are NOT in `targets.csv`
+— often even faster path to new coverage than full probing. Use
+both: telemetry-from-JobSpy for whatever ATSes Solongo encounters
+in practice; universe-probing for proactive expansion to companies
+JobSpy hasn't surfaced yet.
 
 ### Phase 3c: Playwright adapters (3-5 sessions)
 
