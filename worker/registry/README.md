@@ -33,35 +33,23 @@ which:
 
 ## Deployment (one time, by the maintainer)
 
+Full step-by-step walkthrough with troubleshooting: **[DEPLOY.md](DEPLOY.md)**
+
+Short version:
 ```bash
 cd worker/registry
-
-# 1. Authenticate with the same Cloudflare account that hosts your
-#    personal Worker
 npx wrangler login
-
-# 2. Create the D1 database
-npx wrangler d1 create job-pipeline-registry
-# It prints a UUID — copy it.
-
-# 3. Fill in the template
-cp wrangler.template.jsonc wrangler.jsonc
-# Edit: replace ${REGISTRY_D1_DATABASE_ID} with the UUID from step 2
-
-# 4. Apply the schema
+npx wrangler d1 create job-pipeline-registry        # copy the UUID
+cp wrangler.template.jsonc wrangler.jsonc           # paste UUID into file
 npx wrangler d1 execute job-pipeline-registry --file=schema.sql
-
-# 5. Deploy
 npx wrangler deploy
-
-# 6. Verify
+# Verify:
 curl https://job-pipeline-registry.<your-subdomain>.workers.dev/api/community/health
-# Should return: {"ok":true,"server":"registry"}
 ```
 
-The deployed URL goes into the project's defaults so forks point at it
-automatically — see the `JOB_PIPELINE_REGISTRY_URL` constant in
-`scripts/discover_company_universe.py`.
+If your deployed subdomain differs from `stansond.workers.dev`, update
+`DEFAULT_REGISTRY_URL` in `scripts/discover_company_universe.py` so
+forks pull from the right place.
 
 ## API
 
