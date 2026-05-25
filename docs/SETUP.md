@@ -195,6 +195,14 @@ they're much faster.
 
 ## What to do next
 
+- **Pull community-verified targets.** Other people running this fork
+  have discovered Greenhouse / Lever boards you might not know about.
+  Pull their work:
+  ```bash
+  python3 scripts/discover_company_universe.py update-from-community
+  ```
+  It shows you a diff before writing — nothing happens without confirmation.
+
 - **Use it daily.** Open the dashboard, mark jobs as
   Interested / Very interested / Pass.
 - **Add jobs you find elsewhere.** Click "+ Add Job" in the dashboard,

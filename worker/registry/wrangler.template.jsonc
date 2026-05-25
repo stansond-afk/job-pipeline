@@ -1,0 +1,49 @@
+// wrangler.template.jsonc — community registry Worker.
+//
+// DEPLOYED ONCE by the project maintainer (not by individual forks).
+//
+// Setup:
+//   1. cd worker/registry
+//   2. npx wrangler d1 create job-pipeline-registry
+//      (note the returned UUID)
+//   3. Edit this file → fill in REGISTRY_D1_DATABASE_ID with that UUID,
+//      save as wrangler.jsonc
+//   4. npx wrangler d1 execute job-pipeline-registry --file=schema.sql
+//   5. npx wrangler deploy
+//
+// After deploy, the Worker is reachable at:
+//   https://job-pipeline-registry.<your-cf-subdomain>.workers.dev/api/community/health
+//
+// Forks point at this URL via their config/profile.yaml's
+// `community.registry_url` field.
+
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "job-pipeline-registry",
+  "main": "index.js",
+  "compatibility_date": "2026-05-24",
+
+  // D1 binding — the registry's only storage.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "job-pipeline-registry",
+      "database_id": "${REGISTRY_D1_DATABASE_ID}"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+
+  // NOTE: this Worker is intentionally PUBLIC (no Cloudflare Access).
+  // It accepts anonymous submissions + serves the registry to anyone.
+  // Abuse protection: rate-limit-per-IP (Cloudflare default) plus the
+  // 1000-submissions-per-contributor-per-day cap enforced in code.
+  //
+  // If abuse becomes a real problem, options in order of escalation:
+  //   1. Tighten the daily cap.
+  //   2. Add Cloudflare Turnstile to the submit endpoint.
+  //   3. Require Access JWT (which forces forks to use the same Access
+  //      team — adds coordination cost but bulletproof anti-abuse).
+}

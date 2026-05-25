@@ -184,6 +184,30 @@ both: telemetry-from-JobSpy for whatever ATSes Solongo encounters
 in practice; universe-probing for proactive expansion to companies
 JobSpy hasn't surfaced yet.
 
+**Community slug registry (shared infra):** the project also ships
+with a community registry — a separate Cloudflare Worker deployed by
+the maintainer that pools verified slugs across all forks. Two opt-in
+subcommands:
+
+```bash
+# After verify, optionally upload your verified slugs to the community
+python scripts/discover_company_universe.py share
+
+# Pull community-verified slugs + prompt to merge into your targets.csv
+python scripts/discover_company_universe.py update-from-community
+```
+
+The registry's GET endpoint returns slugs with `submission_count >= 2`
+by default — a single bad-faith submission can't pollute the canonical
+list. Your email address is hashed locally before submission so the
+registry never sees plaintext PII. Full details in
+[../worker/registry/README.md](../worker/registry/README.md).
+
+For the maintainer: see that README for the one-time Cloudflare
+deploy of the registry Worker. Forks point at it automatically via
+the `JOB_PIPELINE_REGISTRY_URL` env var (default = the maintainer's
+deployed URL).
+
 ### Phase 3c: Playwright adapters (3-5 sessions)
 
 The big ATSes that need a JavaScript runtime. URL telemetry already

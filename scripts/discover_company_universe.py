@@ -88,6 +88,13 @@ USER_AGENT = "job-pipeline/0.1 (slug discovery; https://github.com/stansond-afk/
 # SEC EDGAR requires a User-Agent with contact info; include an email so
 # their fair-access logging works. Replace with your own when forking.
 SEC_USER_AGENT = "job-pipeline/0.1 stansond@gmail.com"
+
+# Community registry — shared infrastructure where users pool discovered slugs.
+# Default points at the maintainer's deployed Worker; override via the
+# JOB_PIPELINE_REGISTRY_URL env var if you run your own.
+import os as _os
+DEFAULT_REGISTRY_URL = "https://job-pipeline-registry.stansond.workers.dev"
+REGISTRY_URL = _os.environ.get("JOB_PIPELINE_REGISTRY_URL", DEFAULT_REGISTRY_URL)
 RATE_LIMIT_DELAY_SEC = 0.2     # Generous: Greenhouse/Lever public APIs
                                 # easily handle 5 req/sec from a single client.
 REQUEST_TIMEOUT = 15
@@ -693,6 +700,210 @@ def cmd_verify() -> int:
 
 
 # ═════════════════════════════════════════════════════════════════════════
+# COMMUNITY REGISTRY — share + pull slugs across forks
+# ═════════════════════════════════════════════════════════════════════════
+#
+# All optional + explicit. The `share` step prompts before sending; the
+# `update-from-community` step shows you the diff before writing anything.
+
+
+def _contributor_hash() -> str:
+    """SHA256 of the user's email from config/profile.yaml. Opaque
+    identifier — the registry uses this for dedup + abuse caps but
+    never sees the plaintext. Empty string if email unconfigured."""
+    import hashlib
+    try:
+        sys.path.insert(0, str(REPO_ROOT))
+        from jobpipeline import config
+        email = (config.email() or "").strip().lower()
+    except Exception:
+        email = ""
+    if not email:
+        # Fall back to a stable per-machine identifier so anonymous
+        # submissions still dedupe correctly.
+        import socket
+        email = f"anonymous@{socket.gethostname()}"
+    return hashlib.sha256(email.encode("utf-8")).hexdigest()
+
+
+def cmd_share() -> int:
+    """Upload verified slugs to the community registry. Opt-in prompt
+    before any data leaves the machine."""
+    if not VERIFIED_CSV.exists():
+        print(f"ERROR: {VERIFIED_CSV} not found. Run 'verify' first.")
+        return 1
+
+    with VERIFIED_CSV.open() as f:
+        rows = [r for r in csv.DictReader(f) if r.get("verdict") == "verified"]
+    if not rows:
+        print("Nothing to share — no rows have verdict='verified'.")
+        return 0
+
+    print(f"About to share {len(rows)} verified slugs with the community registry:")
+    print(f"  Endpoint:    {REGISTRY_URL}/api/community/submit-slugs")
+    print(f"  Contributor: sha256(your email) — your email itself is NEVER sent")
+    print()
+    print("First 5 entries:")
+    for r in rows[:5]:
+        print(f"  {r['found_ats']:11} {r['verified_slug']:25} ({r['job_count']:>4} jobs)  {r['company'][:35]}")
+    if len(rows) > 5:
+        print(f"  ... and {len(rows) - 5} more")
+    print()
+    answer = input("Send these to the registry? [y/N]: ").strip().lower()
+    if answer != "y":
+        print("Aborted. Nothing sent.")
+        return 0
+
+    submissions = [{
+        "ats":                r["found_ats"],
+        "slug":               r["verified_slug"],
+        "company_hint":       r["company"],
+        "job_count_observed": int(r.get("job_count", 0) or 0),
+    } for r in rows]
+
+    # Chunk into batches of 200 (the Worker's per-request limit).
+    batch_size = 200
+    total_accepted = 0
+    total_duplicates = 0
+    total_rejected = 0
+    for batch_start in range(0, len(submissions), batch_size):
+        batch = submissions[batch_start: batch_start + batch_size]
+        try:
+            r = requests.post(
+                f"{REGISTRY_URL}/api/community/submit-slugs",
+                json={
+                    "contributor_email_hash": _contributor_hash(),
+                    "submissions": batch,
+                },
+                timeout=REQUEST_TIMEOUT,
+                headers={"User-Agent": USER_AGENT},
+            )
+            if r.status_code != 200:
+                print(f"  ERROR: HTTP {r.status_code}: {r.text[:200]}")
+                return 1
+            data = r.json()
+            if not data.get("ok"):
+                print(f"  ERROR: {data}")
+                return 1
+            total_accepted += data.get("accepted", 0)
+            total_duplicates += data.get("duplicates", 0)
+            total_rejected += data.get("rejected", 0)
+        except Exception as e:
+            print(f"  ERROR: {e}")
+            return 1
+
+    print()
+    print(f"Submitted {len(submissions)} slugs:")
+    print(f"  ✓ Accepted:   {total_accepted}")
+    print(f"  · Duplicates: {total_duplicates}  (already submitted by you in a prior run)")
+    print(f"  ✗ Rejected:   {total_rejected}    (invalid format or unknown ATS)")
+    print()
+    print("Thanks for contributing.")
+    return 0
+
+
+def cmd_update_from_community() -> int:
+    """Pull the community consensus registry, diff against the local
+    targets config, and prompt to merge new slugs."""
+    print(f"Pulling community registry from {REGISTRY_URL}...")
+    try:
+        r = requests.get(
+            f"{REGISTRY_URL}/api/community/slugs",
+            params={"min_submissions": 2},
+            timeout=REQUEST_TIMEOUT,
+            headers={"User-Agent": USER_AGENT},
+        )
+        if r.status_code != 200:
+            print(f"ERROR: HTTP {r.status_code}: {r.text[:200]}")
+            return 1
+        data = r.json()
+    except Exception as e:
+        print(f"ERROR: {e}")
+        return 1
+
+    if not data.get("ok"):
+        print(f"ERROR: {data}")
+        return 1
+
+    registry = data.get("registry", [])
+    print(f"Got {len(registry)} community-verified slugs (min_submissions=2).")
+    print()
+
+    # Compare against local config/targets.csv
+    targets_csv = CONFIG_DIR / "targets.csv"
+    have: set[tuple[str, str]] = set()
+    if targets_csv.exists():
+        with targets_csv.open() as f:
+            for row in csv.DictReader(f):
+                ats = (row.get("ats") or "").strip().lower()
+                slug = (row.get("ats_identifier") or "").strip().lower()
+                if ats and slug:
+                    have.add((ats, slug))
+
+    new_rows = [
+        r for r in registry
+        if (r["ats"], r["slug"]) not in have
+    ]
+    print(f"  Already configured locally: {len(registry) - len(new_rows)}")
+    print(f"  New from community:         {len(new_rows)}")
+    print()
+
+    if not new_rows:
+        print("Nothing new to add. Your local targets are in sync with the community.")
+        return 0
+
+    # Show preview
+    print("Sample of new community slugs (first 15):")
+    for r in new_rows[:15]:
+        company = r.get("company_canonical", "")
+        count = r.get("submission_count", 0)
+        print(f"  {r['ats']:11} {r['slug']:25} ({count} community submissions)  {company[:35]}")
+    if len(new_rows) > 15:
+        print(f"  ... and {len(new_rows) - 15} more")
+    print()
+
+    answer = input(f"Append all {len(new_rows)} to config/targets.csv? [y/N]: ").strip().lower()
+    if answer != "y":
+        print("Aborted. Nothing written.")
+        return 0
+
+    # Append. Preserve the existing schema (companies use targets.csv's columns).
+    # Read header to get column order
+    if not targets_csv.exists():
+        targets_csv.parent.mkdir(parents=True, exist_ok=True)
+        with targets_csv.open("w", newline="") as f:
+            csv.writer(f).writerow(["company", "category", "priority", "location", "ats", "ats_identifier", "notes"])
+
+    with targets_csv.open() as f:
+        header = next(csv.reader(f))
+
+    appended = 0
+    with targets_csv.open("a", newline="") as f:
+        w = csv.writer(f)
+        for r in new_rows:
+            row = []
+            for col in header:
+                if col == "company":
+                    row.append(r.get("company_canonical", ""))
+                elif col == "ats":
+                    row.append(r["ats"])
+                elif col == "ats_identifier":
+                    row.append(r["slug"])
+                elif col == "notes":
+                    row.append(f"from community registry ({r.get('submission_count', 1)} submissions)")
+                else:
+                    row.append("")
+            w.writerow(row)
+            appended += 1
+
+    print(f"Appended {appended} rows to {targets_csv}.")
+    print(f"Re-run your scrapers to pick up the new targets:")
+    print(f"  python3 scripts/scrape_greenhouse.py")
+    print(f"  python3 scripts/scrape_lever.py")
+    return 0
+
+
+# ═════════════════════════════════════════════════════════════════════════
 # IO helpers
 # ═════════════════════════════════════════════════════════════════════════
 
@@ -739,6 +950,10 @@ def main() -> int:
     p_all = sub.add_parser("all", help="Run refresh → probe → verify in sequence")
     p_all.add_argument("--limit", type=int, default=None,
         help="Probe only the first N companies (for testing).")
+    sub.add_parser("share",
+        help="Submit your verified slugs to the community registry (opt-in)")
+    sub.add_parser("update-from-community",
+        help="Pull community-verified slugs + prompt to merge into config/targets.csv")
     args = parser.parse_args()
 
     if args.cmd == "refresh":
@@ -749,6 +964,10 @@ def main() -> int:
         return cmd_verify()
     if args.cmd == "all":
         return cmd_all(limit=args.limit)
+    if args.cmd == "share":
+        return cmd_share()
+    if args.cmd == "update-from-community":
+        return cmd_update_from_community()
     return 1
 
 
