@@ -35,11 +35,11 @@ sys.path.insert(0, str(REPO_ROOT))
 import yaml
 from flask import Flask, redirect, request
 
-from jobpipeline import config
+from jobpipeline import config, themes
 
 CONFIG_DIR = REPO_ROOT / "config"
 WIZARD_PORT = 5051
-TOTAL_STEPS = 7
+TOTAL_STEPS = 8
 
 app = Flask(__name__)
 
@@ -287,7 +287,7 @@ def profile_page():
         data["tailored_files"].setdefault("marker", "_{short_name_slug}_")
 
         save_profile(data)
-        return redirect("/scoring")
+        return redirect("/theme")
 
     p = load_profile()
     u = p.get("user", {})
@@ -378,7 +378,167 @@ def profile_page():
 
 
 # ─────────────────────────────────────────────────────────────────────────
-# Step 3: Scoring
+# Step 3: Theme picker
+# ─────────────────────────────────────────────────────────────────────────
+
+
+@app.route("/theme", methods=["GET", "POST"])
+def theme_page():
+    if request.method == "POST":
+        data = load_profile()
+        data.setdefault("dashboard", {})
+
+        # Validate the picked theme against the known list
+        picked = (request.form.get("theme") or "paper").strip().lower()
+        if not themes.is_valid_theme_id(picked):
+            picked = "paper"
+        data["dashboard"]["theme"] = picked
+        data["dashboard"]["mascot_enabled"] = "mascot_enabled" in request.form
+        data["dashboard"]["supporter_name"] = (
+            request.form.get("supporter_name", "").strip()[:120]
+        )
+        data["dashboard"]["show_love_note"] = "show_love_note" in request.form
+
+        # Also sync the legacy mascot.name field with whatever the chosen
+        # theme uses, so anywhere in the codebase that still reads it gets
+        # a sensible value. The theme's `mascotName` may be None for themes
+        # without mascots (Paper, Quiet, Mountain); fall back gracefully.
+        theme = themes.get_theme(picked)
+        mascot_name = (theme.get("copy") or {}).get("mascotName") or "Pip"
+        data["dashboard"].setdefault("mascot", {})
+        data["dashboard"]["mascot"]["name"] = mascot_name
+
+        save_profile(data)
+        return redirect("/scoring")
+
+    p = load_profile()
+    dash = p.get("dashboard", {})
+    current = dash.get("theme") or "paper"
+    mascot_on = dash.get("mascot_enabled", True)
+    supporter = dash.get("supporter_name") or ""
+    love_on = dash.get("show_love_note", True)
+
+    cards_html = ""
+    for tid in themes.list_theme_ids():
+        t = themes.get_theme(tid)
+        toks = t["tokens"]
+        is_current = (tid == current)
+        # 5-color swatch preview from the theme's tokens
+        swatch_colors = [toks["--bg"], toks["--paper"], toks["--a1"],
+                         toks["--sun"], toks["--warm"]]
+        swatch_html = "".join(
+            f'<span class="swatch-dot" style="background:{c};"></span>'
+            for c in swatch_colors
+        )
+        mascot_label = t["mascot"].capitalize() if t["mascot"] else "no mascot"
+        cards_html += f"""
+<label class="theme-card{' theme-card-selected' if is_current else ''}"
+       style="background: {toks['--paper']}; border-color: {toks['--line']};">
+  <input type="radio" name="theme" value="{tid}"{' checked' if is_current else ''}
+         style="position:absolute; opacity:0; pointer-events:none;">
+  <div class="theme-card-header" style="color: {toks['--ink']};">
+    <strong>{_esc(t['name'])}</strong>
+    <span class="theme-card-mascot" style="color: {toks['--sub']};">{_esc(mascot_label)}</span>
+  </div>
+  <div class="theme-card-tagline" style="color: {toks['--sub']};">{_esc(t['tagline'])}</div>
+  <div class="theme-card-swatch">{swatch_html}</div>
+  <div class="theme-card-blurb" style="color: {toks['--ink']};">{_esc(t['blurb'])}</div>
+</label>"""
+
+    extra_css = """
+<style>
+  .theme-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin: 8px 0 4px;
+  }
+  @media (max-width: 600px) { .theme-grid { grid-template-columns: 1fr; } }
+  .theme-card {
+    border: 1px solid var(--line); border-radius: 14px; padding: 14px;
+    cursor: pointer; display: flex; flex-direction: column; gap: 8px;
+    position: relative; transition: transform 0.1s, box-shadow 0.15s;
+  }
+  .theme-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px -6px rgba(0,0,0,0.15); }
+  .theme-card-selected {
+    box-shadow: 0 0 0 2px var(--sky-dk), 0 4px 12px -6px rgba(0,0,0,0.15);
+  }
+  .theme-card-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 16px;
+  }
+  .theme-card-mascot { font-size: 11px; font-weight: 400; }
+  .theme-card-tagline {
+    font-size: 11px; letter-spacing: 0.4px; text-transform: lowercase;
+  }
+  .theme-card-swatch { display: flex; gap: 4px; }
+  .swatch-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08) inset;
+  }
+  .theme-card-blurb { font-size: 12px; line-height: 1.4; opacity: 0.85; }
+</style>
+"""
+
+    body = f"""
+{extra_css}
+<div class="hand">how should it feel?</div>
+<h1>Pick a theme</h1>
+<p>The dashboard ships with six visual identities. Mechanics are
+identical — only the look, mascot, and tone of the affirmation copy
+change. Click any card to pick it. You can change this anytime later
+in <code>config/profile.yaml</code>.</p>
+<div class="help">
+  <strong>Default is Paper</strong> — minimal, no mascot, no script
+  font. Pick it if you want a clean tool with zero flourish. Garden
+  (warm, capybara) was the original direction. Quiet Focus and Mountain
+  are gender-neutral / professional. Tide is calm coastal. Dusk is the
+  only dark theme.
+</div>
+
+<form method="post">
+  <div class="theme-grid">{cards_html}</div>
+
+  <h2 style="margin-top: 24px;">Extras</h2>
+
+  <div class="checkbox-row">
+    <input type="checkbox" name="mascot_enabled" id="mascot_enabled"
+           {"checked" if mascot_on else ""}>
+    <label for="mascot_enabled">
+      Show the theme's mascot when it has one (Garden, Tide, Dusk).
+      Uncheck for a monogram avatar instead.
+    </label>
+  </div>
+
+  <h2 style="margin-top: 16px;">Someone who believes in you (optional)</h2>
+  <p style="font-size: 12px; color: var(--sub);">
+    Job searches make people forget they are loved. If you enter a name,
+    the dashboard will surface a small dismissible note —
+    "{{name}} thinks you're the best thing in the world." Cheesy on purpose;
+    leave blank to silently disable.
+  </p>
+  <label for="supporter_name">Supporter name (optional)</label>
+  <input type="text" name="supporter_name" id="supporter_name"
+         value="{_esc(supporter)}" placeholder="e.g. Mara · my mom · my partner">
+
+  <div class="checkbox-row" style="margin-top: 8px;">
+    <input type="checkbox" name="show_love_note" id="show_love_note"
+           {"checked" if love_on else ""}>
+    <label for="show_love_note">
+      Show the love note when supporter is set. Uncheck to keep the
+      name saved but hide the pill.
+    </label>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-back" href="/profile">← Back</a>
+    <button class="btn" type="submit">Continue →</button>
+  </div>
+</form>
+"""
+    return page("Theme", body, 3)
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Step 4: Scoring
 # ─────────────────────────────────────────────────────────────────────────
 
 
@@ -495,7 +655,7 @@ def scoring_page():
   </div>
 </form>
 """
-    return page("Scoring", body, 3)
+    return page("Scoring", body, 4)
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -591,7 +751,7 @@ Foreign postings are hard-filtered (score = 0) unless you opt in.</p>
   </div>
 </form>
 """
-    return page("Geographic preferences", body, 4)
+    return page("Geographic preferences", body, 5)
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -685,7 +845,7 @@ employers across consulting, government, and nonprofits.</p>
   </div>
 </form>
 """
-    return page("Target companies", body, 5)
+    return page("Target companies", body, 6)
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -782,7 +942,7 @@ npx wrangler deploy</pre>
   </div>
 </form>
 """
-    return page("Cloudflare deploy", body, 6)
+    return page("Cloudflare deploy", body, 7)
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -825,7 +985,7 @@ same secrets you set up in <code>.env</code>, copied to your GitHub repo:</p>
   </div>
 </form>
 """
-    return page("GitHub Actions", body, 7)
+    return page("GitHub Actions", body, 8)
 
 
 @app.route("/done")
@@ -869,7 +1029,7 @@ open dashboard/index.html</pre>
   good luck out there.
 </p>
 """
-    return page("Done", body, 7)
+    return page("Done", body, 8)
 
 
 # ─────────────────────────────────────────────────────────────────────────

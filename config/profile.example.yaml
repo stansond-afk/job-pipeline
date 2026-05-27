@@ -38,11 +38,33 @@ location:
   international_ok: false
 
 dashboard:
-  # The mascot — purely aesthetic. Default is "Pip" the capybara from the
-  # original design. You can rename to anything (Boots, Huckleberry, etc.).
+  # Theme — one of: paper, garden, tide, quiet, mountain, dusk.
+  # Defines the dashboard's visual identity (colors, fonts, mascot, copy
+  # register). The setup wizard helps you pick this with previews.
+  # Default is "paper" — clean, no mascot, no script font. Safe.
+  # See handoff/themes-spec.md for what each looks like.
+  theme: "paper"
+
+  # Whether the theme's mascot is shown (where applicable). Only Garden,
+  # Tide, and Dusk have mascots; Paper, Quiet Focus, and Mountain don't
+  # regardless of this setting.
+  mascot_enabled: true
+
+  # Legacy mascot config (kept for backward compatibility with v1 setups).
+  # When `theme` is set, the theme's mascot wins. This section is only
+  # used as a fallback hint if the theme has no mascot configured.
   mascot:
     name: "Pip"
-    species: "capybara"        # affects copy ("Pip the capybara")
+    species: "capybara"
+
+  # The "someone loves you" pillar. If set, the dashboard surfaces a
+  # dismissible note like "Mara thinks you are the best thing in the world."
+  # Leave blank to disable silently (no broken UI).
+  supporter_name: ""
+
+  # Whether to show the love note at all (independent toggle so the
+  # supporter_name stays saved even when hidden).
+  show_love_note: true
 
   # Hand-written footer text shown at the bottom of every dashboard page.
   footer_text: "made with care · for {short_name}"

@@ -100,6 +100,32 @@ def weekly_goal() -> int:
     return _path("profile", "dashboard", "weekly_goal", default=15)
 
 
+def theme_id() -> str:
+    """Return the user's chosen theme key. Falls back to 'paper'
+    (the safe default — no personality imposed)."""
+    return _path("profile", "dashboard", "theme", default="paper")
+
+
+def mascot_enabled() -> bool:
+    """Whether the theme's mascot should be shown. Only relevant for
+    themes that have a mascot at all (Garden, Tide, Dusk)."""
+    val = _path("profile", "dashboard", "mascot_enabled", default=True)
+    return bool(val)
+
+
+def supporter_name() -> str:
+    """Name of someone who supports the user. Surfaces as a love note
+    on the dashboard. Empty string disables the note silently."""
+    return _path("profile", "dashboard", "supporter_name", default="") or ""
+
+
+def show_love_note() -> bool:
+    """Master toggle for the love-note pill. Independent of
+    supporter_name so the name can stay saved even when hidden."""
+    val = _path("profile", "dashboard", "show_love_note", default=True)
+    return bool(val)
+
+
 def footer_text() -> str:
     raw = _path("profile", "dashboard", "footer_text",
                 default="made with care · for {short_name}")
