@@ -1,0 +1,954 @@
+company,sources,headquarters,industry,found_ats,verified_slug,job_count,verdict,evidence
+Airbnb,"sp500,sec_edgar","San Francisco, California",Consumer Discretionary,greenhouse,airbnb,238,verified,board='Airbnb' contains distinctive 'airbnb'
+Align Technology,"sp500,sec_edgar","Tempe, Arizona",Health Care,greenhouse,align,25,mismatch,board='A-LIGN External' has no token overlap with company
+AppLovin,"sp500,sec_edgar","Palo Alto, California",Information Technology,greenhouse,applovin,29,verified,board='AppLovin' contains distinctive 'applovin'
+Archer Daniels Midland,"sp500,largest_us,sec_edgar","Chicago, Illinois",Consumer Staples,greenhouse,archer,1,mismatch,board='Archer Veterinary Clinic' has no token overlap with company
+Axon Enterprise,"sp500,sec_edgar","Scottsdale, Arizona",Industrials,greenhouse,axon,562,verified,company contains board's distinctive 'axon'
+"Block, Inc.","sp500,sec_edgar,sec_edgar",none,Financials,greenhouse,block,173,verified,board='Block' contains distinctive 'block'
+Capital One,sp500,"Tysons Corner, Virginia",Financials,lever,capital,63,review,postings don't clearly reference company; manual check needed
+Carvana,"sp500,sec_edgar","Tempe, Arizona",Consumer Discretionary,greenhouse,carvana,2183,verified,board='Carvana' contains distinctive 'carvana'
+Charles River Laboratories,sp500,"Wilmington, Massachusetts",Health Care,greenhouse,charles,3,verified,company contains board's distinctive 'charles'
+Charles Schwab Corporation,sp500,"Westlake, Texas",Financials,greenhouse,charles,3,duplicate,already claimed by 'Charles River Laboratories'
+CoStar Group,"sp500,sec_edgar","Washington, D.C.",Real Estate,greenhouse,costar,3,verified,board='Co–Star' contains distinctive 'costar'
+Datadog,"sp500,sec_edgar","New York City, New York",Information Technology,greenhouse,datadog,411,verified,board='Datadog' contains distinctive 'datadog'
+D. R. Horton,sp500,"Arlington, Texas",Consumer Discretionary,greenhouse,drhorton,1,verified,board='D.R. Horton' contains distinctive 'horton'
+Emerson Electric,"sp500,sec_edgar","Ferguson, Missouri",Industrials,greenhouse,ee,1,mismatch,board='Emily's Entourage' has no token overlap with company
+Eversource Energy,"sp500,sec_edgar","Hartford, Connecticut",Utilities,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+Expand Energy,"sp500,sec_edgar","Oklahoma City, Oklahoma",Energy,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+Extra Space Storage,"sp500,sec_edgar","Salt Lake City, Utah",Real Estate,greenhouse,ess,13,mismatch,board='cBEYONData + SMX' has no token overlap with company
+Fair Isaac,"sp500,sec_edgar","Bozeman, Montana",Information Technology,lever,fi,11,review,postings don't clearly reference company; manual check needed
+Fox Corporation(Class A),"sp500,sp500,sec_edgar,sec_edgar","New York City, New York",Communication Services,greenhouse,fox,7,verified,board='Fox Creek Veterinary Hospital - Wildwood' contains distinctive 'fox'
+General Dynamics,"sp500,largest_us,sec_edgar","Reston, Virginia",Industrials,greenhouse,general,1,mismatch,board='General Interest' has no token overlap with company
+General Mills,"sp500,sec_edgar","Golden Valley, Minnesota",Consumer Staples,greenhouse,general,1,duplicate,already claimed by 'General Dynamics'
+General Motors,"sp500,largest_us,sec_edgar","Detroit, Michigan",Consumer Discretionary,greenhouse,general,1,duplicate,already claimed by 'General Dynamics'
+GoDaddy,"sp500,sec_edgar","Tempe, Arizona",Information Technology,greenhouse,godaddy,35,verified,board='GoDaddy' contains distinctive 'godaddy'
+Hasbro,"sp500,sec_edgar","Pawtucket, Rhode Island",Consumer Discretionary,greenhouse,hasbro,83,verified,board='Hasbro' contains distinctive 'hasbro'
+Henry Schein,"sp500,sec_edgar","Melville, New York",Health Care,greenhouse,hs,28,mismatch,board='Headspace' has no token overlap with company
+Intercontinental Exchange,"sp500,sec_edgar","Atlanta, Georgia",Financials,greenhouse,ie,8,mismatch,board='IE' has no token overlap with company
+International Flavors & Fragrances,"sp500,sec_edgar","New York City, New York",Materials,greenhouse,international,1,mismatch,board='UpWork International' has no token overlap with company
+International Paper,sp500,"Memphis, Tennessee",Materials,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+MetLife,"sp500,largest_us,sec_edgar,sec_edgar,sec_edgar,sec_edgar","New York City, New York",Financials,lever,metlife,39,review,postings don't clearly reference company; manual check needed
+O’Reilly Automotive,"sp500,sec_edgar","Springfield, Missouri",Consumer Discretionary,greenhouse,ora,20,mismatch,board='Ora' has no token overlap with company
+Palantir Technologies,"sp500,sec_edgar","Aventura, Florida",Information Technology,greenhouse,pt,7,mismatch,board='WePractice (Psychotherapeut:in)' has no token overlap with company
+Philip Morris International,"sp500,sec_edgar","New York City, New York",Consumer Staples,greenhouse,pm,1,mismatch,board='EMEA Private Job Board' has no token overlap with company
+Public Service Enterprise Group,"sp500,sec_edgar","Newark, New Jersey",Utilities,greenhouse,public,4,verified,company contains board's distinctive 'public'
+Public Storage,"sp500,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar","Glendale, California",Real Estate,greenhouse,public,4,duplicate,already claimed by 'Public Service Enterprise Group'
+Robinhood Markets,"sp500,sec_edgar","Menlo Park, California",Financials,greenhouse,robinhood,134,verified,board='Robinhood' contains distinctive 'robinhood'
+Southwest Airlines,"sp500,sec_edgar","Dallas, Texas",Industrials,greenhouse,sa,1,mismatch,board='Success Academy' has no token overlap with company
+Take-Two Interactive,sp500,"New York City, New York",Communication Services,greenhouse,taketwo,35,verified,"board='Take-Two Interactive Software, Inc.' contains distinctive 'interactive'"
+U.S. Bancorp,sp500,"Minneapolis, Minnesota",Financials,greenhouse,us,1,mismatch,board='itel - United States' has no token overlap with company
+Union Pacific Corporation,"sp500,sec_edgar","Omaha, Nebraska",Industrials,greenhouse,up,1,mismatch,board='Up' has no token overlap with company
+Universal Health Services,"sp500,sec_edgar","King of Prussia, Pennsylvania",Health Care,greenhouse,universal,2,verified,board='Universal' contains distinctive 'universal'
+Veeva Systems,"sp500,sec_edgar","Pleasanton, California",Health Care,lever,veeva,1039,review,postings don't clearly reference company; manual check needed
+Verisign,sp500,"Reston, Virginia",Information Technology,greenhouse,verisign,22,verified,board='Verisign' contains distinctive 'verisign'
+W. R. Berkley Corporation,sp500,"Greenwich, Connecticut",Financials,lever,wr,46,review,postings don't clearly reference company; manual check needed
+W. W. Grainger,"sp500,sec_edgar","Lake Forest, Illinois",Industrials,greenhouse,ww,73,mismatch,board='Weight Watchers' has no token overlap with company
+Wynn Resorts,"sp500,sec_edgar","Paradise, Nevada",Consumer Discretionary,lever,wr,46,duplicate,already claimed by 'W. R. Berkley Corporation'
+Nationwide Mutual Insurance Company,largest_us,"Columbus, Ohio",Financials,greenhouse,nmi,9,mismatch,board='NMI' has no token overlap with company
+Capital One Financial,"largest_us,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar","Tysons, Virginia",Financials,lever,capital,63,duplicate,already claimed by 'Capital One'
+"Koch, Inc.",private,United States,,greenhouse,koch,1,verified,board='Koch Mechanical' contains distinctive 'koch'
+Fidelity Investments,private,United States,,lever,fi,11,duplicate,already claimed by 'Fair Isaac'
+Allied Universal,private,United States,,greenhouse,allied,6,mismatch,board='Allied Mechanical' has no token overlap with company
+SpaceX,private,United States,,greenhouse,spacex,1689,verified,board='SpaceX' contains distinctive 'spacex'
+Stichting INGKA Foundation,charity,,nonprofit,greenhouse,si,4,mismatch,board='SimplyInsured' has no token overlap with company
+W. K. Kellogg Foundation Trust,charity,,nonprofit,greenhouse,wk,20,mismatch,board='Wieden+Kennedy' has no token overlap with company
+David and Lucile Packard Foundation,charity,,nonprofit,greenhouse,david,5,verified,company contains board's distinctive 'david'
+American College of Pediatricians,think_tank,,think-tank,greenhouse,acp,3,mismatch,board='Academy with Community Partners' has no token overlap with company
+American Institute for Economic Research,think_tank,,think-tank,greenhouse,americaninstitute,16,mismatch,board='American Institute' has no token overlap with company
+Brookings Institution,think_tank,,think-tank,lever,brookings,6,review,postings don't clearly reference company; manual check needed
+Future of American Democracy Foundation,think_tank,,think-tank,greenhouse,future,5,verified,company contains board's distinctive 'future'
+Independent Institute,think_tank,,think-tank,greenhouse,independent,1,mismatch,board='BR' has no token overlap with company
+International Food Policy Research Institute,think_tank,,think-tank,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+Lincoln Institute of Land Policy,think_tank,,think-tank,greenhouse,lincoln,13,verified,board='Lincoln Property Company through LinkedIn' contains distinctive 'lincoln'
+National Association of Scholars,think_tank,,think-tank,greenhouse,national,4,mismatch,board='NATIONAL' has no token overlap with company
+National Bureau of Asian Research,think_tank,,think-tank,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+National Bureau of Economic Research,think_tank,,think-tank,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+National Center for Policy Analysis,think_tank,,think-tank,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+National Endowment for Democracy,think_tank,,think-tank,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+National Policy Institute,think_tank,,think-tank,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+Oklahoma Policy Institute,think_tank,,think-tank,greenhouse,oklahoma,5,verified,board='Virtual Preparatory Academy of Oklahoma' contains distinctive 'oklahoma'
+Public Citizen,think_tank,,think-tank,greenhouse,public,4,duplicate,already claimed by 'Public Service Enterprise Group'
+Public Policy Institute of California,think_tank,,think-tank,greenhouse,public,4,duplicate,already claimed by 'Public Service Enterprise Group'
+The Independent Institute,think_tank,,think-tank,greenhouse,independent,1,duplicate,already claimed by 'Independent Institute'
+Center on International Cooperation,think_tank,,think-tank,lever,cic,13,review,postings don't clearly reference company; manual check needed
+Chicago Council on Global Affairs,think_tank,,think-tank,greenhouse,chicago,1,mismatch,board='Returners Job Board' has no token overlap with company
+Inter-American Dialogue,think_tank,,think-tank,greenhouse,inter,160,mismatch,board='Inter Carreiras' has no token overlap with company
+International Crisis Group,think_tank,,think-tank,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+National Committee on American Foreign Policy,think_tank,,think-tank,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+National Security Network,think_tank,,think-tank,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+RTI International,think_tank,,think-tank,greenhouse,rti,11,mismatch,board='Real-Time Innovations' has no token overlap with company
+World Resources Institute,think_tank,,think-tank,lever,wr,46,duplicate,already claimed by 'W. R. Berkley Corporation'
+Energy Innovation,think_tank,,think-tank,greenhouse,energyinnovation,2,verified,board='Energy Innovation' contains distinctive 'innovation'
+Metropolitan Area Planning Council,think_tank,,think-tank,greenhouse,map,89,mismatch,board='VML MAP' has no token overlap with company
+International Center for Research on Women,think_tank,,think-tank,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+International Intellectual Property Institute,think_tank,,think-tank,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+GENERAL ELECTRIC CO,sec_edgar,,,greenhouse,general,1,duplicate,already claimed by 'General Dynamics'
+INTERNATIONAL BUSINESS MACHINES CORP,sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+RIO TINTO PLC,"sec_edgar,sec_edgar",,,greenhouse,rtp,5,mismatch,board='Kiva RTP' has no token overlap with company
+UNILEVER PLC,"sec_edgar,sec_edgar",,,greenhouse,up,1,duplicate,already claimed by 'Union Pacific Corporation'
+Spotify Technology S.A.,sec_edgar,,,greenhouse,sts,2,mismatch,board='Steve Tate and Son Plumbing' has no token overlap with company
+NATIONAL GRID PLC,"sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+Bloom Energy Corp,sec_edgar,,,lever,bloom,9,review,postings don't clearly reference company; manual check needed
+Rocket Lab Corp,sec_edgar,,,greenhouse,rocketlab,303,verified,board='Rocket Lab Corporation' contains distinctive 'rocket'
+"Cloudflare, Inc.",sec_edgar,,,greenhouse,cloudflare,140,verified,board='Cloudflare' contains distinctive 'cloudflare'
+ROYAL CARIBBEAN CRUISES LTD,sec_edgar,,,greenhouse,rcc,1,mismatch,board='RCC' has no token overlap with company
+Cerebras Systems Inc.,sec_edgar,,,greenhouse,cerebrassystems,90,verified,board='Cerebras Systems' contains distinctive 'cerebras'
+London Stock Exchange Group plc,sec_edgar,,,greenhouse,london,4,mismatch,board='Aimé Leon Dore EU' has no token overlap with company
+"CoreWeave, Inc.",sec_edgar,,,greenhouse,coreweave,240,verified,board='CoreWeave' contains distinctive 'coreweave'
+"Astera Labs, Inc.",sec_edgar,,,greenhouse,asteralabs,152,verified,board='Astera Labs' contains distinctive 'astera'
+Nebius Group N.V.,sec_edgar,,,greenhouse,nebius,352,verified,board='Nebius' contains distinctive 'nebius'
+FLEX LTD.,sec_edgar,,,greenhouse,flex,71,verified,board='Flex' contains distinctive 'flex'
+"Baidu, Inc.","sec_edgar,sec_edgar",,,greenhouse,baidu,26,verified,board='Baidu USA' contains distinctive 'baidu'
+SWISSCOM AG,"sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+TAKE TWO INTERACTIVE SOFTWARE INC,sec_edgar,,,greenhouse,taketwo,35,duplicate,already claimed by 'Take-Two Interactive'
+Ubiquiti Inc.,sec_edgar,,,greenhouse,ubiquiti,157,verified,board='Ubiquiti' contains distinctive 'ubiquiti'
+"AST SpaceMobile, Inc.",sec_edgar,,,greenhouse,astspacemobile,229,verified,board='AST SpaceMobile' contains distinctive 'spacemobile'
+Roblox Corp,sec_edgar,,,greenhouse,roblox,290,verified,board='Roblox' contains distinctive 'roblox'
+"Revolution Medicines, Inc.","sec_edgar,sec_edgar",,,greenhouse,revolutionmedicines,218,verified,board='Revolution Medicines' contains distinctive 'revolution'
+"Natera, Inc.",sec_edgar,,,greenhouse,natera,199,verified,board='Natera' contains distinctive 'natera'
+TWILIO INC,sec_edgar,,,greenhouse,twilio,149,verified,board='Twilio' contains distinctive 'twilio'
+"Reddit, Inc.",sec_edgar,,,greenhouse,reddit,162,verified,board='Reddit' contains distinctive 'reddit'
+"Zscaler, Inc.",sec_edgar,,,greenhouse,zscaler,344,verified,board='Zscaler' contains distinctive 'zscaler'
+"Coupang, Inc.",sec_edgar,,,greenhouse,coupang,508,verified,board='Coupang' contains distinctive 'coupang'
+VERISIGN INC/CA,sec_edgar,,,greenhouse,verisign,22,duplicate,already claimed by 'Verisign'
+"MongoDB, Inc.",sec_edgar,,,greenhouse,mongodb,417,verified,board='MongoDB' contains distinctive 'mongodb'
+COGNIZANT TECHNOLOGY SOLUTIONS CORP,sec_edgar,,,greenhouse,cts,2,mismatch,board='CTS Cloud Trading Solutions LTD' has no token overlap with company
+Roivant Sciences Ltd.,sec_edgar,,,greenhouse,roivantsciences,8,verified,board='Roivant Sciences' contains distinctive 'sciences'
+"STERLING INFRASTRUCTURE, INC.",sec_edgar,,,greenhouse,sterling,2,verified,company contains board's distinctive 'sterling'
+"Affirm Holdings, Inc.",sec_edgar,,,greenhouse,affirm,160,verified,company contains board's distinctive 'affirm'
+UL Solutions Inc.,sec_edgar,,,greenhouse,us,1,duplicate,already claimed by 'U.S. Bancorp'
+"SoFi Technologies, Inc.",sec_edgar,,,greenhouse,sofi,155,verified,company contains board's distinctive 'sofi'
+"Super Micro Computer, Inc.",sec_edgar,,,greenhouse,super,223,mismatch,board='Super Technologies' has no token overlap with company
+LATTICE SEMICONDUCTOR CORP,sec_edgar,,,greenhouse,lattice,10,verified,company contains board's distinctive 'lattice'
+Madison Air Solutions Corp,sec_edgar,,,greenhouse,mas,3,mismatch,board='Midwest Applied Solutions' has no token overlap with company
+"ROKU, INC",sec_edgar,,,greenhouse,roku,247,verified,board='Roku' contains distinctive 'roku'
+Samsara Inc.,sec_edgar,,,greenhouse,samsara,341,verified,board='Samsara' contains distinctive 'samsara'
+DiDi Global Inc.,sec_edgar,,,greenhouse,didi,5,verified,board='DiDi Labs' contains distinctive 'didi'
+KOREA ELECTRIC POWER CORP,sec_edgar,,,greenhouse,korea,1,verified,company contains board's distinctive 'korea'
+INTERNATIONAL PAPER CO /NEW/,"sec_edgar,sec_edgar",,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+"Okta, Inc.",sec_edgar,,,greenhouse,okta,368,verified,board='Okta' contains distinctive 'okta'
+Planet Labs PBC,sec_edgar,,,greenhouse,planetlabs,78,verified,board='Planet' contains distinctive 'planet'
+BLUE OWL CAPITAL INC.,"sec_edgar,sec_edgar",,,lever,blue,3,review,postings don't clearly reference company; manual check needed
+LINCOLN ELECTRIC HOLDINGS INC,sec_edgar,,,greenhouse,lincoln,13,duplicate,already claimed by 'Lincoln Institute of Land Policy'
+REINSURANCE GROUP OF AMERICA INC,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,rga,18,mismatch,board='R/GA Careers Page' has no token overlap with company
+"Aurora Innovation, Inc.","sec_edgar,sec_edgar",,,greenhouse,aurorainnovation,168,verified,board='Aurora Innovation' contains distinctive 'innovation'
+Summit Therapeutics Inc.,sec_edgar,,,greenhouse,summittherapeutics,30,verified,board='Summit Therapeutics' contains distinctive 'therapeutics'
+"Rubrik, Inc.",sec_edgar,,,greenhouse,rubrik,131,verified,board='Rubrik Job Board' contains distinctive 'rubrik'
+"Toast, Inc.",sec_edgar,,,greenhouse,toast,323,verified,board='Toast' contains distinctive 'toast'
+PayPay Corp,sec_edgar,,,greenhouse,paypay,72,verified,board='PayPay' contains distinctive 'paypay'
+"BridgeBio Pharma, Inc.",sec_edgar,,,greenhouse,bridgebio,115,verified,board='BridgeBio Pharma' contains distinctive 'bridgebio'
+HF Sinclair Corp,sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+EQUITY LIFESTYLE PROPERTIES INC,sec_edgar,,,greenhouse,elp,1,mismatch,board='RAPP ELP' has no token overlap with company
+"Axsome Therapeutics, Inc.",sec_edgar,,,greenhouse,axsometherapeutics,179,verified,board='Axsome Therapeutics' contains distinctive 'therapeutics'
+"Figma, Inc.",sec_edgar,,,greenhouse,figma,159,verified,board='Figma' contains distinctive 'figma'
+"Virtu Financial, Inc.",sec_edgar,,,greenhouse,virtu,34,verified,board='Virtu Financial' contains distinctive 'financial'
+Unity Software Inc.,sec_edgar,,,greenhouse,us,1,duplicate,already claimed by 'U.S. Bancorp'
+HARMONY GOLD MINING CO LTD,"sec_edgar,sec_edgar",,,lever,harmony,9,verified,postings reference 'harmony'
+SEI INVESTMENTS CO,sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+Oklo Inc.,sec_edgar,,,greenhouse,oklo,55,verified,board='Oklo' contains distinctive 'oklo'
+Hut 8 Corp.,sec_edgar,,,greenhouse,hut8,47,verified,board='Hut 8' contains distinctive 'hut'
+Galaxy Digital Inc.,sec_edgar,,,greenhouse,galaxy,3,mismatch,board='Galaxy Integrated Technologies' has no token overlap with company
+CYTOKINETICS INC,sec_edgar,,,greenhouse,cytokinetics,10,verified,board='Cytokinetics' contains distinctive 'cytokinetics'
+"PINTEREST, INC.",sec_edgar,,,greenhouse,pinterest,174,verified,board='Pinterest' contains distinctive 'pinterest'
+"Essential Utilities, Inc.",sec_edgar,,,greenhouse,essential,100,verified,board='Essential Anesthesia Management' contains distinctive 'essential'
+RANGE RESOURCES CORP,sec_edgar,,,greenhouse,range,17,verified,company contains board's distinctive 'range'
+Element Solutions Inc,sec_edgar,,,lever,elementsolutions,17,review,postings don't clearly reference company; manual check needed
+FIRST MAJESTIC SILVER CORP,sec_edgar,,,greenhouse,fms,1,mismatch,board='Fields Mechanical Systems' has no token overlap with company
+Dutch Bros Inc.,sec_edgar,,,lever,dutch,5,review,postings don't clearly reference company; manual check needed
+"Praxis Precision Medicines, Inc.",sec_edgar,,,greenhouse,praxisprecisionmedicines,30,verified,"board='Praxis Precision Medicines, Inc.' contains distinctive 'precision'"
+SOUTHEAST AIRPORT GROUP,"sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+"Clearway Energy, Inc.",sec_edgar,,,greenhouse,clearway,11,verified,board='Clearway Group' contains distinctive 'clearway'
+JFrog Ltd,sec_edgar,,,greenhouse,jfrog,99,verified,board='JFrog' contains distinctive 'jfrog'
+Frontline plc,sec_edgar,,,lever,fp,25,review,postings don't clearly reference company; manual check needed
+Noble Corp plc,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,noble,2,verified,board='Noble' contains distinctive 'noble'
+"DILLARD'S, INC.","sec_edgar,sec_edgar",,,greenhouse,dillards,2,verified,board='Dillards' contains distinctive 'dillard'
+"Rexford Industrial Realty, Inc.","sec_edgar,sec_edgar,sec_edgar",,,greenhouse,rexfordindustrial,2,verified,board='Rexford Industrial' contains distinctive 'industrial'
+"Clear Secure, Inc.",sec_edgar,,,greenhouse,clear,65,mismatch,board='CLEAR - Corporate' has no token overlap with company
+MANHATTAN ASSOCIATES INC,sec_edgar,,,greenhouse,ma,1,mismatch,board='Mallory Alexander' has no token overlap with company
+"Nuvalent, Inc.",sec_edgar,,,greenhouse,nuvalent,15,verified,"board='Nuvalent, Inc.' contains distinctive 'nuvalent'"
+EASTMAN CHEMICAL CO,sec_edgar,,,greenhouse,ec,2,mismatch,board='Environmental Comfort' has no token overlap with company
+"Figure Technology Solutions, Inc.","sec_edgar,sec_edgar",,,greenhouse,figure,14,mismatch,board='Figure Lending' has no token overlap with company
+NATIONAL FUEL GAS CO,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+"Everus Construction Group, Inc.",sec_edgar,,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+"CHARLES RIVER LABORATORIES INTERNATIONAL, INC.",sec_edgar,,,greenhouse,charles,3,duplicate,already claimed by 'Charles River Laboratories'
+"STAG Industrial, Inc.",sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+"Kodiak Gas Services, Inc.",sec_edgar,,,greenhouse,kodiak,58,verified,board='Kodiak' contains distinctive 'kodiak'
+"Core Scientific, Inc./tx","sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,corescientific,17,verified,board='Core Scientific' contains distinctive 'scientific'
+"Life Time Group Holdings, Inc.",sec_edgar,,,lever,life,55,review,postings don't clearly reference company; manual check needed
+GDS Holdings Ltd,"sec_edgar,sec_edgar",,,greenhouse,gds,1,mismatch,board='Garage Door Specialist' has no token overlap with company
+Healthcare Realty Trust Inc,sec_edgar,,,lever,healthcare,4,review,postings don't clearly reference company; manual check needed
+"PROCORE TECHNOLOGIES, INC.",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+TETRA TECH INC,sec_edgar,,,greenhouse,tetra,3,verified,board='Tetra' contains distinctive 'tetra'
+"Oscar Health, Inc.",sec_edgar,,,greenhouse,oscar,236,verified,board='Oscar Health' contains distinctive 'health'
+"Enphase Energy, Inc.",sec_edgar,,,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+Super Group (SGHC) Ltd,sec_edgar,,,greenhouse,super,223,duplicate,"already claimed by 'Super Micro Computer, Inc.'"
+First American Financial Corp,sec_edgar,,,greenhouse,faf,1,mismatch,board='Fresh Air Fund' has no token overlap with company
+PLEXUS CORP,sec_edgar,,,lever,plexus,2,review,postings don't clearly reference company; manual check needed
+Celcuity Inc.,sec_edgar,,,greenhouse,celcuity,18,verified,board='Celcuity Inc.' contains distinctive 'celcuity'
+"Vaxcyte, Inc.",sec_edgar,,,greenhouse,vaxcyte,52,verified,board='Vaxcyte' contains distinctive 'vaxcyte'
+"HANOVER INSURANCE GROUP, INC.",sec_edgar,,,greenhouse,hanover,4,verified,company contains board's distinctive 'hanover'
+"ESSENTIAL PROPERTIES REALTY TRUST, INC.",sec_edgar,,,greenhouse,essential,100,duplicate,"already claimed by 'Essential Utilities, Inc.'"
+LINCOLN NATIONAL CORP,"sec_edgar,sec_edgar",,,greenhouse,lincoln,13,duplicate,already claimed by 'Lincoln Institute of Land Policy'
+"Chime Financial, Inc.",sec_edgar,,,greenhouse,chime,73,verified,"board='Chime Financial, Inc' contains distinctive 'financial'"
+"Solaris Energy Infrastructure, Inc.",sec_edgar,,,greenhouse,sei,1,mismatch,board='SEI' has no token overlap with company
+"Kymera Therapeutics, Inc.",sec_edgar,,,greenhouse,kymeratherapeutics,21,verified,board='Kymera Therapeutics' contains distinctive 'therapeutics'
+StepStone Group Inc.,sec_edgar,,,greenhouse,stepstone,65,verified,board='StepStone Group' contains distinctive 'stepstone'
+"Protagonist Therapeutics, Inc",sec_edgar,,,greenhouse,protagonist,7,verified,company contains board's distinctive 'protagonist'
+"DROPBOX, INC.",sec_edgar,,,greenhouse,dropbox,58,verified,board='Dropbox' contains distinctive 'dropbox'
+"Rush Street Interactive, Inc.",sec_edgar,,,greenhouse,rushstreetinteractive,28,verified,board='Rush Street Interactive' contains distinctive 'interactive'
+CORCEPT THERAPEUTICS INC,sec_edgar,,,greenhouse,corcepttherapeutics,46,verified,board='Corcept Therapeutics' contains distinctive 'therapeutics'
+Aura Minerals Inc.,sec_edgar,,,greenhouse,aura,6,verified,company contains board's distinctive 'aura'
+National Storage Affiliates Trust,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+"Spyre Therapeutics, Inc.",sec_edgar,,,greenhouse,spyretherapeutics,2,verified,board='Spyre Therapeutics' contains distinctive 'therapeutics'
+"Apogee Therapeutics, Inc.",sec_edgar,,,greenhouse,apogeetherapeutics,30,verified,board='Apogee Therapeutics' contains distinctive 'therapeutics'
+"Mirum Pharmaceuticals, Inc.",sec_edgar,,,greenhouse,mirumpharmaceuticals,33,verified,board='Mirum Pharmaceuticals' contains distinctive 'pharmaceuticals'
+"PTC THERAPEUTICS, INC.",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+Scholar Rock Holding Corp,sec_edgar,,,lever,scholarrock,17,review,postings don't clearly reference company; manual check needed
+Elastic N.V.,sec_edgar,,,greenhouse,elastic,159,verified,board='Elastic' contains distinctive 'elastic'
+MERCURY GENERAL CORP,sec_edgar,,,greenhouse,mercury,57,verified,board='Mercury' contains distinctive 'mercury'
+MERCURY SYSTEMS INC,sec_edgar,,,greenhouse,mercury,57,duplicate,already claimed by 'MERCURY GENERAL CORP'
+Magnolia Oil & Gas Corp,sec_edgar,,,greenhouse,magnolia,20,verified,board='Magnolia' contains distinctive 'magnolia'
+"Cogent Biosciences, Inc.",sec_edgar,,,greenhouse,cogentbiosciences,18,verified,board='Cogent Biosciences' contains distinctive 'biosciences'
+"Rigetti Computing, Inc.","sec_edgar,sec_edgar",,,lever,rigetti,16,review,postings don't clearly reference company; manual check needed
+NICE Ltd.,"sec_edgar,sec_edgar",,,greenhouse,nice,397,verified,board='NICE' contains distinctive 'nice'
+SELECTIVE INSURANCE GROUP INC,"sec_edgar,sec_edgar",,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+"Victory Capital Holdings, Inc.",sec_edgar,,,greenhouse,victory,1,mismatch,board='Victory Creative Group' has no token overlap with company
+EquipmentShare.com Inc,sec_edgar,,,greenhouse,equipmentsharecom,928,verified,board='EquipmentShare' contains distinctive 'equipmentshare'
+SPIRE INC,"sec_edgar,sec_edgar",,,greenhouse,spire,49,verified,board='Spire' contains distinctive 'spire'
+"Lyft, Inc.",sec_edgar,,,greenhouse,lyft,125,verified,board='Lyft' contains distinctive 'lyft'
+Blue Owl Technology Finance Corp.,sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+"Duolingo, Inc.",sec_edgar,,,greenhouse,duolingo,78,verified,board='Duolingo' contains distinctive 'duolingo'
+"Dianthus Therapeutics, Inc. /DE/",sec_edgar,,,greenhouse,dianthustherapeutics,10,verified,board='Dianthus Therapeutics' contains distinctive 'therapeutics'
+"Xometry, Inc.",sec_edgar,,,greenhouse,xometry,304,verified,board='Xometry' contains distinctive 'xometry'
+Sphere Entertainment Co.,sec_edgar,,,greenhouse,sphereentertainment,31,verified,"board='Sphere Entertainment Group, LLC' contains distinctive 'entertainment'"
+Netskope Inc,sec_edgar,,,greenhouse,netskope,121,verified,board='Netskope' contains distinctive 'netskope'
+Zeta Global Holdings Corp.,sec_edgar,,,lever,zeta,23,review,postings don't clearly reference company; manual check needed
+"Klaviyo, Inc.",sec_edgar,,,greenhouse,klaviyo,236,verified,board='Klaviyo' contains distinctive 'klaviyo'
+Gitlab Inc.,sec_edgar,,,greenhouse,gitlab,159,verified,board='GitLab' contains distinctive 'gitlab'
+INTERNATIONAL BANCSHARES CORP,sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+Crescent Energy Co,sec_edgar,,,greenhouse,crescent,28,verified,board='Crescent' contains distinctive 'crescent'
+"ARRAY DIGITAL INFRASTRUCTURE, INC.","sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,array,19,verified,company contains board's distinctive 'array'
+Archer Aviation Inc.,"sec_edgar,sec_edgar",,,greenhouse,archer,1,duplicate,already claimed by 'Archer Daniels Midland'
+COMMVAULT SYSTEMS INC,sec_edgar,,,greenhouse,commvault,105,verified,board='Commvault' contains distinctive 'commvault'
+"International Seaways, Inc.",sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+UNIVERSAL DISPLAY CORP \PA\,sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+COMSTOCK RESOURCES INC,sec_edgar,,,greenhouse,comstock,61,verified,company contains board's distinctive 'comstock'
+"Grand Canyon Education, Inc.",sec_edgar,,,lever,grand,11,review,postings don't clearly reference company; manual check needed
+Rightmove PLC/ADR,"sec_edgar,sec_edgar",,,greenhouse,rpa,5,mismatch,board='RPA' has no token overlap with company
+"Shift4 Payments, Inc.","sec_edgar,sec_edgar",,,greenhouse,shift4,76,verified,company contains board's distinctive 'shift'
+"Kiniksa Pharmaceuticals International, plc",sec_edgar,,,greenhouse,kiniksapharmaceuticals,37,verified,board='Kiniksa Pharmaceuticals' contains distinctive 'pharmaceuticals'
+Science Applications International Corp,sec_edgar,,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+"Enova International, Inc.",sec_edgar,,,greenhouse,enova,39,verified,board='Enova International' contains distinctive 'enova'
+"Excelerate Energy, Inc.",sec_edgar,,,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+BRADY CORP,sec_edgar,,,greenhouse,brady,42,verified,board='Brady Services' contains distinctive 'brady'
+"CLEANSPARK, INC.","sec_edgar,sec_edgar",,,lever,cleanspark,15,review,postings don't clearly reference company; manual check needed
+"Champion Homes, Inc.",sec_edgar,,,greenhouse,champion,2,verified,board='Champion Industrial Contractors' contains distinctive 'champion'
+"BillionToOne, Inc.",sec_edgar,,,greenhouse,billiontoone,124,verified,board='BillionToOne' contains distinctive 'billiontoone'
+INDEPENDENT BANK CORP,sec_edgar,,,greenhouse,independent,1,duplicate,already claimed by 'Independent Institute'
+NATIONAL HEALTH INVESTORS INC,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+"Doximity, Inc.",sec_edgar,,,greenhouse,doximity,17,verified,board='Doximity' contains distinctive 'doximity'
+ST JOE Co,sec_edgar,,,greenhouse,sj,2,mismatch,board='SJ Test' has no token overlap with company
+CAL-MAINE FOODS INC,sec_edgar,,,greenhouse,cmf,1,mismatch,board='CMF by Nothing' has no token overlap with company
+Kinetik Holdings Inc.,sec_edgar,,,greenhouse,kinetik,1,verified,company contains board's distinctive 'kinetik'
+"COHEN & STEERS, INC.",sec_edgar,,,greenhouse,cohensteers,19,verified,board='Cohen & Steers' contains distinctive 'steers'
+"Oruka Therapeutics, Inc.",sec_edgar,,,greenhouse,oruka,23,verified,board='Oruka Therapeutics' contains distinctive 'therapeutics'
+"SOUNDHOUND AI, INC.","sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+Otter Tail Corp,sec_edgar,,,greenhouse,otter,35,verified,board='Otter' contains distinctive 'otter'
+"VERACYTE, INC.",sec_edgar,,,greenhouse,veracyte,36,verified,board='Veracyte' contains distinctive 'veracyte'
+Polaris Inc.,sec_edgar,,,greenhouse,polaris,1,verified,board='Polaris' contains distinctive 'polaris'
+ACADIA PHARMACEUTICALS INC,sec_edgar,,,greenhouse,acadiapharmaceuticals,47,verified,board='Acadia Pharmaceuticals Inc.' contains distinctive 'pharmaceuticals'
+Sezzle Inc.,sec_edgar,,,greenhouse,sezzle,203,verified,board='Sezzle' contains distinctive 'sezzle'
+Pattern Group Inc.,sec_edgar,,,lever,pattern,107,verified,postings reference 'pattern'
+dLocal Ltd,sec_edgar,,,lever,dlocal,34,review,postings don't clearly reference company; manual check needed
+ASSURED GUARANTY LTD,sec_edgar,,,greenhouse,assuredguaranty,4,verified,board='Assured Guaranty' contains distinctive 'guaranty'
+"Erasca, Inc.",sec_edgar,,,greenhouse,erasca,3,verified,board='Erasca' contains distinctive 'erasca'
+"COMMUNITY FINANCIAL SYSTEM, INC.",sec_edgar,,,greenhouse,community,1,verified,board='Rome Community Partners' contains distinctive 'community'
+Twist Bioscience Corp,sec_edgar,,,greenhouse,twistbioscience,21,verified,board='Twist Bioscience' contains distinctive 'bioscience'
+Allied Gold Corp,sec_edgar,,,greenhouse,allied,6,duplicate,already claimed by 'Allied Universal'
+NATIONAL BEVERAGE CORP,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+Kyivstar Group Ltd.,"sec_edgar,sec_edgar",,,lever,kyivstar,147,verified,postings reference 'kyivstar'
+"Life360, Inc.","sec_edgar,sec_edgar",,,greenhouse,life360,36,verified,board='Life360' contains distinctive 'life'
+Hypermarcas S.A.,sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+NATIONAL HEALTHCARE CORP,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+SIGNET JEWELERS LTD,sec_edgar,,,greenhouse,sj,2,duplicate,already claimed by 'ST JOE Co'
+INNODATA INC,sec_edgar,,,lever,innodata,3,review,postings don't clearly reference company; manual check needed
+EXTREME NETWORKS INC,sec_edgar,,,lever,extremenetworks,54,review,postings don't clearly reference company; manual check needed
+"DigitalBridge Group, Inc.","sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,digitalbridge,2,verified,board='DigitalBridge' contains distinctive 'digitalbridge'
+"Tango Therapeutics, Inc.",sec_edgar,,,greenhouse,tangotherapeutics,19,verified,board='Tango Therapeutics' contains distinctive 'therapeutics'
+"10x Genomics, Inc.",sec_edgar,,,greenhouse,10xgenomics,38,verified,board='10x Genomics' contains distinctive 'genomics'
+TOOTSIE ROLL INDUSTRIES INC,"sec_edgar,sec_edgar",,,lever,tri,13,review,postings don't clearly reference company; manual check needed
+COHEN & STEERS INFRASTRUCTURE FUND INC,sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+"e.l.f. Beauty, Inc.",sec_edgar,,,lever,elfbeauty,77,review,postings don't clearly reference company; manual check needed
+"WisdomTree, Inc.",sec_edgar,,,lever,wisdomtree,6,review,postings don't clearly reference company; manual check needed
+"LifeStance Health Group, Inc.",sec_edgar,,,lever,lifestance,1456,review,postings don't clearly reference company; manual check needed
+"NMI Holdings, Inc.",sec_edgar,,,greenhouse,nmi,9,duplicate,already claimed by 'Nationwide Mutual Insurance Company'
+"Dyne Therapeutics, Inc.",sec_edgar,,,greenhouse,dynetherapeutics,36,verified,board='Dyne Therapeutics' contains distinctive 'therapeutics'
+Ero Copper Corp.,sec_edgar,,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+ALUMIS INC.,sec_edgar,,,greenhouse,alumis,17,verified,board='Alumis' contains distinctive 'alumis'
+Beam Therapeutics Inc.,sec_edgar,,,greenhouse,beamtherapeutics,33,verified,board='Beam Therapeutics' contains distinctive 'therapeutics'
+INSIGHT ENTERPRISES INC,sec_edgar,,,greenhouse,ie,8,duplicate,already claimed by 'Intercontinental Exchange'
+SiriusPoint Ltd,sec_edgar,,,greenhouse,siriuspoint,18,verified,board='SiriusPoint' contains distinctive 'siriuspoint'
+"Upstart Holdings, Inc.",sec_edgar,,,greenhouse,upstart,78,verified,company contains board's distinctive 'upstart'
+"Inter & Co, Inc.",sec_edgar,,,greenhouse,inter,160,duplicate,already claimed by 'Inter-American Dialogue'
+"Fastly, Inc.",sec_edgar,,,greenhouse,fastly,62,verified,board='Fastly' contains distinctive 'fastly'
+National Energy Services Reunited Corp.,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+"Curaleaf Holdings, Inc.",sec_edgar,,,greenhouse,curaleaf,195,verified,board='Curaleaf' contains distinctive 'curaleaf'
+Telesat Corp,sec_edgar,,,lever,telesat,38,review,postings don't clearly reference company; manual check needed
+"Kailera Therapeutics, Inc.",sec_edgar,,,greenhouse,kailera,20,verified,"board='Kailera Therapeutics, Inc.' contains distinctive 'therapeutics'"
+Artisan Partners Asset Management Inc.,sec_edgar,,,greenhouse,artisanpartners,8,verified,company contains board's distinctive 'partners'
+"Disc Medicine, Inc.",sec_edgar,,,greenhouse,discmedicine,9,verified,board='Disc Medicine' contains distinctive 'medicine'
+Keel Infrastructure Corp.,sec_edgar,,,greenhouse,keelinfrastructure,21,verified,board='Keel Infrastructure' contains distinctive 'infrastructure'
+"CarGurus, Inc.",sec_edgar,,,greenhouse,cargurus,52,verified,board='CarGurus' contains distinctive 'cargurus'
+"Braze, Inc.",sec_edgar,,,greenhouse,braze,215,verified,board='Braze' contains distinctive 'braze'
+"Relay Therapeutics, Inc.",sec_edgar,,,greenhouse,relaytherapeutics,6,verified,board='Relay Therapeutics' contains distinctive 'therapeutics'
+WeRide Inc.,"sec_edgar,sec_edgar",,,lever,weride,35,review,postings don't clearly reference company; manual check needed
+"Mineralys Therapeutics, Inc.",sec_edgar,,,greenhouse,mineralystherapeutics,12,verified,board='Mineralys Therapeutics' contains distinctive 'therapeutics'
+SONIC AUTOMOTIVE INC,sec_edgar,,,greenhouse,sonic,13,mismatch,board='Sonic Internet + Phone' has no token overlap with company
+LEMAITRE VASCULAR INC,sec_edgar,,,greenhouse,lv,1,mismatch,board='LV's Number 1 Company' has no token overlap with company
+Ultragenyx Pharmaceutical Inc.,sec_edgar,,,greenhouse,ultragenyxpharmaceutical,22,verified,board='Ultragenyx Pharmaceutical' contains distinctive 'pharmaceutical'
+AGILYSYS INC,sec_edgar,,,greenhouse,agilysys,9,verified,board='Agilysys' contains distinctive 'agilysys'
+"Definium Therapeutics, Inc.",sec_edgar,,,greenhouse,definiumtherapeutics,16,verified,board='Definium Therapeutics' contains distinctive 'therapeutics'
+"Axogen, Inc.",sec_edgar,,,greenhouse,axogen,40,verified,board='Axogen' contains distinctive 'axogen'
+Kodiak Sciences Inc.,sec_edgar,,,greenhouse,kodiak,58,duplicate,"already claimed by 'Kodiak Gas Services, Inc.'"
+POET TECHNOLOGIES INC.,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"PELOTON INTERACTIVE, INC.",sec_edgar,,,greenhouse,peloton,63,verified,company contains board's distinctive 'peloton'
+Adaptive Biotechnologies Corp,sec_edgar,,,greenhouse,adaptivebiotechnologies,14,verified,board='Adaptive Biotechnologies' contains distinctive 'biotechnologies'
+"AvePoint, Inc.",sec_edgar,,,greenhouse,avepoint,335,verified,board='AvePoint' contains distinctive 'avepoint'
+"Alarm.com Holdings, Inc.",sec_edgar,,,greenhouse,alarmcom,80,verified,company contains board's distinctive 'alarm'
+"PureCycle Technologies, Inc.","sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"Slide Insurance Holdings, Inc.",sec_edgar,,,greenhouse,slideinsurance,24,verified,board='Slide Insurance' contains distinctive 'insurance'
+Blue Bird Corp,sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+UNIVERSAL TECHNICAL INSTITUTE INC,sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+VERRA MOBILITY Corp,sec_edgar,,,greenhouse,verramobility,46,verified,board='Verra Mobility' contains distinctive 'mobility'
+GENESIS ENERGY LP,sec_edgar,,,lever,genesis,1,review,postings don't clearly reference company; manual check needed
+BRASKEM SA,sec_edgar,,,greenhouse,braskem,12,verified,board='Braskem' contains distinctive 'braskem'
+Ivanhoe Electric Inc.,sec_edgar,,,greenhouse,ie,8,duplicate,already claimed by 'Intercontinental Exchange'
+Ethos Technologies Inc.,sec_edgar,,,greenhouse,ethos,3,verified,company contains board's distinctive 'ethos'
+"CLOVER HEALTH INVESTMENTS, CORP. /DE",sec_edgar,,,greenhouse,cloverhealth,67,verified,company contains board's distinctive 'clover'
+"Stoke Therapeutics, Inc.",sec_edgar,,,greenhouse,stoketherapeutics,16,verified,board='Stoke Therapeutics' contains distinctive 'therapeutics'
+National Bank Holdings Corp,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+Bandwidth Inc.,sec_edgar,,,greenhouse,bandwidth,38,verified,board='Bandwidth' contains distinctive 'bandwidth'
+"Pediatrix Medical Group, Inc.",sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+"Harmony Biosciences Holdings, Inc.",sec_edgar,,,lever,harmony,9,duplicate,already claimed by 'HARMONY GOLD MINING CO LTD'
+"PULSE BIOSCIENCES, INC.",sec_edgar,,,greenhouse,pulsebiosciences,6,verified,board='Pulse Biosciences' contains distinctive 'biosciences'
+COHEN & STEERS QUALITY INCOME REALTY FUND INC,sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+Syndax Pharmaceuticals Inc,sec_edgar,,,greenhouse,syndaxpharmaceuticals,7,verified,board='Syndax Pharmaceuticals' contains distinctive 'pharmaceuticals'
+Flex LNG Ltd.,sec_edgar,,,greenhouse,flex,71,duplicate,already claimed by 'FLEX LTD.'
+"OCULAR THERAPEUTIX, INC",sec_edgar,,,greenhouse,oculartherapeutix,17,verified,board='Ocular Therapeutix' contains distinctive 'therapeutix'
+"PATHWARD FINANCIAL, INC.",sec_edgar,,,greenhouse,pathward,33,verified,company contains board's distinctive 'pathward'
+WEALTHFRONT CORP,sec_edgar,,,lever,wealthfront,14,review,postings don't clearly reference company; manual check needed
+ENCORE CAPITAL GROUP INC,sec_edgar,,,greenhouse,encore,2,verified,company contains board's distinctive 'encore'
+"Live Oak Bancshares, Inc.","sec_edgar,sec_edgar",,,greenhouse,lob,7,mismatch,board='Lob' has no token overlap with company
+"Rapport Therapeutics, Inc.",sec_edgar,,,greenhouse,rapporttherapeutics,5,verified,board='Rapport Therapeutics' contains distinctive 'therapeutics'
+"Five9, Inc.",sec_edgar,,,greenhouse,five9,161,verified,board='Five9' contains distinctive 'five'
+CTS CORP,sec_edgar,,,greenhouse,cts,2,duplicate,already claimed by 'COGNIZANT TECHNOLOGY SOLUTIONS CORP'
+"Nurix Therapeutics, Inc.",sec_edgar,,,greenhouse,nurix,19,verified,company contains board's distinctive 'nurix'
+"Marqeta, Inc.",sec_edgar,,,greenhouse,marqeta,40,verified,board='Marqeta' contains distinctive 'marqeta'
+Proto Labs Inc,sec_edgar,,,greenhouse,proto,4,verified,board='Proto' contains distinctive 'proto'
+BlackSky Technology Inc.,"sec_edgar,sec_edgar",,,greenhouse,blacksky,21,verified,company contains board's distinctive 'blacksky'
+Mega Fortune Co Ltd,sec_edgar,,,lever,mega,12,review,postings don't clearly reference company; manual check needed
+"CAPRICOR THERAPEUTICS, INC.",sec_edgar,,,lever,capricor,39,verified,postings reference 'therapeutics'
+"Sila Realty Trust, Inc.",sec_edgar,,,lever,sila,272,review,postings don't clearly reference company; manual check needed
+"Generate Biomedicines, Inc.",sec_edgar,,,greenhouse,generatebiomedicines,17,verified,board='Generate Biomedicines' contains distinctive 'biomedicines'
+AZUL SA,"sec_edgar,sec_edgar",,,lever,azul,19,review,postings don't clearly reference company; manual check needed
+NATIONAL STEEL CO,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+Payoneer Global Inc.,sec_edgar,,,greenhouse,payoneer,82,verified,board='Payoneer' contains distinctive 'payoneer'
+"Sixth Street Specialty Lending, Inc.",sec_edgar,,,greenhouse,sixthstreet,17,verified,company contains board's distinctive 'street'
+"PALVELLA THERAPEUTICS, INC.",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"MARAVAI LIFESCIENCES HOLDINGS, INC.",sec_edgar,,,greenhouse,maravailifesciences,3,verified,board='Maravai LifeSciences' contains distinctive 'lifesciences'
+PROCEPT BioRobotics Corp,sec_edgar,,,lever,procept-biorobotics,7,review,postings don't clearly reference company; manual check needed
+Rumble Inc.,"sec_edgar,sec_edgar",,,greenhouse,rumble,14,verified,board='Rumble - Career Page' contains distinctive 'rumble'
+Robinhood Ventures Fund I,sec_edgar,,,greenhouse,robinhood,134,duplicate,already claimed by 'Robinhood Markets'
+Green Thumb Industries Inc.,sec_edgar,,,greenhouse,greenthumbindustries,215,verified,company contains board's distinctive 'green'
+"Asana, Inc.",sec_edgar,,,greenhouse,asana,135,verified,board='Asana' contains distinctive 'asana'
+"IOVANCE BIOTHERAPEUTICS, INC.",sec_edgar,,,greenhouse,iovancebiotherapeutics,25,verified,board='Iovance Biotherapeutics' contains distinctive 'biotherapeutics'
+"RECURSION PHARMACEUTICALS, INC.",sec_edgar,,,greenhouse,recursionpharmaceuticals,37,verified,company contains board's distinctive 'recursion'
+APPIAN CORP,sec_edgar,,,greenhouse,appian,186,verified,board='Appian Corporation' contains distinctive 'appian'
+GENERAL AMERICAN INVESTORS CO INC,"sec_edgar,sec_edgar",,,greenhouse,general,1,duplicate,already claimed by 'General Dynamics'
+LINCOLN EDUCATIONAL SERVICES CORP,sec_edgar,,,greenhouse,lincoln,13,duplicate,already claimed by 'Lincoln Institute of Land Policy'
+"Amylyx Pharmaceuticals, Inc.",sec_edgar,,,greenhouse,amylyx,10,verified,board='Amylyx Pharmaceuticals' contains distinctive 'pharmaceuticals'
+"Coursera, Inc.",sec_edgar,,,greenhouse,coursera,11,verified,board='Coursera' contains distinctive 'coursera'
+"MBX Biosciences, Inc.",sec_edgar,,,greenhouse,mbxbiosciences,9,verified,board='MBX Biosciences' contains distinctive 'biosciences'
+Taboola.com Ltd.,"sec_edgar,sec_edgar",,,greenhouse,taboola,79,verified,board='Taboola' contains distinctive 'taboola'
+WORLD KINECT CORP,sec_edgar,,,greenhouse,wk,20,duplicate,already claimed by 'W. K. Kellogg Foundation Trust'
+LAKELAND FINANCIAL CORP,sec_edgar,,,greenhouse,lakeland,2,mismatch,board='Lakeland Veterinary Hospital' has no token overlap with company
+UroGen Pharma Ltd.,sec_edgar,,,greenhouse,up,1,duplicate,already claimed by 'Union Pacific Corporation'
+COMPASS Pathways plc,sec_edgar,,,greenhouse,compasspathways,39,verified,board='Compass Pathways' contains distinctive 'pathways'
+"AtriCure, Inc.",sec_edgar,,,greenhouse,atricure,2,verified,board='AtriCure' contains distinctive 'atricure'
+"DoubleVerify Holdings, Inc.",sec_edgar,,,greenhouse,doubleverify,69,verified,board='DoubleVerify' contains distinctive 'doubleverify'
+HEALTHCARE SERVICES GROUP INC,sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+Hillman Solutions Corp.,sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+TETRA TECHNOLOGIES INC,sec_edgar,,,greenhouse,tetra,3,duplicate,already claimed by 'TETRA TECH INC'
+CAPITAL SOUTHWEST CORP,sec_edgar,,,lever,capital,63,duplicate,already claimed by 'Capital One'
+"Alamar Biosciences, Inc.",sec_edgar,,,greenhouse,alamarbiosciences,22,verified,board='Alamar Biosciences' contains distinctive 'biosciences'
+AbCellera Biologics Inc.,sec_edgar,,,greenhouse,abcellera,16,verified,board='AbCellera' contains distinctive 'abcellera'
+"Kodiak AI, Inc.","sec_edgar,sec_edgar",,,greenhouse,kodiak,58,duplicate,"already claimed by 'Kodiak Gas Services, Inc.'"
+"Maze Therapeutics, Inc.",sec_edgar,,,greenhouse,mazetherapeutics,8,verified,board='Maze Therapeutics' contains distinctive 'therapeutics'
+J&J SNACK FOODS CORP,sec_edgar,,,greenhouse,jjsnackfoods,85,verified,board='J&J Snack Foods' contains distinctive 'snack'
+PHIBRO ANIMAL HEALTH CORP,sec_edgar,,,greenhouse,pah,1,mismatch,board='Packanack Animal Hospital' has no token overlap with company
+UNIVERSAL CORP /VA/,sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+"National Vision Holdings, Inc.",sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+Genius Sports Ltd,sec_edgar,,,greenhouse,geniussports,30,verified,board='Genius Sports' contains distinctive 'genius'
+HARMONIC INC.,sec_edgar,,,greenhouse,harmonic,11,verified,board='Harmonic' contains distinctive 'harmonic'
+GeneDx Holdings Corp.,"sec_edgar,sec_edgar",,,greenhouse,genedx,38,verified,company contains board's distinctive 'genedx'
+IDT CORP,sec_edgar,,,lever,idt,113,verified,postings reference 'idt'
+"Aeva Technologies, Inc.",sec_edgar,,,lever,aeva,37,review,postings don't clearly reference company; manual check needed
+Capital Clean Energy Carriers Corp.,sec_edgar,,,lever,capital,63,duplicate,already claimed by 'Capital One'
+"UMH PROPERTIES, INC.","sec_edgar,sec_edgar",,,greenhouse,up,1,duplicate,already claimed by 'Union Pacific Corporation'
+"Array Technologies, Inc.",sec_edgar,,,greenhouse,array,19,duplicate,"already claimed by 'ARRAY DIGITAL INFRASTRUCTURE, INC.'"
+"Septerna, Inc.",sec_edgar,,,greenhouse,septerna,6,verified,board='Septerna' contains distinctive 'septerna'
+"MapLight Therapeutics, Inc.",sec_edgar,,,greenhouse,maplighttherapeutics,16,verified,board='MapLight Therapeutics' contains distinctive 'therapeutics'
+"LINDBLAD EXPEDITIONS HOLDINGS, INC.",sec_edgar,,,lever,lindblad-expeditions,17,review,postings don't clearly reference company; manual check needed
+Avalyn Pharma Inc.,sec_edgar,,,greenhouse,avalynpharma,3,verified,board='Avalyn Pharma' contains distinctive 'avalyn'
+"Olema Pharmaceuticals, Inc.",sec_edgar,,,greenhouse,olema,20,mismatch,board='Olema Oncology' has no token overlap with company
+"Clear Channel Outdoor Holdings, Inc.",sec_edgar,,,greenhouse,clear,65,duplicate,"already claimed by 'Clear Secure, Inc.'"
+ARBOR REALTY TRUST INC,"sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,arborrealtytrust,8,verified,board='Arbor Realty Trust' contains distinctive 'realty'
+COMMUNITY TRUST BANCORP INC /KY/,sec_edgar,,,greenhouse,community,1,duplicate,"already claimed by 'COMMUNITY FINANCIAL SYSTEM, INC.'"
+"Pursuit Attractions & Hospitality, Inc.",sec_edgar,,,greenhouse,pursuit,5,verified,company contains board's distinctive 'pursuit'
+INTEGRA LIFESCIENCES HOLDINGS CORP,sec_edgar,,,greenhouse,integra,8,mismatch,board='IntegraFEC' has no token overlap with company
+"TripAdvisor, Inc.",sec_edgar,,,greenhouse,tripadvisor,88,verified,board='Tripadvisor' contains distinctive 'tripadvisor'
+"Jade Biosciences, Inc.",sec_edgar,,,greenhouse,jadebiosciences,5,verified,board='Jade Biosciences' contains distinctive 'biosciences'
+Highlander Silver Corp.,sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+Anterix Inc.,sec_edgar,,,greenhouse,anterix,1,verified,board='Anterix' contains distinctive 'anterix'
+"UNIVERSAL INSURANCE HOLDINGS, INC.",sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+Pagaya Technologies Ltd.,"sec_edgar,sec_edgar",,,greenhouse,pagaya,6,verified,company contains board's distinctive 'pagaya'
+ZoomInfo Technologies Inc.,sec_edgar,,,greenhouse,zoominfo,58,verified,board='ZoomInfo Technologies LLC' contains distinctive 'technologies'
+"Marcus & Millichap, Inc.",sec_edgar,,,lever,marcusmillichap,191,review,postings don't clearly reference company; manual check needed
+International General Insurance Holdings Ltd.,sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+Cohen & Steers Tax-Advantaged Preferred Securities & Income Fund,sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+"National Healthcare Properties, Inc.","sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+"Sweetgreen, Inc.",sec_edgar,,,greenhouse,sweetgreen,47,verified,board='sweetgreen' contains distinctive 'sweetgreen'
+SAFETY INSURANCE GROUP INC,sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+"UPWORK, INC",sec_edgar,,,greenhouse,upwork,13,verified,board='Upwork' contains distinctive 'upwork'
+PAPA JOHNS INTERNATIONAL INC,sec_edgar,,,greenhouse,papa,3,verified,company contains board's distinctive 'papa'
+Simply Good Foods Co,sec_edgar,,,greenhouse,simply,5,verified,board='Simply' contains distinctive 'simply'
+NATIONAL PRESTO INDUSTRIES INC,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+"Phoenix Education Partners, Inc.",sec_edgar,,,greenhouse,pep,2,mismatch,board='Pep' has no token overlap with company
+"UPBOUND GROUP, INC.",sec_edgar,,,greenhouse,upbound,9,verified,board='Upbound' contains distinctive 'upbound'
+Ategrity Specialty Insurance Co Holdings,sec_edgar,,,greenhouse,asi,8,mismatch,board='ASI Hastings' has no token overlap with company
+Hyperliquid Strategies Inc,sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+COHEN & STEERS REIT & PREFERRED & INCOME FUND INC,sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+Whitestone REIT,sec_edgar,,,lever,wr,46,duplicate,already claimed by 'W. R. Berkley Corporation'
+"Omada Health, Inc.",sec_edgar,,,greenhouse,omadahealth,22,verified,board='Omada Health' contains distinctive 'health'
+HIVE Digital Technologies Ltd.,sec_edgar,,,greenhouse,hive,11,verified,company contains board's distinctive 'hive'
+U S PHYSICAL THERAPY INC /NV,sec_edgar,,,greenhouse,us,1,duplicate,already claimed by 'U.S. Bancorp'
+"BITGO HOLDINGS, INC.",sec_edgar,,,greenhouse,bitgo,49,verified,company contains board's distinctive 'bitgo'
+HORIZON BANCORP INC /IN/,sec_edgar,,,lever,horizon,1,review,postings don't clearly reference company; manual check needed
+Life Healthcare Group Holdings Limited/ADR,"sec_edgar,sec_edgar",,,lever,life,55,duplicate,"already claimed by 'Life Time Group Holdings, Inc.'"
+"Kura Oncology, Inc.",sec_edgar,,,greenhouse,kuraoncology,5,verified,board='Kura Oncology' contains distinctive 'oncology'
+MeiraGTx Holdings plc,sec_edgar,,,greenhouse,mhp,7,mismatch,board='MHP' has no token overlap with company
+"Talkspace, Inc.","sec_edgar,sec_edgar",,,greenhouse,talkspace,11,verified,board='Talkspace Corporate' contains distinctive 'talkspace'
+"Amplitude, Inc.",sec_edgar,,,greenhouse,amplitude,55,verified,board='Amplitude' contains distinctive 'amplitude'
+"Avalo Therapeutics, Inc.",sec_edgar,,,greenhouse,avalotherapeutics,3,verified,board='Avalo Therapeutics' contains distinctive 'therapeutics'
+Jumia Technologies AG,sec_edgar,,,greenhouse,jumia,2,verified,company contains board's distinctive 'jumia'
+"Abacus Global Management, Inc.","sec_edgar,sec_edgar",,,greenhouse,abacus,66,verified,company contains board's distinctive 'abacus'
+Vor Biopharma Inc.,sec_edgar,,,greenhouse,vorbiopharma,19,verified,company contains board's distinctive 'vor'
+"Seaport Therapeutics, Inc.",sec_edgar,,,greenhouse,seaporttherapeutics,6,verified,board='Seaport Therapeutics' contains distinctive 'therapeutics'
+"indie Semiconductor, Inc.",sec_edgar,,,greenhouse,indiesemiconductor,18,verified,company contains board's distinctive 'indie'
+SUPER HI INTERNATIONAL HOLDING LTD.,"sec_edgar,sec_edgar",,,greenhouse,super,223,duplicate,"already claimed by 'Super Micro Computer, Inc.'"
+CAPITAL CITY BANK GROUP INC,sec_edgar,,,lever,capital,63,duplicate,already claimed by 'Capital One'
+"SS Innovations International, Inc.",sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+"Nextdoor Holdings, Inc.",sec_edgar,,,greenhouse,nextdoor,28,verified,board='Nextdoor' contains distinctive 'nextdoor'
+"Aura Biosciences, Inc.",sec_edgar,,,greenhouse,aura,6,duplicate,already claimed by 'Aura Minerals Inc.'
+"Spire Global, Inc.",sec_edgar,,,greenhouse,spire,49,duplicate,already claimed by 'SPIRE INC'
+Absci Corp,sec_edgar,,,greenhouse,absci,1,verified,board='Absci' contains distinctive 'absci'
+"SOUTH PLAINS FINANCIAL, INC.",sec_edgar,,,greenhouse,spf,17,mismatch,board='SPF Screens & Awnings' has no token overlap with company
+ENTRAVISION COMMUNICATIONS CORP,sec_edgar,,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+Ferroglobe PLC,sec_edgar,,,lever,fp,25,duplicate,already claimed by 'Frontline plc'
+Invesco Mortgage Capital Inc.,"sec_edgar,sec_edgar",,,greenhouse,imc,137,mismatch,board='IMC' has no token overlap with company
+"SpyGlass Pharma, Inc.",sec_edgar,,,lever,spyglass,3,review,postings don't clearly reference company; manual check needed
+Hyliion Holdings Corp.,sec_edgar,,,greenhouse,hyliion,12,verified,company contains board's distinctive 'hyliion'
+"Five Point Holdings, LLC",sec_edgar,,,lever,fp,25,duplicate,already claimed by 'Frontline plc'
+Viant Technology Inc.,sec_edgar,,,greenhouse,vianttechnology,40,verified,board='Viant Technology' contains distinctive 'technology'
+Himalaya Shipping Ltd.,sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+Mako Mining Corp.,sec_edgar,,,greenhouse,mako,7,verified,company contains board's distinctive 'mako'
+SLR Investment Corp.,sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+Blue Moon Metals Inc.,sec_edgar,,,greenhouse,bluemoonmetals,19,verified,board='Blue Moon Metals' contains distinctive 'metals'
+FIDUS INVESTMENT Corp,sec_edgar,,,lever,fi,11,duplicate,already claimed by 'Fair Isaac'
+"BridgeBio Oncology Therapeutics, Inc.",sec_edgar,,,greenhouse,bridgebio,115,duplicate,"already claimed by 'BridgeBio Pharma, Inc.'"
+"SAFE BULKERS, INC.","sec_edgar,sec_edgar,sec_edgar",,,lever,safe,12,review,postings don't clearly reference company; manual check needed
+RISKIFIED LTD.,sec_edgar,,,greenhouse,riskified,33,verified,board='Riskified' contains distinctive 'riskified'
+INDEPENDENT BANK CORP /MI/,sec_edgar,,,greenhouse,independent,1,duplicate,already claimed by 'Independent Institute'
+FINANCIAL INSTITUTIONS INC,"sec_edgar,sec_edgar,sec_edgar",,,lever,fi,11,duplicate,already claimed by 'Fair Isaac'
+"QUINSTREET, INC",sec_edgar,,,greenhouse,quinstreet,32,verified,board='QuinStreet' contains distinctive 'quinstreet'
+"Unusual Machines, Inc.",sec_edgar,,,lever,unusual,7,review,postings don't clearly reference company; manual check needed
+"Ceribell, Inc.",sec_edgar,,,greenhouse,ceribell,41,verified,"board='Ceribell, Inc' contains distinctive 'ceribell'"
+VILLAGE SUPER MARKET INC,sec_edgar,,,greenhouse,village,1,verified,board='The Village Learning Center' contains distinctive 'village'
+NOAH HOLDINGS LTD,sec_edgar,,,greenhouse,noah,4,mismatch,board='North Oatlands Animal Hospital' has no token overlap with company
+"EverQuote, Inc.",sec_edgar,,,greenhouse,everquote,5,verified,board='EverQuote' contains distinctive 'everquote'
+"Groupon, Inc.",sec_edgar,,,greenhouse,groupon,23,verified,board='Groupon' contains distinctive 'groupon'
+INTERNATIONAL TOWER HILL MINES LTD,sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+IRONWOOD PHARMACEUTICALS INC,sec_edgar,,,greenhouse,ironwoodpharmaceuticals,2,verified,board='Ironwood Pharmaceuticals' contains distinctive 'pharmaceuticals'
+Community West Bancshares,sec_edgar,,,greenhouse,community,1,duplicate,"already claimed by 'COMMUNITY FINANCIAL SYSTEM, INC.'"
+"Gemini Space Station, Inc.",sec_edgar,,,greenhouse,gemini,27,verified,company contains board's distinctive 'gemini'
+GCM Grosvenor Inc.,sec_edgar,,,greenhouse,gcmgrosvenor,7,verified,board='GCM Grosvenor' contains distinctive 'grosvenor'
+"Solid Power, Inc.","sec_edgar,sec_edgar",,,greenhouse,solidpower,8,verified,board='Solid Power' contains distinctive 'solid'
+VTEX,sec_edgar,,,greenhouse,vtex,24,verified,board='VTEX' contains distinctive 'vtex'
+PAR TECHNOLOGY CORP,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"DoubleDown Interactive Co., Ltd.",sec_edgar,,,lever,doubledown,2,review,postings don't clearly reference company; manual check needed
+"MNTN, Inc.",sec_edgar,,,greenhouse,mntn,14,verified,board='MNTN' contains distinctive 'mntn'
+ALPINE BANKS OF COLORADO,sec_edgar,,,greenhouse,abc,24,mismatch,board='ThoughtWorks_new' has no token overlap with company
+"Cohen & Steers Ltd Duration Preferred & Income Fund, Inc.",sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+"GREENLIGHT CAPITAL RE, LTD.",sec_edgar,,,lever,greenlight,20,review,postings don't clearly reference company; manual check needed
+"ARVINAS, INC.",sec_edgar,,,greenhouse,arvinas,6,verified,board='Arvinas' contains distinctive 'arvinas'
+UNIVERSAL HEALTH REALTY INCOME TRUST,sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+"Eikon Therapeutics, Inc.",sec_edgar,,,greenhouse,eikontherapeutics,28,verified,board='Eikon Therapeutics' contains distinctive 'therapeutics'
+"Clearfield, Inc.",sec_edgar,,,greenhouse,clearfield,13,verified,board='CLEAR - Field' contains distinctive 'clearfield'
+Industrial Logistics Properties Trust,sec_edgar,,,greenhouse,industrial,2,verified,board='Industrial Door Company' contains distinctive 'industrial'
+NeuroPace Inc,sec_edgar,,,greenhouse,neuropace,9,verified,board='NeuroPace' contains distinctive 'neuropace'
+Karat Packaging Inc.,sec_edgar,,,greenhouse,karat,9,verified,company contains board's distinctive 'karat'
+"Velo3D, Inc.","sec_edgar,sec_edgar",,,lever,velo3d,28,verified,postings reference 'velo'
+Horizon Quantum Holdings Ltd.,"sec_edgar,sec_edgar",,,lever,horizon,1,duplicate,already claimed by 'HORIZON BANCORP INC /IN/'
+"PagerDuty, Inc.",sec_edgar,,,greenhouse,pagerduty,37,verified,board='PagerDuty' contains distinctive 'pagerduty'
+CERUS CORP,sec_edgar,,,greenhouse,cerus,5,verified,board='Cerus' contains distinctive 'cerus'
+Eagle Point Credit Co Inc.,"sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,lever,eaglepointcredit,7,verified,postings reference 'credit'
+Invesco Municipal Trust,sec_edgar,,,greenhouse,imt,3,mismatch,board='Team Rubicon - Field Leadership' has no token overlap with company
+"CRESCENT BIOPHARMA, INC.",sec_edgar,,,greenhouse,crescent,28,duplicate,already claimed by 'Crescent Energy Co'
+OOMA INC,sec_edgar,,,greenhouse,ooma,6,verified,board='Ooma' contains distinctive 'ooma'
+"LendingTree, Inc.",sec_edgar,,,greenhouse,lendingtree,20,verified,board='LendingTree' contains distinctive 'lendingtree'
+Horizon Kinetics Holding Corp,sec_edgar,,,lever,horizon,1,duplicate,already claimed by 'HORIZON BANCORP INC /IN/'
+"Prime Medicine, Inc.",sec_edgar,,,greenhouse,primemedicine,7,verified,board='Prime Medicine' contains distinctive 'medicine'
+TAIWAN FUND INC,sec_edgar,,,greenhouse,taiwan,1,verified,board='SIE TAIWAN' contains distinctive 'taiwan'
+PROKIDNEY CORP.,sec_edgar,,,greenhouse,prokidney,17,verified,board='ProKidney' contains distinctive 'prokidney'
+Capital Bancorp Inc,sec_edgar,,,lever,capital,63,duplicate,already claimed by 'Capital One'
+"Ginkgo Bioworks Holdings, Inc.","sec_edgar,sec_edgar",,,greenhouse,ginkgobioworks,11,verified,board='Ginkgo Bioworks Inc.' contains distinctive 'bioworks'
+Integra Resources Corp.,sec_edgar,,,greenhouse,integra,8,duplicate,already claimed by 'INTEGRA LIFESCIENCES HOLDINGS CORP'
+INSTEEL INDUSTRIES INC,sec_edgar,,,greenhouse,ii,5,mismatch,board='Inside Ideas Group' has no token overlap with company
+Community Healthcare Trust Inc,sec_edgar,,,greenhouse,community,1,duplicate,"already claimed by 'COMMUNITY FINANCIAL SYSTEM, INC.'"
+FTAI Infrastructure Inc.,sec_edgar,,,lever,fi,11,duplicate,already claimed by 'Fair Isaac'
+"Strata Critical Medical, Inc.",sec_edgar,,,greenhouse,scm,28,mismatch,board='Stevens Capital Management LP' has no token overlap with company
+"Priority Technology Holdings, Inc.","sec_edgar,sec_edgar",,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+OneSpan Inc.,sec_edgar,,,greenhouse,onespan,17,verified,board='OneSpan' contains distinctive 'onespan'
+Agriculture & Natural Solutions Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,ansa,5,mismatch,board='Ansa' has no token overlap with company
+"Weave Communications, Inc.",sec_edgar,,,greenhouse,weave,8,verified,company contains board's distinctive 'weave'
+Farmland Partners Inc.,sec_edgar,,,lever,fp,25,duplicate,already claimed by 'Frontline plc'
+Apex Treasury Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,apex,1,verified,company contains board's distinctive 'apex'
+"International Money Express, Inc.",sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+"PubMatic, Inc.",sec_edgar,,,greenhouse,pubmatic,59,verified,board='PubMatic' contains distinctive 'pubmatic'
+"MediaAlpha, Inc.",sec_edgar,,,greenhouse,mediaalpha,6,verified,board='MediaAlpha' contains distinctive 'mediaalpha'
+"Energy Recovery, Inc.",sec_edgar,,,lever,energyrecovery,7,review,postings don't clearly reference company; manual check needed
+Karbon Capital Partners Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,karbon,21,verified,company contains board's distinctive 'karbon'
+"Backblaze, Inc.",sec_edgar,,,greenhouse,backblaze,45,verified,board='Backblaze External Website' contains distinctive 'backblaze'
+"4D Molecular Therapeutics, Inc.",sec_edgar,,,greenhouse,4dmoleculartherapeutics,11,verified,board='4D Molecular Therapeutics' contains distinctive 'therapeutics'
+Clean Energy Fuels Corp.,sec_edgar,,,lever,cef,2,review,postings don't clearly reference company; manual check needed
+"GRAVITY Co., Ltd.",sec_edgar,,,greenhouse,gravity,4,verified,board='Gravity' contains distinctive 'gravity'
+"Stitch Fix, Inc.",sec_edgar,,,greenhouse,stitchfix,20,verified,board='Stitch Fix' contains distinctive 'stitch'
+"Newegg Commerce, Inc.",sec_edgar,,,greenhouse,nc,5,mismatch,board='NorthCoast Asset Management' has no token overlap with company
+Meshflow Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+"Perspective Therapeutics, Inc.",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"Replimune Group, Inc.",sec_edgar,,,lever,replimune,1,review,postings don't clearly reference company; manual check needed
+"Fulcrum Therapeutics, Inc.",sec_edgar,,,greenhouse,fulcrumtherapeutics,3,verified,board='Fulcrum Therapeutics' contains distinctive 'therapeutics'
+Praetorian Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,praetorian,4,verified,company contains board's distinctive 'praetorian'
+"Crescent Capital BDC, Inc.","sec_edgar,sec_edgar",,,greenhouse,crescent,28,duplicate,already claimed by 'Crescent Energy Co'
+Armada Acquisition Corp. II,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,armada,61,verified,company contains board's distinctive 'armada'
+"Getty Images Holdings, Inc.",sec_edgar,,,lever,gettyimages,9,review,postings don't clearly reference company; manual check needed
+"Sprout Social, Inc.",sec_edgar,,,greenhouse,sproutsocial,3,verified,board='Sprout Social' contains distinctive 'sprout'
+"BEYOND MEAT, INC.",sec_edgar,,,greenhouse,beyond,6,verified,board='Beyond' contains distinctive 'beyond'
+"Lyell Immunopharma, Inc.",sec_edgar,,,greenhouse,lyellimmunopharma,10,verified,board='Lyell Immunopharma' contains distinctive 'immunopharma'
+Space Asset Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,space,5,mismatch,board='Space Programs' has no token overlap with company
+COMMUNITY HEALTH SYSTEMS INC,sec_edgar,,,greenhouse,community,1,duplicate,"already claimed by 'COMMUNITY FINANCIAL SYSTEM, INC.'"
+"Ranger Energy Services, Inc.",sec_edgar,,,greenhouse,res,39,mismatch,board='Resource Environmental Solutions LLC' has no token overlap with company
+SES AI Corp,"sec_edgar,sec_edgar",,,greenhouse,sesai,43,verified,board='SES' contains distinctive 'ses'
+"Cohen & Steers Closed-End Opportunity Fund, Inc.",sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+SOURCE CAPITAL /DE/,sec_edgar,,,lever,source,6,review,postings don't clearly reference company; manual check needed
+MOZAYYX Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+"UNIVERSAL LOGISTICS HOLDINGS, INC.",sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+"Blend Labs, Inc.",sec_edgar,,,greenhouse,blend,5,verified,board='Blend' contains distinctive 'blend'
+ELITE PHARMACEUTICALS INC /NV/,sec_edgar,,,greenhouse,elite,18,mismatch,"board='Elite Physical Therapy, Inc.' has no token overlap with company"
+Siddhi Acquisition Corp (Cayman Islands),"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+SARATOGA INVESTMENT CORP.,"sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+"Yext, Inc.",sec_edgar,,,greenhouse,yext,24,verified,board='Yext' contains distinctive 'yext'
+Prelude Therapeutics Inc,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"Airsculpt Technologies, Inc.",sec_edgar,,,greenhouse,airsculpt,62,verified,company contains board's distinctive 'airsculpt'
+Soulpower Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+HIGHLAND OPPORTUNITIES & INCOME FUND,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,highland,4,verified,company contains board's distinctive 'highland'
+Axiom Intelligence Acquisition Corp 1,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,axiom,23,verified,company contains board's distinctive 'axiom'
+Soren Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+"Compass Therapeutics, Inc.",sec_edgar,,,greenhouse,compasstherapeutics,2,verified,board='Compass Therapeutics' contains distinctive 'therapeutics'
+RMR GROUP INC.,sec_edgar,,,greenhouse,rmr,3,verified,board='RMR Mechanical' contains distinctive 'rmr'
+FENNEC PHARMACEUTICALS INC.,sec_edgar,,,lever,fp,25,duplicate,already claimed by 'Frontline plc'
+Armada Acquisition Corp. III,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,armada,61,duplicate,already claimed by 'Armada Acquisition Corp. II'
+Bravo Mining Corp.,sec_edgar,,,greenhouse,bravo,18,mismatch,board='BRAVO - A Cooperative Company' has no token overlap with company
+"ClearPoint Neuro, Inc.",sec_edgar,,,lever,clearpoint,4,verified,postings reference 'clearpoint'
+SIMILARWEB LTD.,sec_edgar,,,greenhouse,similarweb,85,verified,board='Similarweb' contains distinctive 'similarweb'
+Bold Eagle Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,bold,1,mismatch,board='Bold Careers' has no token overlap with company
+Blue Water Acquisition Corp. III,"sec_edgar,sec_edgar,sec_edgar",,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+"Forward Industries, Inc.",sec_edgar,,,greenhouse,forward,7,verified,company contains board's distinctive 'forward'
+Cresco Labs Inc.,sec_edgar,,,greenhouse,crescolabs,76,verified,board='Cresco Labs' contains distinctive 'cresco'
+JAPAN SMALLER CAPITALIZATION FUND INC,sec_edgar,,,greenhouse,japan,3,mismatch,board='Mirakl - Japan' has no token overlap with company
+"Invivyd, Inc.",sec_edgar,,,greenhouse,invivyd,29,verified,board='Invivyd' contains distinctive 'invivyd'
+"Public Policy Holding Company, Inc.",sec_edgar,,,greenhouse,public,4,duplicate,already claimed by 'Public Service Enterprise Group'
+"Neumora Therapeutics, Inc.",sec_edgar,,,greenhouse,neumora,2,verified,company contains board's distinctive 'neumora'
+Ellomay Capital Ltd.,sec_edgar,,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+Safeguard Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+"Claros Mortgage Trust, Inc.",sec_edgar,,,greenhouse,claros,5,verified,company contains board's distinctive 'claros'
+Range Capital Acquisition Corp II,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,range,17,duplicate,already claimed by 'RANGE RESOURCES CORP'
+McKinley Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+"TSS, Inc.",sec_edgar,,,greenhouse,tss,3,verified,board='TSS' contains distinctive 'tss'
+Activate Energy Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,activate,4,verified,company contains board's distinctive 'activate'
+TRANSCONTINENTAL REALTY INVESTORS INC,sec_edgar,,,lever,tri,13,duplicate,already claimed by 'TOOTSIE ROLL INDUSTRIES INC'
+Illumination Acquisition Corp. I,"sec_edgar,sec_edgar,sec_edgar",,,lever,illumination,2,review,postings don't clearly reference company; manual check needed
+REGENXBIO Inc.,sec_edgar,,,lever,regenxbio,5,review,postings don't clearly reference company; manual check needed
+"SHOULDER INNOVATIONS, INC.",sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+Pantheon Resources plc,sec_edgar,,,greenhouse,pantheon,25,verified,company contains board's distinctive 'pantheon'
+COHEN & STEERS TOTAL RETURN REALTY FUND INC,sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+"ETOILES CAPITAL GROUP CO., LTD",sec_edgar,,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+AMARIN CORP PLCUK,sec_edgar,,,greenhouse,acp,3,duplicate,already claimed by 'American College of Pediatricians'
+"Niagen Bioscience, Inc.",sec_edgar,,,lever,niagenbioscience,2,review,postings don't clearly reference company; manual check needed
+"BLUE RIDGE BANKSHARES, INC.",sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+"Village Farms International, Inc.",sec_edgar,,,greenhouse,village,1,duplicate,already claimed by 'VILLAGE SUPER MARKET INC'
+General Purpose Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,general,1,duplicate,already claimed by 'General Dynamics'
+Relativity Holdings Inc.,sec_edgar,,,greenhouse,relativity,293,verified,board='Relativity Space' contains distinctive 'relativity'
+Blue Acquisition Corp/Cayman,"sec_edgar,sec_edgar,sec_edgar",,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+Comstock Inc.,sec_edgar,,,greenhouse,comstock,61,duplicate,already claimed by 'COMSTOCK RESOURCES INC'
+Iris Acquisition Corp II,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,iris,5,mismatch,board='Iris North America' has no token overlap with company
+"National CineMedia, Inc.",sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+Horizon Technology Finance Corp,"sec_edgar,sec_edgar",,,lever,horizon,1,duplicate,already claimed by 'HORIZON BANCORP INC /IN/'
+First Western Financial Inc,sec_edgar,,,greenhouse,firstwestern,34,verified,company contains board's distinctive 'western'
+Xsolla SPAC 1,"sec_edgar,sec_edgar,sec_edgar",,,lever,xsolla,173,verified,postings reference 'xsolla'
+enCore Energy Corp.,sec_edgar,,,greenhouse,encore,2,duplicate,already claimed by 'ENCORE CAPITAL GROUP INC'
+"ZIPRECRUITER, INC.",sec_edgar,,,greenhouse,ziprecruiter,35,verified,board='ZipRecruiter' contains distinctive 'ziprecruiter'
+KOREA FUND INC,sec_edgar,,,greenhouse,korea,1,duplicate,already claimed by 'KOREA ELECTRIC POWER CORP'
+Muzero Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+FuboTV Inc.,sec_edgar,,,greenhouse,fubotv,8,verified,company contains board's distinctive 'fubo'
+"Digimarc Parent, Inc.",sec_edgar,,,greenhouse,digimarc,6,verified,board='Digimarc' contains distinctive 'digimarc'
+"Protara Therapeutics, Inc.",sec_edgar,,,greenhouse,protaratherapeutics,9,verified,"board='Protara Therapeutics, Inc.' contains distinctive 'therapeutics'"
+"Akebia Therapeutics, Inc.",sec_edgar,,,greenhouse,akebiatherapeutics,1,verified,board='Akebia Therapeutics' contains distinctive 'therapeutics'
+FORWARD AIR CORP,sec_edgar,,,greenhouse,forward,7,duplicate,"already claimed by 'Forward Industries, Inc.'"
+Cohen & Steers Real Estate Opportunities & Income Fund,sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+"Allied Energy, Inc.",sec_edgar,,,greenhouse,allied,6,duplicate,already claimed by 'Allied Universal'
+OCTAVE SPECIALTY GROUP INC,sec_edgar,,,greenhouse,octave,23,verified,company contains board's distinctive 'octave'
+U.S. GOLD CORP.,sec_edgar,,,greenhouse,us,1,duplicate,already claimed by 'U.S. Bancorp'
+Profound Medical Corp.,sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+Oportun Financial Corp,sec_edgar,,,greenhouse,oportun,43,verified,company contains board's distinctive 'oportun'
+Pampa Metals Corp,sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+"Chicago Atlantic Real Estate Finance, Inc.",sec_edgar,,,greenhouse,chicago,1,duplicate,already claimed by 'Chicago Council on Global Affairs'
+"Alector, Inc.",sec_edgar,,,lever,alector,1,review,postings don't clearly reference company; manual check needed
+TerrAscend Corp.,sec_edgar,,,lever,terrascend,34,verified,postings reference 'terrascend'
+"Orchestra BioMed Holdings, Inc.",sec_edgar,,,greenhouse,orchestra,38,verified,board='Orchestra' contains distinctive 'orchestra'
+SPACSphere Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+"SmartRent, Inc.",sec_edgar,,,greenhouse,smartrent,9,verified,board='SmartRent' contains distinctive 'smartrent'
+"Entrada Therapeutics, Inc.",sec_edgar,,,greenhouse,entradatherapeutics,5,verified,board='Entrada Therapeutics' contains distinctive 'therapeutics'
+"Cohen & Steers Select Preferred & Income Fund, Inc.",sec_edgar,,,greenhouse,cohensteers,19,duplicate,"already claimed by 'COHEN & STEERS, INC.'"
+Tonix Pharmaceuticals Holding Corp.,sec_edgar,,,greenhouse,tonixpharmaceuticals,17,verified,board='Tonix Pharmaceuticals' contains distinctive 'pharmaceuticals'
+SUMA Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+trivago N.V.,sec_edgar,,,greenhouse,trivago,8,verified,board='trivago' contains distinctive 'trivago'
+COMMUNITY BANCORP /VT,sec_edgar,,,greenhouse,community,1,duplicate,"already claimed by 'COMMUNITY FINANCIAL SYSTEM, INC.'"
+FLEXSTEEL INDUSTRIES INC,sec_edgar,,,lever,fi,11,duplicate,already claimed by 'Fair Isaac'
+NATIONAL BANKSHARES INC,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+"Chicago Atlantic BDC, Inc.",sec_edgar,,,greenhouse,chicago,1,duplicate,already claimed by 'Chicago Council on Global Affairs'
+OHIO VALLEY BANC CORP,sec_edgar,,,greenhouse,ohio,2,mismatch,board='OH.io' has no token overlap with company
+"Atrium Therapeutics, Inc.",sec_edgar,,,lever,atrium-therapeutics,4,review,postings don't clearly reference company; manual check needed
+"Keros Therapeutics, Inc.",sec_edgar,,,greenhouse,keros,7,verified,board='Keros Therapeutics' contains distinctive 'therapeutics'
+FATE THERAPEUTICS INC,sec_edgar,,,lever,fatetherapeutics,4,review,postings don't clearly reference company; manual check needed
+"Nkarta, Inc.",sec_edgar,,,greenhouse,nkarta,1,verified,board='Nkarta Testing Job Board' contains distinctive 'nkarta'
+CORE MOLDING TECHNOLOGIES INC,sec_edgar,,,greenhouse,cmt,2,mismatch,board='CMTelematics' has no token overlap with company
+K2 Capital Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,kca,1,mismatch,board='Keep A Child Alive' has no token overlap with company
+"Caribou Biosciences, Inc.",sec_edgar,,,greenhouse,caribou,3,mismatch,board='Caribou Financial' has no token overlap with company
+"MICROVISION, INC.",sec_edgar,,,lever,microvision,9,review,postings don't clearly reference company; manual check needed
+HIGHLAND GLOBAL ALLOCATION FUND,sec_edgar,,,greenhouse,highland,4,duplicate,already claimed by 'HIGHLAND OPPORTUNITIES & INCOME FUND'
+"Inspired Entertainment, Inc.",sec_edgar,,,greenhouse,ie,8,duplicate,already claimed by 'Intercontinental Exchange'
+Epsilon Energy Ltd.,sec_edgar,,,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+Blue Water Acquisition Corp. IV,"sec_edgar,sec_edgar,sec_edgar",,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+Ellington Credit Co,"sec_edgar,sec_edgar",,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+"SUPERIOR GROUP OF COMPANIES, INC.",sec_edgar,,,greenhouse,superior,2,verified,company contains board's distinctive 'superior'
+Elme Communities,sec_edgar,,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+Neo-Concept International Group Holdings Ltd,sec_edgar,,,greenhouse,nc,5,duplicate,"already claimed by 'Newegg Commerce, Inc.'"
+"Acumen Pharmaceuticals, Inc.",sec_edgar,,,greenhouse,acumen,9,verified,company contains board's distinctive 'acumen'
+Range Capital Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,range,17,duplicate,already claimed by 'RANGE RESOURCES CORP'
+Journey Medical Corp,sec_edgar,,,greenhouse,journey,5,verified,board='Journey' contains distinctive 'journey'
+TUCOWS INC /PA/,sec_edgar,,,greenhouse,tucows,12,verified,board='Tucows' contains distinctive 'tucows'
+"Hanover Bancorp, Inc. /MD",sec_edgar,,,greenhouse,hanover,4,duplicate,"already claimed by 'HANOVER INSURANCE GROUP, INC.'"
+"1stdibs.com, Inc.",sec_edgar,,,greenhouse,1stdibscom,2,verified,board='1stdibs.com' contains distinctive 'stdibs'
+"Comstock Holding Companies, Inc.",sec_edgar,,,greenhouse,comstock,61,duplicate,already claimed by 'COMSTOCK RESOURCES INC'
+"Polaryx Therapeutics, Inc.",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"HERON THERAPEUTICS, INC. /DE/",sec_edgar,,,greenhouse,herontherapeutics,20,verified,board='Heron Therapeutics' contains distinctive 'therapeutics'
+Nerdy Inc.,sec_edgar,,,greenhouse,nerdy,65,verified,board='Nerdy' contains distinctive 'nerdy'
+"ChargePoint Holdings, Inc.",sec_edgar,,,greenhouse,chargepoint,29,verified,board='ChargePoint' contains distinctive 'chargepoint'
+Indigo Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,indigo,3,verified,company contains board's distinctive 'indigo'
+FRIEDMAN INDUSTRIES INC,sec_edgar,,,lever,fi,11,duplicate,already claimed by 'Fair Isaac'
+PHOENIX MOTOR INC.,sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+U.S. GoldMining Inc.,"sec_edgar,sec_edgar",,,greenhouse,us,1,duplicate,already claimed by 'U.S. Bancorp'
+APEX Tech Acquisition Inc.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,apex,1,duplicate,already claimed by 'Apex Treasury Corp'
+"Korro Bio, Inc.",sec_edgar,,,lever,korrobio,5,review,postings don't clearly reference company; manual check needed
+"Affinity Bancshares, Inc.",sec_edgar,,,greenhouse,affinity,22,verified,company contains board's distinctive 'affinity'
+TRIO-TECH INTERNATIONAL,sec_edgar,,,lever,trio,3,review,postings don't clearly reference company; manual check needed
+"Brilliant Earth Group, Inc.",sec_edgar,,,greenhouse,brilliantearth,88,verified,board='Brilliant Earth' contains distinctive 'brilliant'
+Universal Token,sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+SIFCO INDUSTRIES INC,sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+"REGO PAYMENT ARCHITECTURES, INC.",sec_edgar,,,greenhouse,rpa,5,duplicate,already claimed by 'Rightmove PLC/ADR'
+"Townsquare Media, Inc.",sec_edgar,,,greenhouse,townsquaremedia,108,verified,board='Townsquare Media' contains distinctive 'townsquare'
+"Sunrise Realty Trust, Inc.",sec_edgar,,,greenhouse,sunrise,26,verified,board='Sunrise Management' contains distinctive 'sunrise'
+Zevia PBC,sec_edgar,,,greenhouse,zevia,5,verified,board='Zevia' contains distinctive 'zevia'
+DIRTT ENVIRONMENTAL SOLUTIONS LTD,sec_edgar,,,greenhouse,des,1,mismatch,board='Nano Energies Holding a.s.' has no token overlap with company
+FARADAY FUTURE INTELLIGENT ELECTRIC INC.,"sec_edgar,sec_edgar",,,greenhouse,faradayfuture,42,verified,company contains board's distinctive 'faraday'
+LAKELAND INDUSTRIES INC,sec_edgar,,,greenhouse,lakeland,2,duplicate,already claimed by 'LAKELAND FINANCIAL CORP'
+"WW INTERNATIONAL, INC.",sec_edgar,,,greenhouse,ww,73,duplicate,already claimed by 'W. W. Grainger'
+Pelthos Therapeutics Inc.,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"Securetech Innovations, Inc.",sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+"Seer, Inc.",sec_edgar,,,greenhouse,seer,4,verified,board='Seer Inc.' contains distinctive 'seer'
+Miluna Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+BROADWAY FINANCIAL CORP DE,sec_edgar,,,greenhouse,broadway,3,mismatch,board='Broadway Veterinary Clinic' has no token overlap with company
+"Nuvera Communications, Inc.",sec_edgar,,,greenhouse,nc,5,duplicate,"already claimed by 'Newegg Commerce, Inc.'"
+Future Vision II Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,future,5,duplicate,already claimed by 'Future of American Democracy Foundation'
+Safe Pro Group Inc.,sec_edgar,,,lever,safe,12,duplicate,"already claimed by 'SAFE BULKERS, INC.'"
+"Outset Medical, Inc.",sec_edgar,,,greenhouse,outsetmedical,21,verified,board='Outset Medical' contains distinctive 'medical'
+VIDA Global Inc.,sec_edgar,,,lever,vida,17,review,postings don't clearly reference company; manual check needed
+"Airship AI Holdings, Inc.","sec_edgar,sec_edgar",,,greenhouse,airship,20,verified,company contains board's distinctive 'airship'
+"Bark, Inc.",sec_edgar,,,greenhouse,bark,3,verified,board='BARK' contains distinctive 'bark'
+"Spectral AI, Inc.","sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+"PLIANT THERAPEUTICS, INC.",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"Seres Therapeutics, Inc.",sec_edgar,,,greenhouse,seres,3,verified,company contains board's distinctive 'seres'
+"WESTWATER RESOURCES, INC.",sec_edgar,,,lever,wr,46,duplicate,already claimed by 'W. R. Berkley Corporation'
+INTERLINK ELECTRONICS INC,sec_edgar,,,greenhouse,ie,8,duplicate,already claimed by 'Intercontinental Exchange'
+"Charlotte's Web Holdings, Inc.",sec_edgar,,,greenhouse,csw,11,mismatch,"board='Cornerstone Wireless, LLC.' has no token overlap with company"
+International Media Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+Keen Vision Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,keen,1,mismatch,board='Keen Advisor Questionnaire' has no token overlap with company
+ARES STRATEGIC MINING INC.,sec_edgar,,,greenhouse,asm,308,mismatch,board='ASM' has no token overlap with company
+"BlockchAIn Digital Infrastructure, Inc.",sec_edgar,,,greenhouse,blockchain,38,verified,company contains board's distinctive 'blockchain'
+Skillsoft Corp.,"sec_edgar,sec_edgar",,,greenhouse,skillsoft,18,verified,board='Skillsoft' contains distinctive 'skillsoft'
+"Loop Industries, Inc.",sec_edgar,,,greenhouse,loop,15,verified,company contains board's distinctive 'loop'
+Momentus Inc.,"sec_edgar,sec_edgar",,,greenhouse,momentus,13,verified,board='Momentus Space LLC' contains distinctive 'momentus'
+BLUE DOLPHIN ENERGY CO,sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+Entera Bio Ltd.,sec_edgar,,,greenhouse,entera,6,verified,board='Entera' contains distinctive 'entera'
+IMPACT BIOMEDICAL INC.,sec_edgar,,,greenhouse,impact,88,verified,company contains board's distinctive 'impact'
+Wetour Robotics Ltd,sec_edgar,,,lever,wr,46,duplicate,already claimed by 'W. R. Berkley Corporation'
+"BuzzFeed, Inc.","sec_edgar,sec_edgar",,,greenhouse,buzzfeed,10,verified,"board='Employment Opportunities at BuzzFeed, Inc.' contains distinctive 'buzzfeed'"
+"PIONEER POWER SOLUTIONS, INC.",sec_edgar,,,greenhouse,pps,1,mismatch,board='Premiere Property Services' has no token overlap with company
+PPX Mining Corp.,sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+"Elauwit Connection, Inc.",sec_edgar,,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+Able View Global Inc.,"sec_edgar,sec_edgar",,,greenhouse,able,5,verified,board='Able' contains distinctive 'able'
+"Grove Collaborative Holdings, Inc.","sec_edgar,sec_edgar",,,greenhouse,grovecollaborative,4,verified,board='Grove Collaborative' contains distinctive 'collaborative'
+UNIVERSAL ELECTRONICS INC,sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+"Gossamer Bio, Inc.",sec_edgar,,,greenhouse,gossamerbio,1,verified,board='Gossamer Bio' contains distinctive 'gossamer'
+Horizon Space Acquisition II Corp.,"sec_edgar,sec_edgar,sec_edgar",,,lever,horizon,1,duplicate,already claimed by 'HORIZON BANCORP INC /IN/'
+Pyxis Tankers Inc.,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+Indonesia Energy Corp Ltd,sec_edgar,,,greenhouse,ie,8,duplicate,already claimed by 'Intercontinental Exchange'
+"BLUE BIOFUELS, INC.",sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+Wing Yip Food Holdings Group Ltd,sec_edgar,,,greenhouse,wing,36,verified,company contains board's distinctive 'wing'
+"PLUS THERAPEUTICS, INC.",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"Galaxy Gaming, Inc.",sec_edgar,,,greenhouse,galaxy,3,duplicate,already claimed by 'Galaxy Digital Inc.'
+Crisp Momentum Inc.,sec_edgar,,,greenhouse,crisp,7,verified,company contains board's distinctive 'crisp'
+"ConnectM Technology Solutions, Inc.","sec_edgar,sec_edgar",,,greenhouse,cts,2,duplicate,already claimed by 'COGNIZANT TECHNOLOGY SOLUTIONS CORP'
+Technology & Telecommunication Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,technology,3,mismatch,board='Relai' has no token overlap with company
+"Jerash Holdings (US), Inc.",sec_edgar,,,greenhouse,us,1,duplicate,already claimed by 'U.S. Bancorp'
+Blue Gold Ltd,"sec_edgar,sec_edgar",,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+Mega Matrix Inc,sec_edgar,,,lever,mega,12,duplicate,already claimed by 'Mega Fortune Co Ltd'
+Jaguar Uranium Corp.,sec_edgar,,,greenhouse,jaguar,1,verified,company contains board's distinctive 'jaguar'
+"FAMILY OFFICE OF AMERICA, INC.",sec_edgar,,,greenhouse,familyoffice,23,mismatch,board='Soros Fund Management' has no token overlap with company
+Sterling Metals Corp.,sec_edgar,,,greenhouse,sterling,2,duplicate,"already claimed by 'STERLING INFRASTRUCTURE, INC.'"
+PHAOS TECHNOLOGY HOLDINGS (CAYMAN) Ltd,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"RANGE IMPACT, INC.",sec_edgar,,,greenhouse,range,17,duplicate,already claimed by 'RANGE RESOURCES CORP'
+INTERNATIONAL BATTERY METALS LTD.,sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+AERO ENERGY Ltd,"sec_edgar,sec_edgar",,,lever,aero,6,review,postings don't clearly reference company; manual check needed
+U S GLOBAL INVESTORS INC,sec_edgar,,,greenhouse,us,1,duplicate,already claimed by 'U.S. Bancorp'
+LIVE VENTURES Inc,sec_edgar,,,greenhouse,lv,1,duplicate,already claimed by 'LEMAITRE VASCULAR INC'
+Beam Global,sec_edgar,,,greenhouse,beam,5,verified,board='Bridge to Enter Advanced Mathematics (BEAM)' contains distinctive 'beam'
+American Strategic Investment Co.,sec_edgar,,,greenhouse,asi,8,duplicate,already claimed by 'Ategrity Specialty Insurance Co Holdings'
+Elite Health Systems Inc.,sec_edgar,,,greenhouse,elite,18,duplicate,already claimed by 'ELITE PHARMACEUTICALS INC /NV/'
+Horizon Space Acquisition I Corp.,"sec_edgar,sec_edgar,sec_edgar",,,lever,horizon,1,duplicate,already claimed by 'HORIZON BANCORP INC /IN/'
+Embrace Change Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,embrace,8,verified,company contains board's distinctive 'embrace'
+"PROVECTUS BIOPHARMACEUTICALS, INC.",sec_edgar,,,lever,provectus,27,review,postings don't clearly reference company; manual check needed
+PALATIN TECHNOLOGIES INC,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+"System1, Inc.","sec_edgar,sec_edgar",,,lever,system1,9,review,postings don't clearly reference company; manual check needed
+LIVEPERSON INC,sec_edgar,,,greenhouse,liveperson,26,verified,board='LivePerson' contains distinctive 'liveperson'
+"Sensei Biotherapeutics, Inc.",sec_edgar,,,greenhouse,sensei,12,mismatch,"board='Sensei Wellness Holdings Inc.,' has no token overlap with company"
+Four Seasons Education (Cayman) Inc.,sec_edgar,,,greenhouse,fourseasons,1,verified,company contains board's distinctive 'seasons'
+Athena Bitcoin Global,sec_edgar,,,greenhouse,athena,1,mismatch,board='Athena Group Advisors' has no token overlap with company
+Spectre Acquisition Corp,sec_edgar,,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+Japan Gold Corp.,sec_edgar,,,greenhouse,japan,3,duplicate,already claimed by 'JAPAN SMALLER CAPITALIZATION FUND INC'
+"Upland Software, Inc.",sec_edgar,,,greenhouse,us,1,duplicate,already claimed by 'U.S. Bancorp'
+Rubicon Organics Inc.,sec_edgar,,,lever,ro,50,review,postings don't clearly reference company; manual check needed
+International Land Alliance Inc.,sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+"Quince Therapeutics, Inc.",sec_edgar,,,greenhouse,quince,139,verified,company contains board's distinctive 'quince'
+"Flux Power Holdings, Inc.",sec_edgar,,,lever,fp,25,duplicate,already claimed by 'Frontline plc'
+Ridgeline Minerals Corp,sec_edgar,,,greenhouse,ridgeline,48,verified,board='Ridgeline' contains distinctive 'ridgeline'
+"Rocky Mountain Chocolate Factory, Inc.",sec_edgar,,,greenhouse,rockymountain,23,verified,company contains board's distinctive 'mountain'
+Cyngn Inc.,sec_edgar,,,lever,cyngn,7,review,postings don't clearly reference company; manual check needed
+Aspira Women's Health Inc.,sec_edgar,,,greenhouse,aspira,9,verified,board='Aspira' contains distinctive 'aspira'
+Pasithea Therapeutics Corp.,"sec_edgar,sec_edgar",,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+Epsium Enterprise Ltd,sec_edgar,,,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+"UNIVERSAL SAFETY PRODUCTS, INC.",sec_edgar,,,greenhouse,universal,2,duplicate,already claimed by 'Universal Health Services'
+Rise Gold Corp.,sec_edgar,,,lever,rise,32,verified,postings reference 'rise'
+BLUE SKY URANIUM CORP.,sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+PUBLIC CO MANAGEMENT CORP,sec_edgar,,,greenhouse,public,4,duplicate,already claimed by 'Public Service Enterprise Group'
+"Picard Medical, Inc.",sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+AURA SYSTEMS INC,sec_edgar,,,greenhouse,aura,6,duplicate,already claimed by 'Aura Minerals Inc.'
+Karbon-X Corp.,sec_edgar,,,greenhouse,karbon,21,duplicate,already claimed by 'Karbon Capital Partners Corp.'
+Trio Petroleum Corp,sec_edgar,,,lever,trio,3,duplicate,already claimed by 'TRIO-TECH INTERNATIONAL'
+"Mynd.ai, Inc.",sec_edgar,,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+ParaZero Technologies Ltd.,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+Perfect Moment Ltd.,sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+reAlpha Tech Corp.,sec_edgar,,,greenhouse,realpha,1,verified,board='reAlpha' contains distinctive 'realpha'
+Jackpot Digital Inc.,sec_edgar,,,greenhouse,jackpot,2,verified,board='Jackpot' contains distinctive 'jackpot'
+"MultiSensor AI Holdings, Inc.","sec_edgar,sec_edgar",,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+Cambium Networks Corp,sec_edgar,,,lever,cambiumnetworks,15,review,postings don't clearly reference company; manual check needed
+Lakewood-Amedex Biotherapeutics Inc.,sec_edgar,,,greenhouse,lakewood,1,verified,company contains board's distinctive 'lakewood'
+ATHENA GOLD CORP,sec_edgar,,,greenhouse,athena,1,duplicate,already claimed by 'Athena Bitcoin Global'
+FGI Industries Ltd.,"sec_edgar,sec_edgar",,,lever,fi,11,duplicate,already claimed by 'Fair Isaac'
+"Hawkeye Systems, Inc.",sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+"Quarta-Rad, Inc.",sec_edgar,,,greenhouse,qr,2,mismatch,board='Campus QR' has no token overlap with company
+TORQ RESOURCES INC.,sec_edgar,,,greenhouse,torq,51,verified,company contains board's distinctive 'torq'
+CHICAGO RIVET & MACHINE CO,sec_edgar,,,greenhouse,chicago,1,duplicate,already claimed by 'Chicago Council on Global Affairs'
+SCIENTIFIC INDUSTRIES INC,sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+Crypto Co,sec_edgar,,,lever,crypto,115,review,postings don't clearly reference company; manual check needed
+Elite Express Holding Inc.,sec_edgar,,,greenhouse,elite,18,duplicate,already claimed by 'ELITE PHARMACEUTICALS INC /NV/'
+"Myseum.AI, Inc.","sec_edgar,sec_edgar",,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+"Super League Enterprise, Inc.",sec_edgar,,,greenhouse,super,223,duplicate,"already claimed by 'Super Micro Computer, Inc.'"
+"CREATIVE MEDICAL TECHNOLOGY HOLDINGS, INC.",sec_edgar,,,greenhouse,cmt,2,duplicate,already claimed by 'CORE MOLDING TECHNOLOGIES INC'
+SUNRISE REAL ESTATE GROUP INC,sec_edgar,,,greenhouse,sunrise,26,duplicate,"already claimed by 'Sunrise Realty Trust, Inc.'"
+Recharge Resources Ltd.,"sec_edgar,sec_edgar",,,greenhouse,recharge,3,verified,company contains board's distinctive 'recharge'
+"Tenon Medical, Inc.","sec_edgar,sec_edgar",,,greenhouse,tenon,1,verified,company contains board's distinctive 'tenon'
+"HIGH WIRE NETWORKS, INC.",sec_edgar,,,greenhouse,highwire,39,verified,company contains board's distinctive 'highwire'
+"ReTo Eco-Solutions, Inc.",sec_edgar,,,greenhouse,res,39,duplicate,"already claimed by 'Ranger Energy Services, Inc.'"
+Trident Digital Tech Holdings Ltd,sec_edgar,,,greenhouse,trident,6,verified,company contains board's distinctive 'trident'
+"SOCKET MOBILE, INC.",sec_edgar,,,greenhouse,socket,1,verified,board='Socket' contains distinctive 'socket'
+"STANDARD PREMIUM FINANCE HOLDINGS, INC.",sec_edgar,,,greenhouse,spf,17,duplicate,"already claimed by 'SOUTH PLAINS FINANCIAL, INC.'"
+"Saker Aviation Services, Inc.",sec_edgar,,,greenhouse,sas,5,mismatch,board='Superior Alarm Systems' has no token overlap with company
+Future FinTech Group Inc.,sec_edgar,,,greenhouse,future,5,duplicate,already claimed by 'Future of American Democracy Foundation'
+Innovative Eyewear Inc,"sec_edgar,sec_edgar",,,greenhouse,ie,8,duplicate,already claimed by 'Intercontinental Exchange'
+Galaxy Payroll Group Ltd,sec_edgar,,,greenhouse,galaxy,3,duplicate,already claimed by 'Galaxy Digital Inc.'
+NOBLE ROMANS INC,sec_edgar,,,greenhouse,noble,2,duplicate,already claimed by 'Noble Corp plc'
+Noble Plains Uranium Corp.,sec_edgar,,,greenhouse,noble,2,duplicate,already claimed by 'Noble Corp plc'
+Armada Mercantile Ltd,sec_edgar,,,greenhouse,armada,61,duplicate,already claimed by 'Armada Acquisition Corp. II'
+"Beyond Air, Inc.",sec_edgar,,,greenhouse,beyond,6,duplicate,"already claimed by 'BEYOND MEAT, INC.'"
+"FiscalNote Holdings, Inc.","sec_edgar,sec_edgar",,,lever,fiscalnote,15,verified,postings reference 'fiscalnote'
+Powell Max Ltd,sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+"Healthcare Triangle, Inc.",sec_edgar,,,lever,healthcare,4,duplicate,already claimed by 'Healthcare Realty Trust Inc'
+EpicQuest Education Group International Ltd,sec_edgar,,,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+"Newton Golf Company, Inc.",sec_edgar,,,greenhouse,newton,2,verified,board='Newton' contains distinctive 'newton'
+Icon Energy Corp,sec_edgar,,,greenhouse,ie,8,duplicate,already claimed by 'Intercontinental Exchange'
+Wolfden Resources Corp,sec_edgar,,,lever,wr,46,duplicate,already claimed by 'W. R. Berkley Corporation'
+CALLAN JMB INC.,sec_edgar,,,lever,callan,4,review,postings don't clearly reference company; manual check needed
+ABACUS MINING & EXPLORATION CORP,sec_edgar,,,greenhouse,abacus,66,duplicate,"already claimed by 'Abacus Global Management, Inc.'"
+"Plastec Technologies, Ltd.",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+Zeta Network Group,sec_edgar,,,lever,zeta,23,duplicate,already claimed by 'Zeta Global Holdings Corp.'
+U Power Ltd,sec_edgar,,,greenhouse,up,1,duplicate,already claimed by 'Union Pacific Corporation'
+"Strategic Environmental & Energy Resources, Inc.",sec_edgar,,,greenhouse,seer,4,duplicate,"already claimed by 'Seer, Inc.'"
+"Arcadia Biosciences, Inc.",sec_edgar,,,lever,arcadia,10,review,postings don't clearly reference company; manual check needed
+Scinai Immunotherapeutics Ltd.,sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+"Jaguar Health, Inc.",sec_edgar,,,greenhouse,jaguar,1,duplicate,already claimed by 'Jaguar Uranium Corp.'
+Integrated Media Technology Ltd,sec_edgar,,,greenhouse,imt,3,duplicate,already claimed by 'Invesco Municipal Trust'
+Grayscale Decentralized Finance (DeFi) Fund LLC,sec_edgar,,,greenhouse,grayscale,2,verified,company contains board's distinctive 'grayscale'
+Birdie Win Corp,sec_edgar,,,greenhouse,bw,11,mismatch,board='BW' has no token overlap with company
+Universe Pharmaceuticals INC,sec_edgar,,,greenhouse,up,1,duplicate,already claimed by 'Union Pacific Corporation'
+International Stem Cell CORP,sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+PRF Technologies Ltd.,sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+Bravo Multinational Inc.,sec_edgar,,,greenhouse,bravo,18,duplicate,already claimed by 'Bravo Mining Corp.'
+"Eline Entertainment Group, Inc.",sec_edgar,,,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+INTERNATIONAL STAR INC,sec_edgar,,,greenhouse,international,1,duplicate,already claimed by 'International Flavors & Fragrances'
+IMPACT ANALYTICS INC.,"sec_edgar,sec_edgar",,,greenhouse,impact,88,duplicate,already claimed by 'IMPACT BIOMEDICAL INC.'
+ScanTech AI Systems Inc.,sec_edgar,,,greenhouse,sas,5,duplicate,"already claimed by 'Saker Aviation Services, Inc.'"
+Fyntechnical Innovations Inc,sec_edgar,,,lever,fi,11,duplicate,already claimed by 'Fair Isaac'
+"ECO SCIENCE SOLUTIONS, INC.","sec_edgar,sec_edgar",,,greenhouse,ess,13,duplicate,already claimed by 'Extra Space Storage'
+"Firsthand Technology Value Fund, Inc.",sec_edgar,,,greenhouse,firsthand,28,verified,company contains board's distinctive 'firsthand'
+Blue Hat Interactive Entertainment Technology,sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+Blue Star Foods Corp.,sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+ACP Holdings Acquisition Corp.,"sec_edgar,sec_edgar",,,greenhouse,aha,1,mismatch,board='Animal Health Associates' has no token overlap with company
+Grayscale BNB ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Capital Power Corp/ADR,"sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,lever,capital,63,duplicate,already claimed by 'Capital One'
+Grayscale Dogecoin Trust ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+"POCHE TECHNOLOGY CO., Ltd",sec_edgar,,,greenhouse,pt,7,duplicate,already claimed by 'Palantir Technologies'
+Shreya Acquisition Group,"sec_edgar,sec_edgar",,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+CALM Chain International Ltd,sec_edgar,,,greenhouse,calm,1,verified,company contains board's distinctive 'calm'
+Pine Tree Acquisition Corp.,sec_edgar,,,greenhouse,pine,1,verified,company contains board's distinctive 'pine'
+Future Money Acquisition Corp,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,future,5,duplicate,already claimed by 'Future of American Democracy Foundation'
+Encore Inc.,sec_edgar,,,greenhouse,encore,2,duplicate,already claimed by 'ENCORE CAPITAL GROUP INC'
+DISCIPLINED GROWTH ACQUISITION Corp,sec_edgar,,,lever,dga,8,review,postings don't clearly reference company; manual check needed
+Grayscale HYPE ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Keystone Acquisition Corp.,sec_edgar,,,greenhouse,keystone,36,verified,company contains board's distinctive 'keystone'
+Aperture AC,"sec_edgar,sec_edgar",,,greenhouse,aperture,13,verified,board='Aperture Labs' contains distinctive 'aperture'
+Sky Acquisition Group,sec_edgar,,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+"Victory Giant Technology (HuiZhou) Co., Ltd./ADR",sec_edgar,,,greenhouse,victory,1,duplicate,"already claimed by 'Victory Capital Holdings, Inc.'"
+General Catalyst Global Resilience Merger Corp.,"sec_edgar,sec_edgar",,,greenhouse,general,1,duplicate,already claimed by 'General Dynamics'
+Mercator Acquisition Corp.,sec_edgar,,,greenhouse,ma,1,duplicate,already claimed by 'MANHATTAN ASSOCIATES INC'
+RRE Ventures Acquisition Corp.,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,rva,10,mismatch,board='Retina Vitreous Associates' has no token overlap with company
+APEX Global Solutions Ltd,sec_edgar,,,greenhouse,apex,1,duplicate,already claimed by 'Apex Treasury Corp'
+Grayscale Bitcoin Mini Trust ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Bittensor Trust (TAO),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Sui Staking ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+AM PM Group Ltd,sec_edgar,,,greenhouse,ampm,3,mismatch,board='AM/PM Door Inc' has no token overlap with company
+Allied Critical Metals Corp.,sec_edgar,,,greenhouse,allied,6,duplicate,already claimed by 'Allied Universal'
+Mercury NZ Ltd./ADR,"sec_edgar,sec_edgar",,,greenhouse,mercury,57,duplicate,already claimed by 'MERCURY GENERAL CORP'
+"Seres Group Co., Ltd./ADR",sec_edgar,,,greenhouse,seres,3,duplicate,"already claimed by 'Seres Therapeutics, Inc.'"
+"Securitize Holdings, Inc.",sec_edgar,,,greenhouse,securitize,8,verified,board='Securitize' contains distinctive 'securitize'
+METRO INC./ADR,sec_edgar,,,greenhouse,metro,6,verified,board='Metro East JV' contains distinctive 'metro'
+Mandatum Oyj/ADR,"sec_edgar,sec_edgar",,,greenhouse,moa,8,mismatch,board='Mid-Ohio Air Conditioning' has no token overlap with company
+GreenLight Metals Inc.,sec_edgar,,,lever,greenlight,20,duplicate,"already claimed by 'GREENLIGHT CAPITAL RE, LTD.'"
+Grayscale Ethereum Classic Trust (ETC),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Lendbuzz Inc.,sec_edgar,,,lever,lendbuzz,66,review,postings don't clearly reference company; manual check needed
+Grayscale Bitcoin Cash Trust (BCH),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale CoinDesk Crypto 5 ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+"Liftoff Mobile, Inc.",sec_edgar,,,greenhouse,liftoff,19,verified,board='Liftoff' contains distinctive 'liftoff'
+Grayscale Decentraland Trust (MANA),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Chainlink Trust ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Basic Attention Token Trust (BAT),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Litecoin Trust (LTC),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Zcash Trust (ZEC),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Horizen Trust (ZEN),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Bitcoin Trust ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+"Parabilis Medicines, Inc.",sec_edgar,,,greenhouse,pm,1,duplicate,already claimed by 'Philip Morris International'
+Super Copper Corp.,sec_edgar,,,greenhouse,super,223,duplicate,"already claimed by 'Super Micro Computer, Inc.'"
+Galaxy Enterprises Inc. /WY/,sec_edgar,,,greenhouse,galaxy,3,duplicate,already claimed by 'Galaxy Digital Inc.'
+WisdomTree Bitcoin Fund,sec_edgar,,,lever,wisdomtree,6,duplicate,"already claimed by 'WisdomTree, Inc.'"
+Grayscale Solana Staking ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+"Fundrise Innovation Fund, LLC",sec_edgar,,,lever,fundrise,1,review,postings don't clearly reference company; manual check needed
+Grayscale Ethereum Staking ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Stellar Lumens Trust (XLM),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Stacks Trust (STX),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+21Shares Ethereum ETF,sec_edgar,,,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+Grayscale Near Trust (NEAR),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale Avalanche Staking ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Octave Intelligence plc,"sec_edgar,sec_edgar",,,greenhouse,octave,23,duplicate,already claimed by 'OCTAVE SPECIALTY GROUP INC'
+Wealth Management System Inc.,sec_edgar,,,greenhouse,wms,9,verified,board='Waypoint Management Services' contains distinctive 'management'
+"Horizon Robotics, Inc./ADR","sec_edgar,sec_edgar",,,lever,horizon,1,duplicate,already claimed by 'HORIZON BANCORP INC /IN/'
+Grayscale Ethereum Staking Mini ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+Grayscale XRP Trust ETF,sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+"Magnolia Bancorp, Inc.",sec_edgar,,,greenhouse,magnolia,20,duplicate,already claimed by 'Magnolia Oil & Gas Corp'
+Grayscale Livepeer Trust (LPT),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+"Encore Medical, Inc.",sec_edgar,,,greenhouse,encore,2,duplicate,already claimed by 'ENCORE CAPITAL GROUP INC'
+"Lincoln International, Inc.",sec_edgar,,,greenhouse,lincoln,13,duplicate,already claimed by 'Lincoln Institute of Land Policy'
+NORTHFIELD CAPITAL CORP,sec_edgar,,,greenhouse,nc,5,duplicate,"already claimed by 'Newegg Commerce, Inc.'"
+TAIWAN SEMICONDUCTOR MANUFACTURING CO LTD,"sec_edgar,sec_edgar",,,greenhouse,taiwan,1,duplicate,already claimed by 'TAIWAN FUND INC'
+NATIONAL RURAL UTILITIES COOPERATIVE FINANCE CORP /DC/,sec_edgar,,,greenhouse,national,4,duplicate,already claimed by 'National Association of Scholars'
+BYD CO LTD,sec_edgar,,,greenhouse,byd,19,verified,board='BYD North America' contains distinctive 'byd'
+"Japan Exchange Group, Inc./ADR",sec_edgar,,,greenhouse,japan,3,duplicate,already claimed by 'JAPAN SMALLER CAPITALIZATION FUND INC'
+Kose Corporation/ADR,sec_edgar,,,greenhouse,kca,1,duplicate,already claimed by 'K2 Capital Acquisition Corp'
+Auto Trader Group plc/ADR,sec_edgar,,,greenhouse,autotrader,16,verified,board='Autotrader' contains distinctive 'trader'
+Disco Corporation/ADR,sec_edgar,,,greenhouse,disco,37,verified,board='DISCO' contains distinctive 'disco'
+"Udemy, Inc.",sec_edgar,,,greenhouse,udemy,10,verified,board='Udemy' contains distinctive 'udemy'
+PureTech Health plc,"sec_edgar,sec_edgar",,,greenhouse,puretechhealth,2,verified,board='PureTech Health' contains distinctive 'puretech'
+Athena Technology Acquisition Corp. II,"sec_edgar,sec_edgar,sec_edgar",,,greenhouse,athena,1,duplicate,already claimed by 'Athena Bitcoin Global'
+CAPITAL PROPERTIES INC /RI/,sec_edgar,,,lever,capital,63,duplicate,already claimed by 'Capital One'
+"RED METAL RESOURCES, LTD.",sec_edgar,,,greenhouse,rmr,3,duplicate,already claimed by 'RMR GROUP INC.'
+"Latch, Inc.","sec_edgar,sec_edgar",,,lever,latch,2,review,postings don't clearly reference company; manual check needed
+Curative Biotechnology Inc,sec_edgar,,,greenhouse,curative,5,verified,company contains board's distinctive 'curative'
+"SOUTHERN ITS INTERNATIONAL, INC.",sec_edgar,,,greenhouse,si,4,duplicate,already claimed by 'Stichting INGKA Foundation'
+Ranger Gold Corp.,sec_edgar,,,lever,ranger,4,review,postings don't clearly reference company; manual check needed
+"SADDLE RANCH MEDIA, INC.",sec_edgar,,,greenhouse,srm,37,mismatch,board='S-RM' has no token overlap with company
+"Spirit Aviation Holdings, Inc.",sec_edgar,,,greenhouse,sa,1,duplicate,already claimed by 'Southwest Airlines'
+"Software Effective Solutions, Corp.",sec_edgar,,,greenhouse,ses,2,mismatch,board='SES Construction' has no token overlap with company
+"Blue Line Protection Group, Inc.",sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+Community Redevelopment Inc.,sec_edgar,,,greenhouse,community,1,duplicate,"already claimed by 'COMMUNITY FINANCIAL SYSTEM, INC.'"
+"Resonate Blends, Inc.",sec_edgar,,,greenhouse,resonate,7,verified,board='Resonate' contains distinctive 'resonate'
+"ESPORTS ENTERTAINMENT GROUP, INC.","sec_edgar,sec_edgar,sec_edgar",,,greenhouse,ee,1,duplicate,already claimed by 'Emerson Electric'
+ProShares Trust II,"sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar,sec_edgar",,,greenhouse,proshares,19,verified,board='ProShares' contains distinctive 'proshares'
+"Japan Post Bank Co., Ltd.",sec_edgar,,,greenhouse,japan,3,duplicate,already claimed by 'JAPAN SMALLER CAPITALIZATION FUND INC'
+Stone Ridge Trust V,sec_edgar,,,greenhouse,stone,422,verified,board='Stone - Linkedin' contains distinctive 'stone'
+"Finch Therapeutics Group, Inc.",sec_edgar,,,lever,finch,7,review,postings don't clearly reference company; manual check needed
+"Mercari, Inc./ADR",sec_edgar,,,greenhouse,mercari,3,verified,board='Mercari' contains distinctive 'mercari'
+Zenvia Inc.,sec_edgar,,,greenhouse,zenvia,1,verified,board='ZENVIA' contains distinctive 'zenvia'
+HOOPS SCOUTING USA,sec_edgar,,,greenhouse,hs,28,duplicate,already claimed by 'Henry Schein'
+Adyen N.V./ADR,sec_edgar,,,greenhouse,adyen,233,verified,board='Adyen' contains distinctive 'adyen'
+Growth Stalk Holdings Corp,sec_edgar,,,greenhouse,growth,8,mismatch,board='BitGo Campaigns' has no token overlap with company
+Sunrise Communications AG,sec_edgar,,,greenhouse,sunrise,26,duplicate,"already claimed by 'Sunrise Realty Trust, Inc.'"
+Relativity Acquisition Corp,sec_edgar,,,greenhouse,relativity,293,duplicate,already claimed by 'Relativity Holdings Inc.'
+Grayscale Filecoin Trust (FIL),sec_edgar,,,greenhouse,grayscale,2,duplicate,already claimed by 'Grayscale Decentralized Finance (DeFi) Fund LLC'
+"Blue Line Holdings, Inc.",sec_edgar,,,lever,blue,3,duplicate,already claimed by 'BLUE OWL CAPITAL INC.'
+WHITECAP RESOURCES INC.,sec_edgar,,,lever,wr,46,duplicate,already claimed by 'W. R. Berkley Corporation'
+Emo Capital Corp.,sec_edgar,,,greenhouse,ec,2,duplicate,already claimed by 'EASTMAN CHEMICAL CO'
+First Phosphate Corp.,"sec_edgar,sec_edgar",,,lever,fp,25,duplicate,already claimed by 'Frontline plc'
+PUBLIC SERVICE CO OF NEW MEXICO,sec_edgar,,,greenhouse,public,4,duplicate,already claimed by 'Public Service Enterprise Group'
+MAGIC SOFTWARE ENTERPRISES LTD,sec_edgar,,,greenhouse,mse,9,mismatch,board='Mid-South Equipment Sales' has no token overlap with company
+JEOL LTD/ADR,sec_edgar,,,greenhouse,jla,10,mismatch,board='Justice League of America' has no token overlap with company
+APEX CRITICAL METALS CORP.,sec_edgar,,,greenhouse,apex,1,duplicate,already claimed by 'Apex Treasury Corp'
