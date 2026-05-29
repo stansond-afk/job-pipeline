@@ -10,17 +10,30 @@ moved into `config/` so anyone can customize it for their own search.
 
 ## Status
 
-🚧 **Under construction.** The generic fork is mid-build. See the
-parent project ([solongo-jobs](https://github.com/stansond-afk/solongo-jobs))
-for a working, opinionated version.
+**Functional.** The setup wizard works end-to-end; all six themes
+render; slug discovery + the community registry are live. Open to
+issues / PRs.
+
+For reference, the opinionated parent project lives at
+[solongo-jobs](https://github.com/stansond-afk/solongo-jobs).
 
 ## What this gives you
 
-- A daily dashboard at a private URL on your phone or laptop
-- Hands-off nightly scraping via GitHub Actions
-- Application tracker — every job you apply to is logged with its resume,
-  cover letter, and a snapshot of the JD
-- Free to run (Cloudflare Workers free tier + GitHub Actions free tier)
+- **Six visual themes** (Paper · Garden · Tide · Quiet Focus · Mountain · Dusk),
+  picked during onboarding. Mechanics are identical; voice + palette
+  + mascot vary. Paper is the safe default — no mascot, no script font,
+  just the work.
+- **A daily dashboard** at a private URL on your phone or laptop
+- **Hands-off nightly scraping** via GitHub Actions (M/W/F by default)
+- **Application tracker** — every job you apply to is logged with its
+  resume, cover letter, and a snapshot of the JD
+- **Slug auto-discovery** — `scripts/discover_company_universe.py`
+  probes ~8,500 companies (S&P 500 + private + SEC EDGAR) against
+  Greenhouse + Lever APIs and surfaces working ATS slugs for any of them
+- **Community slug registry** — opt in to share your discovered slugs
+  with other users + pull theirs (~393 verified slugs available as
+  starter coverage)
+- **Free to run** (Cloudflare Workers free tier + GitHub Actions free tier)
 
 ## What you'll need
 
@@ -41,9 +54,11 @@ for a working, opinionated version.
 See [docs/SETUP.md](docs/SETUP.md) for the full walkthrough. Short version:
 
 ```bash
-git clone https://github.com/<your-username>/job-pipeline.git
+git clone https://github.com/stansond-afk/job-pipeline.git
 cd job-pipeline
-python scripts/setup.py    # interactive wizard
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python3 scripts/setup.py    # interactive wizard at http://localhost:5051
 ```
 
 The wizard will ask for your profile details, target roles, location, and
