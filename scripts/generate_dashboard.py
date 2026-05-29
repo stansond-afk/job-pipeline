@@ -1118,32 +1118,16 @@ def _build_css() -> str:
     align-items: center;
     padding: 22px 28px;
     border-radius: var(--radius-card-lg);
-    background: linear-gradient(135deg, #E4EEF8 0%, #F0E7F5 60%, #FFF6DE 100%);
+    /* Background is plain paper; each theme's chosen decoration
+       (sun-clouds / horizon / waves / paper / stars / peak) renders
+       inside via the .deco container, harmonising with theme tokens. */
+    background: var(--paper);
     border: 1px solid var(--line);
     position: relative;
     overflow: hidden;
     margin-bottom: 16px;
     gap: 16px;
   }}
-  .greeting-sun {{
-    position: absolute; right: 220px; top: -30px;
-    width: 90px; height: 90px; border-radius: 50%;
-    background: var(--sun); opacity: 0.7;
-    pointer-events: none;
-  }}
-  .greeting-sun-inner {{
-    position: absolute; right: 210px; top: -20px;
-    width: 70px; height: 70px; border-radius: 50%;
-    background: var(--sun);
-    pointer-events: none;
-  }}
-  .greeting-cloud-1, .greeting-cloud-2 {{
-    position: absolute; border-radius: 20px;
-    background: var(--paper); opacity: 0.85;
-    pointer-events: none;
-  }}
-  .greeting-cloud-1 {{ left: 220px; top: 18px; width: 60px; height: 16px; }}
-  .greeting-cloud-2 {{ left: 380px; top: 40px; width: 40px; height: 12px; }}
 
   .greeting-left {{
     display: flex; gap: 18px; align-items: center;
@@ -1153,25 +1137,26 @@ def _build_css() -> str:
     width: 78px; height: 78px; border-radius: 50%;
     background: var(--paper);
     display: grid; place-items: center;
-    border: 2px solid var(--cream);
-    box-shadow: 0 6px 18px -8px rgba(80,60,30,0.25);
+    border: 2px solid var(--bg);
+    box-shadow: 0 6px 18px -8px rgba(0,0,0,0.18);
     flex-shrink: 0;
+    /* Keep avatar above the decoration's absolute-positioned layers */
+    position: relative; z-index: 1;
   }}
   .greeting-hello {{
-    font-family: var(--font-hand);
+    font-family: var(--hand);
     font-size: 28px;
-    color: var(--sky-dk);
+    color: var(--a1-dk);
     line-height: 1;
   }}
   .greeting-name {{
-    font-family: var(--font-serif);
+    font-family: var(--serif);
     font-size: 42px;
     font-weight: 500;
     color: var(--ink);
     line-height: 1.05;
     margin-top: 2px;
   }}
-  .greeting-sun-glyph {{ color: var(--coral); }}
   .greeting-meta {{ margin-top: 6px; color: var(--sub); font-size: 14px; }}
 
   .greeting-right {{
