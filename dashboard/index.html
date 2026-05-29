@@ -768,7 +768,7 @@
         <div class="greeting-text">
           <div class="greeting-hello">good morning,</div>
           <div class="greeting-name">Your Name <span class="greeting-sun-glyph">☀</span></div>
-          <div class="greeting-meta">Wednesday, May 27 · Pip says: <em>“the well is full today.”</em></div>
+          <div class="greeting-meta">Friday, May 29 · Pip says: <em>“take it one job at a time.”</em></div>
         </div>
       </div>
 
@@ -830,7 +830,7 @@
         <circle cx="0.0" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="21.5" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="43.1" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="64.6" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="86.2" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="107.7" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="129.2" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="150.8" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="172.3" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="193.8" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="215.4" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="236.9" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="258.5" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="280.0" cy="70.0" r="1.5" fill="#E7DFCD"/>
       </svg>
       <div class="sparkline-axis">
-        <span>May 14</span><span>today</span>
+        <span>May 16</span><span>today</span>
       </div>
       <div class="sparkline-ctx">
         <strong>Best day:</strong> no apps yet. today is a blank page.
@@ -847,7 +847,7 @@
       <div class="funnel-grid">
         <div class="funnel-cell">
           <div class="funnel-tile" style="background:#FBF7EF;border: 1px solid #E7DFCD;opacity:1;">
-            <div class="funnel-count">20</div>
+            <div class="funnel-count">22</div>
             <div class="funnel-label">Active postings</div>
           </div>
           <div class="funnel-arrow">→</div>
@@ -899,16 +899,36 @@
 
 <div class="grid-2col-16-10">
   
-        <div class="card">
-          <div class="card-head">
-            <div class="kicker">today's blue-sky picks</div>
-            <div class="card-title">Pip picked these just for you</div>
-          </div>
-          <div class="empty-state">
-            <div class="hand-accent">an empty sky — what'll you send first?</div>
-            <div class="empty-sub">Pip is waiting for the scrapers to find something good.</div>
-          </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="kicker">today's blue-sky picks</div>
+        <div class="card-title">Pip picked these just for you
+          <span class="card-action">Pip&#x27;s top fits today</span>
         </div>
+      </div>
+      <div class="picks-grid">
+        <div class="pick-card" style="border-left: 5px solid #E7DFCD;">
+          <div class="pick-head">
+            <div>
+              <div class="pick-company">NJ Farmland Preservation Program/State Agriculture Development Committee (SADC)</div>
+              <a href="https://greenjobs.greenjobsearch.org/jobs/regional-farmland-preservation-program-coordinator/" target="_blank" rel="noopener" class="pick-role">Regional Farmland Preservation Program Coordinator</a>
+            </div>
+            <div class="score-chip score-chip-pick" style="background:#F4D87C">10</div>
+          </div>
+          <div class="pick-meta">
+            <span>📍 Trenton, New Jersey, United States</span>
+            <span>·</span>
+            <span>greenjobs</span>
+            <span>·</span>
+            <span>just now</span>
+          </div>
+          <div class="pick-actions">
+            <a class="btn-tailor btn-pick" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Regional%20Farmland%20Preservation%20Program%20Coordinator%20at%20NJ%20Farmland%20Preservation%20Program/State%20Agriculture%20Development%20Committee%20%28SADC%29.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/regional-farmland-preservation-program-coordinator/" target="_blank" rel="noopener">Tailor →</a>
+            <button type="button" class="btn-apply btn-pick btn-pick-apply"
+                    onclick="openApplyModal(22)">Apply →</button>
+          </div>
+        </div></div>
+    </div>
   
     <div class="card pick-me-up-card">
       <div class="card-head">
@@ -918,16 +938,16 @@
         </div>
       </div>
       <div class="photo-placeholder" id="pickmeup-photo"
-           style="background: repeating-linear-gradient(135deg, #E8C5C5 0 14px, #e2bfbf 14px 28px);">
+           style="background: repeating-linear-gradient(135deg, #C5D8E8 0 14px, #bfd2e2 14px 28px);">
         <img id="pickmeup-img"
              alt="A friendly dog for you"
              referrerpolicy="no-referrer"
              onerror="this.style.display='none'">
-        <div class="photo-caption" id="pickmeup-caption">borrowed for a moment</div>
+        <div class="photo-caption" id="pickmeup-caption">a small friend, just for you</div>
       </div>
       <div class="joke-box">
-        <div class="joke-q hand-accent" id="joke-q">Pip on the words &#x27;rockstar&#x27; and &#x27;ninja&#x27;:</div>
-        <div class="joke-a" id="joke-a">&#x27;Neither of those people would sit in your meetings.&#x27;</div>
+        <div class="joke-q hand-accent" id="joke-q">What did the cover letter say to the hiring manager?</div>
+        <div class="joke-a" id="joke-a">&#x27;Dear Sir/Madam, please love me.&#x27;</div>
       </div>
     </div>
 </div>
@@ -1027,7 +1047,7 @@
     <div>
       <div class="kicker">all postings</div>
       <div class="card-title">The full list — search & filter
-        <span class="card-action">showing <strong id="count-visible">20</strong> of 20</span>
+        <span class="card-action">showing <strong id="count-visible">22</strong> of 22</span>
       </div>
     </div>
     <button class="add-job-toggle-btn" id="add-job-toggle-btn" onclick="toggleAddJob()">+ Add Job</button>
@@ -1104,6 +1124,30 @@
       </tr>
     </thead>
     <tbody id="jobs-body">
+
+    <tr class="job-row row-low app-unapplied interest-row-not_reviewed" data-app-state="unapplied" data-interest="not_reviewed" data-tier="low" data-source="greenjobs" data-score="0.1094" data-company="nj farmland preservation program/state agriculture development committee (sadc)" data-search="nj farmland preservation program/state agriculture development committee (sadc) regional farmland preservation program coordinator trenton, new jersey, united states">
+        <td class="td-company"><span class="row-company">NJ Farmland Preservation Program/State Agriculture Development Committee (SADC)</span></td>
+        <td class="td-role">
+          <a href="https://greenjobs.greenjobsearch.org/jobs/regional-farmland-preservation-program-coordinator/" target="_blank" rel="noopener">Regional Farmland Preservation Program Coordinator</a>
+          <div class="row-meta">greenjobs · Wed, 27 Ma</div>
+        </td>
+        <td class="td-location">Trenton, New Jersey, United States</td>
+        <td class="td-score"><span class="score-chip" style="background:#E7DFCD">10</span></td>
+        <td class="td-interest"><select class="interest-select interest-not_reviewed" data-posting-id="22" onchange="onInterestChange(event, 22)" title="Interest level"><option value="not_reviewed" selected>—</option><option value="very_interested">♥ Very</option><option value="interested">● Interested</option><option value="not_interested">Pass</option></select></td>
+        <td class="td-action"><button type="button" class="btn-apply" data-posting-id="22" onclick="openApplyModal(22)">Apply →</button><a class="btn-tailor" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Regional%20Farmland%20Preservation%20Program%20Coordinator%20at%20NJ%20Farmland%20Preservation%20Program/State%20Agriculture%20Development%20Committee%20%28SADC%29.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/regional-farmland-preservation-program-coordinator/" target="_blank" rel="noopener">Tailor →</a></td>
+    </tr>
+
+    <tr class="job-row row-filtered app-unapplied interest-row-not_reviewed" data-app-state="unapplied" data-interest="not_reviewed" data-tier="filtered" data-source="greenjobs" data-score="0.0000" data-company="smart surfaces coalition" data-search="smart surfaces coalition media/communications summer intern washington, district of columbia, united states">
+        <td class="td-company"><span class="row-company">Smart Surfaces Coalition</span></td>
+        <td class="td-role">
+          <a href="https://greenjobs.greenjobsearch.org/jobs/media-communications-summer-intern/" target="_blank" rel="noopener">Media/Communications Summer Intern</a>
+          <div class="row-meta">greenjobs · Wed, 27 Ma</div>
+        </td>
+        <td class="td-location">Washington, District of Columbia, United States</td>
+        <td class="td-score"><span class="score-chip score-chip-filtered">—</span></td>
+        <td class="td-interest"><select class="interest-select interest-not_reviewed" data-posting-id="21" onchange="onInterestChange(event, 21)" title="Interest level"><option value="not_reviewed" selected>—</option><option value="very_interested">♥ Very</option><option value="interested">● Interested</option><option value="not_interested">Pass</option></select></td>
+        <td class="td-action"><button type="button" class="btn-apply" data-posting-id="21" onclick="openApplyModal(21)">Apply →</button><a class="btn-tailor" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Media/Communications%20Summer%20Intern%20at%20Smart%20Surfaces%20Coalition.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/media-communications-summer-intern/" target="_blank" rel="noopener">Tailor →</a></td>
+    </tr>
 
     <tr class="job-row row-filtered app-unapplied interest-row-not_reviewed" data-app-state="unapplied" data-interest="not_reviewed" data-tier="filtered" data-source="greenjobs" data-score="0.0000" data-company="american farmland trust" data-search="american farmland trust new england policy manager (remote) northampton, massachusetts, united states">
         <td class="td-company"><span class="row-company">American Farmland Trust</span></td>
@@ -1439,7 +1483,7 @@
   </div>
 </div>
 
-<div class="page-footer">made with care · for Your Name · <span style="font-family: var(--font-sans); font-size: 11px;">generated May 27, 2026 at 11:01 AM · last scrape 2026-05-27</span></div>
+<div class="page-footer">made with care · for Your Name · <span style="font-family: var(--font-sans); font-size: 11px;">generated May 29, 2026 at 10:53 AM · last scrape 2026-05-29</span></div>
 <div class="page-credit">originally by <a href="https://github.com/stansond-afk" target="_blank" rel="noopener">Stanson Dobbs</a> · MIT licensed · <a href="https://github.com/stansond-afk/job-pipeline" target="_blank" rel="noopener">source</a></div>
 
 <script>
