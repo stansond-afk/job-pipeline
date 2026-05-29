@@ -40,88 +40,82 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from jobpipeline import achievements, config, jokes
+from jobpipeline import achievements, config, jokes, mascots, themes
 
 DB_PATH = Path(__file__).parent.parent / "db" / "jobs.db"
 OUT_PATH = Path(__file__).parent.parent / "dashboard" / "index.html"
 
 
 # ---------------------------------------------------------------------------
-# Design tokens (mirror design/design-tokens.md)
+# Design tokens — derived from the chosen theme at render time.
+#
+# The OLD-style PALETTE dict has Solo-Garden-specific keys (cream, sky,
+# lilac, coral, mint). We translate the active theme's tokens into those
+# same keys so every existing `{PALETTE['cream']}` reference in CSS Just
+# Works under any of the 6 themes — only the color value swaps.
+#
+# When CSS uses the new tokens directly (var(--bg), var(--radius-card),
+# etc.) instead of PALETTE[...], it gets the full theme treatment
+# including radii / typography / kicker letter-spacing variations.
+# Both paths coexist during the Phase B migration.
 # ---------------------------------------------------------------------------
 
-PALETTE = {
-    "cream":    "#FBF7EF",
-    "paper":    "#FFFDF7",
-    "ink":      "#2E2B3D",
-    "sub":      "#6F6A82",
-    "sky":      "#9CC3E8",
-    "sky_dk":   "#5B8AB8",
-    "lilac":    "#C9B8E0",
-    "lilac_dk": "#8A77B0",
-    "sun":      "#F4D87C",
-    "sun_dk":   "#C49F37",
-    "coral":    "#F0A89C",
-    "mint":     "#B9DBC4",
-    "line":     "#E7DFCD",
-}
+
+def palette_from_theme(theme: dict) -> dict:
+    """Map a theme's token table to the legacy PALETTE key names.
+
+    Garden's tokens map cleanly (the original Solo's Garden was the
+    design source of truth, so legacy key names match its semantic
+    roles). Other themes get appropriate stand-ins.
+    """
+    t = theme["tokens"]
+    return {
+        "cream":    t["--bg"],          # page background
+        "paper":    t["--paper"],       # card background
+        "ink":      t["--ink"],         # primary text
+        "sub":      t["--sub"],         # secondary text
+        "line":     t["--line"],        # borders, dividers
+        "sky":      t["--a1"],          # primary accent (sky in Garden)
+        "sky_dk":   t["--a1-dk"],
+        "lilac":    t["--a2"],          # secondary accent (lilac in Garden)
+        "lilac_dk": t["--a2-dk"],
+        "sun":      t["--sun"],         # highlight (strong-fit, weekly ring)
+        "sun_dk":   t["--sun-dk"],
+        "coral":    t["--warm"],        # warm accent (very-interested pill)
+        "mint":     t["--good"],        # positive (good-fit, offered status)
+    }
 
 
-# Capybara mascot — drawn from ellipses + circles. Inline SVG so no
-# external assets needed. `mood` ∈ {happy, sleepy}. The user's mascot
-# name comes from config/profile.yaml; only the SVG art is fixed.
-def pip_svg(size: int = 62, mood: str = "happy") -> str:
-    eye_y = 56 if mood == "sleepy" else 54
-    eye_h = 1 if mood == "sleepy" else 4
-    highlights = ""
-    if mood != "sleepy":
-        highlights = (
-            '<circle cx="49" cy="53" r="1" fill="#fff" />'
-            '<circle cx="73" cy="53" r="1" fill="#fff" />'
-        )
-    return (
-        f'<svg viewBox="0 0 120 110" width="{size}" height="{int(size * 110 / 120)}" '
-        f'aria-hidden="true">'
-        '<ellipse cx="42" cy="32" rx="9" ry="7" fill="#a47b56"/>'
-        '<ellipse cx="78" cy="32" rx="9" ry="7" fill="#a47b56"/>'
-        '<ellipse cx="42" cy="33" rx="4" ry="3" fill="#7d5d40"/>'
-        '<ellipse cx="78" cy="33" rx="4" ry="3" fill="#7d5d40"/>'
-        '<ellipse cx="60" cy="55" rx="36" ry="30" fill="#c39673"/>'
-        '<ellipse cx="60" cy="74" rx="22" ry="14" fill="#d8b08c"/>'
-        f'<ellipse cx="48" cy="{eye_y}" rx="3.5" ry="{eye_h}" fill="#2a2a3a"/>'
-        f'<ellipse cx="72" cy="{eye_y}" rx="3.5" ry="{eye_h}" fill="#2a2a3a"/>'
-        f'{highlights}'
-        '<ellipse cx="36" cy="66" rx="5" ry="3" fill="#f0a89c" opacity="0.55"/>'
-        '<ellipse cx="84" cy="66" rx="5" ry="3" fill="#f0a89c" opacity="0.55"/>'
-        '<ellipse cx="60" cy="70" rx="3" ry="2" fill="#2a2a3a"/>'
-        '<ellipse cx="60" cy="78" rx="6" ry="3" fill="none" stroke="#2a2a3a" '
-        'stroke-width="1.4" stroke-linecap="round"/>'
-        '<circle cx="32" cy="22" r="3" fill="#f4d87c"/>'
-        '<circle cx="30" cy="18" r="2.5" fill="#f0a89c"/>'
-        '<circle cx="34" cy="17" r="2.5" fill="#c9b8e0"/>'
-        '<circle cx="36" cy="22" r="2.5" fill="#9cc3e8"/>'
-        '<circle cx="32" cy="22" r="1.5" fill="#fbf7ef"/>'
-        '</svg>'
-    )
+# Resolved at module load (cheap — single config + dict read). Re-resolved
+# per render via generate() so the wizard's theme swaps take effect on the
+# next dashboard regen.
+_THEME = themes.get_theme(config.theme_id())
+PALETTE = palette_from_theme(_THEME)
 
 
-# Affirmations — interpolated with user's short_name and mascot name from
-# config/profile.yaml at render time. JS picks randomly without repeating
-# within a session.
+def _mascot_label() -> str:
+    """Return the active theme's mascot name (e.g. 'Pip', 'Marlow') or a
+    neutral fallback ('Jobline') for themes without one (Paper, Quiet,
+    Mountain). Used in copy strings like '{label} suggests clearing
+    filters' that need a personable subject regardless of theme."""
+    copy = _THEME.get("copy") or {}
+    return copy.get("mascotName") or copy.get("productName") or "Jobline"
+
+
+# Affirmations come from the active theme's copy register. Each theme
+# has its own register voice (Garden's "Look at you go" vs Quiet's
+# "Quiet, consistent — that's the work" vs Dusk's "Rest now. Tomorrow
+# you'll go again"). The JS picks randomly without repeating within
+# a session.
+#
+# Optionally augmented with one personalised affirmation if the user
+# has a supporter_name set — see handoff/README.md §6 ("someone loves you").
 def _affirmations() -> list[str]:
-    name = config.short_name()
-    mascot = config.mascot_name()
-    return [
-        f"Great job, {name}!",
-        "You showed up today. That's enough.",
-        "Every 'no' is data, not a verdict.",
-        "Look at you go 👀",
-        "Beautiful work. Onward.",
-        f"{mascot} is so proud of you.",
-        "You are doing the hard thing. Slowly. Bravely.",
-        "Future you is cheering for present you.",
-        "Tailoring is the hardest part. You did it.",
-    ]
+    base = list(_THEME["copy"].get("affirmations") or [])
+    supporter = config.supporter_name().strip()
+    if supporter and config.show_love_note():
+        base.append(f"{supporter} thinks you're doing the right thing today.")
+    return base
 
 
 STATUS_LABELS = {
@@ -506,40 +500,73 @@ def render_row(p):
 
 def render_greeting_bar(streak: int) -> str:
     now = datetime.now()
-    greeting, quote = jokes.todays_mascot_quote(now.hour)
-    date_str = now.strftime("%A, %B %-d")
     user_name = config.short_name()
-    mascot = config.mascot_name()
+    copy = _THEME["copy"]
 
-    # Streak pill — solid number even on day 0 (the "0 days" framing is
-    # honest; ramps up with first action).
-    streak_label = "showing up" if streak > 0 else "fresh start"
+    # Greeting and quote: themes vary the tone. Garden's "good morning,
+    # Pip says:" vs Quiet's "Good morning. one focused hour beats three…"
+    # vs Paper's "Good morning. small steady acts."
+    # The hour-of-day greeting from jokes.todays_mascot_quote is too
+    # garden-flavored for non-mascot themes, so we use the theme's
+    # static greetingScript + (mascotSays + mascotQuote) per copy block.
+    greeting = copy["greetingScript"]
+    mascot_says = copy.get("mascotSays") or ""
+    mascot_quote = copy.get("mascotQuote") or ""
+    date_str = now.strftime("%A, %B %-d")
+
+    # Streak pill copy is per-theme too — Garden's "showing up" vs
+    # Quiet's "consecutive days" vs Mountain's "days, climbing"
+    streak_suffix = copy.get("streakSuffix", "days")
+    streak_icon = copy.get("streakIcon", "🔥")
+    celebrate_label = copy.get("celebrate", "Celebrate today")
+    name_suffix = copy.get("nameSuffix", "")
+
+    # Mascot (or monogram if disabled / theme has no mascot)
+    avatar_html = mascots.mascot_or_monogram(
+        _THEME, config.mascot_enabled(),
+        mascots.initials_from_name(user_name),
+        size=62,
+    )
+
+    # Skybox decoration — varies per theme
+    deco_html = mascots.render_decoration(_THEME)
+
+    # Mascot byline only shown if the theme has one to attribute the
+    # quote to. Otherwise the quote is unattributed.
+    if copy.get("mascotName"):
+        meta_byline = (
+            f'{html.escape(mascot_says)} '
+            f'<em>"{html.escape(mascot_quote)}"</em>'
+            if mascot_quote else ""
+        )
+    else:
+        meta_byline = (
+            f'<em>"{html.escape(mascot_quote)}"</em>'
+            if mascot_quote else ""
+        )
 
     return f"""
     <div class="greeting-bar">
-      <div class="greeting-sun"></div>
-      <div class="greeting-sun-inner"></div>
-      <div class="greeting-cloud-1"></div>
-      <div class="greeting-cloud-2"></div>
+      {deco_html}
 
       <div class="greeting-left">
-        <div class="pip-avatar">{pip_svg(62)}</div>
+        <div class="pip-avatar">{avatar_html}</div>
         <div class="greeting-text">
-          <div class="greeting-hello">{html.escape(greeting)},</div>
-          <div class="greeting-name">{html.escape(user_name)} <span class="greeting-sun-glyph">☀</span></div>
-          <div class="greeting-meta">{html.escape(date_str)} · {html.escape(mascot)} says: <em>“{html.escape(quote)}”</em></div>
+          <div class="greeting-hello">{html.escape(greeting)}</div>
+          <div class="greeting-name">{html.escape(user_name)}{html.escape(name_suffix)}</div>
+          <div class="greeting-meta">{html.escape(date_str)} · {meta_byline}</div>
         </div>
       </div>
 
       <div class="greeting-right">
         <div class="streak-pill">
-          <span class="streak-emoji">🔥</span>
+          <span class="streak-emoji">{html.escape(streak_icon)}</span>
           <div>
             <div class="streak-count">{streak} day{"s" if streak != 1 else ""}</div>
-            <div class="streak-sub">{streak_label}</div>
+            <div class="streak-sub">{html.escape(streak_suffix)}</div>
           </div>
         </div>
-        <button class="celebrate-btn" onclick="triggerCelebrate()">🎉 Celebrate today</button>
+        <button class="celebrate-btn" onclick="triggerCelebrate()">{html.escape(celebrate_label)}</button>
         <span id="server-status" class="server-status">server offline</span>
       </div>
     </div>"""
@@ -585,8 +612,8 @@ def render_weekly_ring(weekly: dict) -> str:
           </div>
         </div>
         <div class="weekly-meta">
-          <div class="hand-accent">you're {pct_text}% of the way there</div>
-          <div class="weekly-subtitle">{html.escape(weekly['subtitle'])}</div>
+          <div class="hand-accent">{html.escape(themes.fmt(_THEME["copy"].get("ringCopy", "{pct}% there"), pct=pct_text, done=done, goal=goal, remaining=max(0, goal - done)))}</div>
+          <div class="weekly-subtitle">{html.escape(themes.fmt(_THEME["copy"].get("ringSub", weekly["subtitle"]), pct=pct_text, done=done, goal=goal, remaining=max(0, goal - done)))}</div>
           <div class="day-pills">{pills}</div>
         </div>
       </div>
@@ -665,28 +692,34 @@ def render_funnel(stages: list) -> str:
           {connector}
         </div>""")
 
+    copy = _THEME["copy"]
     return f"""
     <div class="card">
       <div class="card-head">
         <div class="kicker">your funnel</div>
-        <div class="card-title">From discovery to dream job</div>
+        <div class="card-title">{html.escape(copy.get("funnelTitle", "Pipeline"))}</div>
       </div>
       <div class="funnel-grid">{"".join(tiles)}</div>
-      <div class="funnel-footnote">each arrow is a tiny act of courage.</div>
+      <div class="funnel-footnote">{html.escape(copy.get("funnelFooter", "each step is one you took."))}</div>
     </div>"""
 
 
 def render_todays_picks(picks: list, radar_count: int) -> str:
+    copy = _THEME["copy"]
+    picks_kicker = copy.get("picksKicker", "today's picks")
+    picks_title = copy.get("picksTitle", "Today's three")
+    mascot_label = _mascot_label()
+
     if not picks:
         return f"""
         <div class="card">
           <div class="card-head">
-            <div class="kicker">today's blue-sky picks</div>
-            <div class="card-title">{html.escape(config.mascot_name())} picked these just for you</div>
+            <div class="kicker">{html.escape(picks_kicker)}</div>
+            <div class="card-title">{html.escape(picks_title)}</div>
           </div>
           <div class="empty-state">
             <div class="hand-accent">an empty sky — what'll you send first?</div>
-            <div class="empty-sub">{html.escape(config.mascot_name())} is waiting for the scrapers to find something good.</div>
+            <div class="empty-sub">{html.escape(mascot_label)} is waiting for the scrapers to find something good.</div>
           </div>
         </div>"""
 
@@ -733,7 +766,7 @@ def render_todays_picks(picks: list, radar_count: int) -> str:
 
     # Action copy: prefer "X of N on your radar" when there's enough on the
     # radar to make the framing accurate; otherwise just "<mascot>'s top picks".
-    mascot = config.mascot_name()
+    mascot = _mascot_label()
     if radar_count >= len(picks):
         action_copy = f"{len(picks)} of {radar_count} on your radar"
     elif radar_count > 0:
@@ -744,8 +777,8 @@ def render_todays_picks(picks: list, radar_count: int) -> str:
     return f"""
     <div class="card">
       <div class="card-head">
-        <div class="kicker">today's blue-sky picks</div>
-        <div class="card-title">{html.escape(mascot)} picked these just for you
+        <div class="kicker">{html.escape(picks_kicker)}</div>
+        <div class="card-title">{html.escape(picks_title)}
           <span class="card-action">{html.escape(action_copy)}</span>
         </div>
       </div>
@@ -768,20 +801,25 @@ def render_pick_me_up() -> str:
     fallback_colors = ["#C5D8E8", "#D8C5E8", "#E8E1C5", "#E8C5C5", "#C5E8D8"]
     fb = fallback_colors[date.today().toordinal() % len(fallback_colors)]
 
+    mascot_lower = (_THEME["copy"].get("mascotName") or "today's").lower()
     captions = [
         "a small friend, just for you",
-        "huckleberry says hi to this one",
+        f"{mascot_lower} says hi to this one",
         "today's good dog",
         "borrowed for a moment",
         "look at those paws",
     ]
     initial_caption = captions[date.today().toordinal() % len(captions)]
 
+    copy = _THEME["copy"]
+    pmu_kicker = copy.get("pickMeUpKicker", "a small thing")
+    pmu_title = copy.get("pickMeUpTitle", "Something for you")
+
     return f"""
     <div class="card pick-me-up-card">
       <div class="card-head">
-        <div class="kicker">huckleberry's daily pick-me-up</div>
-        <div class="card-title">A little something for you
+        <div class="kicker">{html.escape(pmu_kicker)}</div>
+        <div class="card-title">{html.escape(pmu_title)}
           <button class="shuffle-btn" onclick="shufflePickMeUp()">🎲 new one</button>
         </div>
       </div>
@@ -809,6 +847,30 @@ def _shade(hex_color: str, pct: int) -> str:
     return f"#{(r << 16) | (g << 8) | b:06x}"
 
 
+def render_love_note() -> str:
+    """The 'someone loves you' pillar (handoff/README.md §6).
+
+    If the user set a supporter_name AND has show_love_note enabled,
+    render a dismissible card-row note. Otherwise return empty string —
+    no broken UI, no scolding empty state. Per the design spec:
+    'Job searches make people forget they are loved; the product can
+    refuse to let that happen.'
+    """
+    if not config.show_love_note():
+        return ""
+    supporter = config.supporter_name().strip()
+    if not supporter:
+        return ""
+    return f"""
+    <div class="love-note" id="love-note">
+      <span class="love-note-icon" aria-hidden="true">♥</span>
+      <div class="love-note-text">
+        <strong>{html.escape(supporter)}</strong> thinks you are the best thing in the world.
+      </div>
+      <button class="love-note-dismiss" onclick="document.getElementById('love-note').style.display='none'" aria-label="dismiss">×</button>
+    </div>"""
+
+
 def render_achievements(items: list) -> str:
     earned_count = sum(1 for a in items if a["earned"])
     tiles = []
@@ -822,10 +884,11 @@ def render_achievements(items: list) -> str:
           <div class="ach-desc">{html.escape(a['description'])}</div>
           {badge}
         </div>""")
+    ach_kicker = _THEME["copy"].get("achKicker", "marked")
     return f"""
     <div class="card">
       <div class="card-head">
-        <div class="kicker">your shelf</div>
+        <div class="kicker">{html.escape(ach_kicker)}</div>
         <div class="card-title">Achievements <span class="card-count">· {earned_count} of {len(items)}</span></div>
       </div>
       <div class="achievements-grid">{"".join(tiles)}</div>
@@ -838,6 +901,15 @@ def render_achievements(items: list) -> str:
 
 def generate(postings, sources, weekly, sparkline, sparkline_ctx, funnel,
              picks, radar_count, achievements_list, streak, last_scraped):
+    # Re-resolve the theme + palette at the top of every generate call.
+    # The user may have changed their theme via the wizard between runs;
+    # config.reload() picks up the new YAML, and we refresh the globals
+    # the render functions read from.
+    global _THEME, PALETTE
+    config.reload()
+    _THEME = themes.get_theme(config.theme_id())
+    PALETTE = palette_from_theme(_THEME)
+
     generated_at = datetime.now().strftime("%B %-d, %Y at %-I:%M %p")
     rows_html = "\n".join(render_row(p) for p in postings)
     affirmations_json = json.dumps(_affirmations())
@@ -851,6 +923,7 @@ def generate(postings, sources, weekly, sparkline, sparkline_ctx, funnel,
     body_html = _build_body_html(
         rows_html=rows_html,
         greeting_bar=render_greeting_bar(streak),
+        love_note=render_love_note(),
         weekly_ring=render_weekly_ring(weekly),
         sparkline=render_sparkline(sparkline, sparkline_ctx),
         funnel=render_funnel(funnel),
@@ -895,38 +968,68 @@ def generate(postings, sources, weekly, sparkline, sparkline_ctx, funnel,
 
 def _build_css() -> str:
     P = PALETTE
-    # All literal { } in CSS must be doubled — but since we're not using
-    # f-string interpolation in the CSS itself, we just use a regular
-    # string with .format() substitution.
+    T = _THEME["tokens"]
+    # Emit BOTH the theme's canonical CSS var names (e.g. --a1, --a2,
+    # --warm, --good — used by jobpipeline.mascots decorations) AND the
+    # legacy Solo's-Garden-flavored aliases (--sky, --lilac, --coral,
+    # --mint) that the existing 206-callsite CSS body references.
+    # Two-name scheme means we tokenize the data layer without churning
+    # the whole CSS body in one pass.
     return f"""
   :root {{
-    --cream: {P['cream']};
-    --paper: {P['paper']};
-    --ink: {P['ink']};
-    --sub: {P['sub']};
-    --sky: {P['sky']};
-    --sky-dk: {P['sky_dk']};
-    --lilac: {P['lilac']};
-    --lilac-dk: {P['lilac_dk']};
-    --sun: {P['sun']};
-    --sun-dk: {P['sun_dk']};
-    --coral: {P['coral']};
-    --mint: {P['mint']};
-    --line: {P['line']};
+    /* Surfaces + text */
+    --bg:      {T['--bg']};
+    --paper:   {T['--paper']};
+    --ink:     {T['--ink']};
+    --sub:     {T['--sub']};
+    --line:    {T['--line']};
+    --row:     {T['--row']};
 
-    --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
-    --font-sans:  'Nunito', system-ui, -apple-system, sans-serif;
-    --font-hand:  'Caveat', cursive;
+    /* Canonical accents (used by mascots.py decorations) */
+    --a1:      {T['--a1']};
+    --a1-dk:   {T['--a1-dk']};
+    --a2:      {T['--a2']};
+    --a2-dk:   {T['--a2-dk']};
+    --sun:     {T['--sun']};
+    --sun-dk:  {T['--sun-dk']};
+    --warm:    {T['--warm']};
+    --good:    {T['--good']};
 
-    --radius-pill: 999px;
-    --radius-card: 22px;
+    /* Legacy Solo's-Garden aliases — keep existing CSS body working
+       under every theme. Each maps to the new canonical name. */
+    --cream:    var(--bg);
+    --sky:      var(--a1);
+    --sky-dk:   var(--a1-dk);
+    --lilac:    var(--a2);
+    --lilac-dk: var(--a2-dk);
+    --coral:    var(--warm);
+    --mint:     var(--good);
+
+    /* Typography (per theme) */
+    --serif:      {T['--serif']};
+    --sans:       {T['--sans']};
+    --hand:       {T['--hand']};
+    --font-serif: var(--serif);   /* legacy alias */
+    --font-sans:  var(--sans);    /* legacy alias */
+    --font-hand:  var(--hand);    /* legacy alias */
+
+    /* Geometry (per theme) */
+    --radius-card:    {T['--radius-card']};
+    --radius-pill:    {T['--radius-pill']};
+    --radius-tag:     {T['--radius-tag']};
+    --radius-input:   10px;
     --radius-card-lg: 28px;
-    --radius-input: 10px;
-    --radius-tag: 14px;
 
-    --shadow-card: 0 1px 0 rgba(255,255,255,0.7) inset, 0 8px 20px -16px rgba(80,60,30,0.15);
-    --shadow-float: 0 16px 30px -10px rgba(0,0,0,0.4);
-    --shadow-button: 0 6px 16px -8px rgba(0,0,0,0.4);
+    /* Kicker text styling (varies per theme: Paper has uppercase +
+       2px ls, Tide has lowercase + 1.4px, Mountain has uppercase + 1.8px) */
+    --kicker-tt: {T['--kicker-tt']};
+    --kicker-ls: {T['--kicker-ls']};
+
+    /* Shadows (per theme — Dusk needs darker drop shadows than Paper) */
+    --shadow-card:   {T['--shadow-card']};
+    --shadow-cta:    {T['--shadow-cta']};
+    --shadow-float:  0 16px 30px -10px rgba(0,0,0,0.4);
+    --shadow-button: var(--shadow-cta);  /* legacy alias */
   }}
 
   *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -1107,6 +1210,35 @@ def _build_css() -> str:
     background: var(--sub);
   }}
   .server-status.online::before {{ background: #6cd47a; }}
+
+  /* ----- Love note (handoff/README.md §6) ----- */
+  .love-note {{
+    display: flex; align-items: center; gap: 12px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--warm);
+    border-radius: var(--radius-card);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+  }}
+  .love-note-icon {{
+    color: var(--warm); font-size: 18px; line-height: 1;
+    flex-shrink: 0;
+  }}
+  .love-note-text {{
+    flex: 1; font-size: 13px; color: var(--ink);
+    font-family: var(--hand);
+    font-size: 18px; line-height: 1.3;
+  }}
+  .love-note-text strong {{ font-weight: 600; color: var(--warm); }}
+  .love-note-dismiss {{
+    background: transparent; border: none; color: var(--sub);
+    font-size: 18px; line-height: 1; cursor: pointer;
+    padding: 4px 8px; border-radius: var(--radius-pill);
+    opacity: 0.7;
+  }}
+  .love-note-dismiss:hover {{ opacity: 1; background: var(--row); }}
 
   /* ----- Weekly ring ----- */
   .weekly-body {{ display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }}
@@ -1643,12 +1775,14 @@ def _build_body_html(**kw) -> str:
 <div id="confetti-container"></div>
 
 <div id="affirmation-toast">
-  <div class="affirmation-pip">{pip_svg(28)}</div>
+  <div class="affirmation-pip">{mascots.mascot_or_monogram(_THEME, config.mascot_enabled(), mascots.initials_from_name(config.short_name()), size=28)}</div>
   <div class="affirmation-text" id="affirmation-text"></div>
   <button class="affirmation-close" onclick="dismissAffirmation()">×</button>
 </div>
 
 {kw['greeting_bar']}
+
+{kw['love_note']}
 
 <div class="grid-2col-12-10">
   {kw['weekly_ring']}
@@ -1786,7 +1920,7 @@ def _build_body_html(**kw) -> str:
   <div class="table-empty" id="empty-state" style="display:none;">
     <div class="hand-accent">nothing matches that combo.</div>
     <div style="font-size:12px; color: var(--sub); margin-top: 6px;">
-      {html.escape(config.mascot_name())} suggests <a href="#" onclick="resetFilters(); return false;" style="color: var(--sky-dk); font-weight: 700; text-decoration: underline;">clearing filters</a> and trying again.
+      {html.escape(_mascot_label())} suggests <a href="#" onclick="resetFilters(); return false;" style="color: var(--sky-dk); font-weight: 700; text-decoration: underline;">clearing filters</a> and trying again.
     </div>
   </div>
 
@@ -1885,7 +2019,7 @@ def _build_body_html(**kw) -> str:
 # ---------------------------------------------------------------------------
 
 def _build_js(affirmations_json: str, jokes_json: str) -> str:
-    mascot_json = json.dumps(config.mascot_name())
+    mascot_json = json.dumps(_mascot_label())
     return f"""
 const AFFIRMATIONS = {affirmations_json};
 const JOKES = {jokes_json};
