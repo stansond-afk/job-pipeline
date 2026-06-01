@@ -12,33 +12,59 @@
 <style>
 
   :root {
-    --cream: #FBF7EF;
-    --paper: #FFFDF7;
-    --ink: #2E2B3D;
-    --sub: #6F6A82;
-    --sky: #9CC3E8;
-    --sky-dk: #5B8AB8;
-    --lilac: #C9B8E0;
-    --lilac-dk: #8A77B0;
-    --sun: #F4D87C;
-    --sun-dk: #C49F37;
-    --coral: #F0A89C;
-    --mint: #B9DBC4;
-    --line: #E7DFCD;
+    /* Surfaces + text */
+    --bg:      #F2EFE8;
+    --paper:   #FFFFFF;
+    --ink:     #1A1A1A;
+    --sub:     #6B6B6B;
+    --line:    #D8D4CB;
+    --row:     #F2EFE8;
 
-    --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
-    --font-sans:  'Nunito', system-ui, -apple-system, sans-serif;
-    --font-hand:  'Caveat', cursive;
+    /* Canonical accents (used by mascots.py decorations) */
+    --a1:      #3A6A8C;
+    --a1-dk:   #234B68;
+    --a2:      #8A8580;
+    --a2-dk:   #5C5854;
+    --sun:     #E8D9A8;
+    --sun-dk:  #9A8853;
+    --warm:    #B87363;
+    --good:    #8FA88E;
 
-    --radius-pill: 999px;
-    --radius-card: 22px;
+    /* Legacy Solo's-Garden aliases — keep existing CSS body working
+       under every theme. Each maps to the new canonical name. */
+    --cream:    var(--bg);
+    --sky:      var(--a1);
+    --sky-dk:   var(--a1-dk);
+    --lilac:    var(--a2);
+    --lilac-dk: var(--a2-dk);
+    --coral:    var(--warm);
+    --mint:     var(--good);
+
+    /* Typography (per theme) */
+    --serif:      'EB Garamond', Georgia, serif;
+    --sans:       'Inter', system-ui, sans-serif;
+    --hand:       'EB Garamond', Georgia, serif;
+    --font-serif: var(--serif);   /* legacy alias */
+    --font-sans:  var(--sans);    /* legacy alias */
+    --font-hand:  var(--hand);    /* legacy alias */
+
+    /* Geometry (per theme) */
+    --radius-card:    6px;
+    --radius-pill:    4px;
+    --radius-tag:     4px;
+    --radius-input:   10px;
     --radius-card-lg: 28px;
-    --radius-input: 10px;
-    --radius-tag: 14px;
 
-    --shadow-card: 0 1px 0 rgba(255,255,255,0.7) inset, 0 8px 20px -16px rgba(80,60,30,0.15);
-    --shadow-float: 0 16px 30px -10px rgba(0,0,0,0.4);
-    --shadow-button: 0 6px 16px -8px rgba(0,0,0,0.4);
+    /* Kicker text styling (varies per theme: Paper has uppercase +
+       2px ls, Tide has lowercase + 1.4px, Mountain has uppercase + 1.8px) */
+    --kicker-tt: uppercase;
+    --kicker-ls: 2px;
+
+    /* Shadows (per theme — Dusk needs darker drop shadows than Paper) */
+    --shadow-card:   0 0 0 1px rgba(0,0,0,0.04);
+    --shadow-cta:    0 2px 6px -2px rgba(0,0,0,0.25);
+    --shadow-float:  0 16px 30px -10px rgba(0,0,0,0.4);
+    --shadow-button: var(--shadow-cta);  /* legacy alias */
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -127,32 +153,16 @@
     align-items: center;
     padding: 22px 28px;
     border-radius: var(--radius-card-lg);
-    background: linear-gradient(135deg, #E4EEF8 0%, #F0E7F5 60%, #FFF6DE 100%);
+    /* Background is plain paper; each theme's chosen decoration
+       (sun-clouds / horizon / waves / paper / stars / peak) renders
+       inside via the .deco container, harmonising with theme tokens. */
+    background: var(--paper);
     border: 1px solid var(--line);
     position: relative;
     overflow: hidden;
     margin-bottom: 16px;
     gap: 16px;
   }
-  .greeting-sun {
-    position: absolute; right: 220px; top: -30px;
-    width: 90px; height: 90px; border-radius: 50%;
-    background: var(--sun); opacity: 0.7;
-    pointer-events: none;
-  }
-  .greeting-sun-inner {
-    position: absolute; right: 210px; top: -20px;
-    width: 70px; height: 70px; border-radius: 50%;
-    background: var(--sun);
-    pointer-events: none;
-  }
-  .greeting-cloud-1, .greeting-cloud-2 {
-    position: absolute; border-radius: 20px;
-    background: var(--paper); opacity: 0.85;
-    pointer-events: none;
-  }
-  .greeting-cloud-1 { left: 220px; top: 18px; width: 60px; height: 16px; }
-  .greeting-cloud-2 { left: 380px; top: 40px; width: 40px; height: 12px; }
 
   .greeting-left {
     display: flex; gap: 18px; align-items: center;
@@ -162,25 +172,26 @@
     width: 78px; height: 78px; border-radius: 50%;
     background: var(--paper);
     display: grid; place-items: center;
-    border: 2px solid var(--cream);
-    box-shadow: 0 6px 18px -8px rgba(80,60,30,0.25);
+    border: 2px solid var(--bg);
+    box-shadow: 0 6px 18px -8px rgba(0,0,0,0.18);
     flex-shrink: 0;
+    /* Keep avatar above the decoration's absolute-positioned layers */
+    position: relative; z-index: 1;
   }
   .greeting-hello {
-    font-family: var(--font-hand);
+    font-family: var(--hand);
     font-size: 28px;
-    color: var(--sky-dk);
+    color: var(--a1-dk);
     line-height: 1;
   }
   .greeting-name {
-    font-family: var(--font-serif);
+    font-family: var(--serif);
     font-size: 42px;
     font-weight: 500;
     color: var(--ink);
     line-height: 1.05;
     margin-top: 2px;
   }
-  .greeting-sun-glyph { color: var(--coral); }
   .greeting-meta { margin-top: 6px; color: var(--sub); font-size: 14px; }
 
   .greeting-right {
@@ -219,6 +230,35 @@
     background: var(--sub);
   }
   .server-status.online::before { background: #6cd47a; }
+
+  /* ----- Love note (handoff/README.md §6) ----- */
+  .love-note {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--warm);
+    border-radius: var(--radius-card);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+  }
+  .love-note-icon {
+    color: var(--warm); font-size: 18px; line-height: 1;
+    flex-shrink: 0;
+  }
+  .love-note-text {
+    flex: 1; font-size: 13px; color: var(--ink);
+    font-family: var(--hand);
+    font-size: 18px; line-height: 1.3;
+  }
+  .love-note-text strong { font-weight: 600; color: var(--warm); }
+  .love-note-dismiss {
+    background: transparent; border: none; color: var(--sub);
+    font-size: 18px; line-height: 1; cursor: pointer;
+    padding: 4px 8px; border-radius: var(--radius-pill);
+    opacity: 0.7;
+  }
+  .love-note-dismiss:hover { opacity: 1; background: var(--row); }
 
   /* ----- Weekly ring ----- */
   .weekly-body { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
@@ -751,39 +791,38 @@
 <div id="confetti-container"></div>
 
 <div id="affirmation-toast">
-  <div class="affirmation-pip"><svg viewBox="0 0 120 110" width="28" height="25" aria-hidden="true"><ellipse cx="42" cy="32" rx="9" ry="7" fill="#a47b56"/><ellipse cx="78" cy="32" rx="9" ry="7" fill="#a47b56"/><ellipse cx="42" cy="33" rx="4" ry="3" fill="#7d5d40"/><ellipse cx="78" cy="33" rx="4" ry="3" fill="#7d5d40"/><ellipse cx="60" cy="55" rx="36" ry="30" fill="#c39673"/><ellipse cx="60" cy="74" rx="22" ry="14" fill="#d8b08c"/><ellipse cx="48" cy="54" rx="3.5" ry="4" fill="#2a2a3a"/><ellipse cx="72" cy="54" rx="3.5" ry="4" fill="#2a2a3a"/><circle cx="49" cy="53" r="1" fill="#fff" /><circle cx="73" cy="53" r="1" fill="#fff" /><ellipse cx="36" cy="66" rx="5" ry="3" fill="#f0a89c" opacity="0.55"/><ellipse cx="84" cy="66" rx="5" ry="3" fill="#f0a89c" opacity="0.55"/><ellipse cx="60" cy="70" rx="3" ry="2" fill="#2a2a3a"/><ellipse cx="60" cy="78" rx="6" ry="3" fill="none" stroke="#2a2a3a" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="22" r="3" fill="#f4d87c"/><circle cx="30" cy="18" r="2.5" fill="#f0a89c"/><circle cx="34" cy="17" r="2.5" fill="#c9b8e0"/><circle cx="36" cy="22" r="2.5" fill="#9cc3e8"/><circle cx="32" cy="22" r="1.5" fill="#fbf7ef"/></svg></div>
+  <div class="affirmation-pip"><div style="width:28px;height:28px;border-radius:50%;background:var(--paper);border:1.5px solid var(--line);display:grid;place-items:center;font-family:var(--serif);font-size:12px;font-weight:500;color:var(--ink);letter-spacing:-0.02em;">YN</div></div>
   <div class="affirmation-text" id="affirmation-text"></div>
   <button class="affirmation-close" onclick="dismissAffirmation()">×</button>
 </div>
 
 
     <div class="greeting-bar">
-      <div class="greeting-sun"></div>
-      <div class="greeting-sun-inner"></div>
-      <div class="greeting-cloud-1"></div>
-      <div class="greeting-cloud-2"></div>
+      <div class="deco" aria-hidden="true"><div style="position:absolute;left:0;top:0;right:0;height:1px;background:var(--line);"></div><div style="position:absolute;left:0;bottom:0;right:0;height:1px;background:var(--line);"></div></div>
 
       <div class="greeting-left">
-        <div class="pip-avatar"><svg viewBox="0 0 120 110" width="62" height="56" aria-hidden="true"><ellipse cx="42" cy="32" rx="9" ry="7" fill="#a47b56"/><ellipse cx="78" cy="32" rx="9" ry="7" fill="#a47b56"/><ellipse cx="42" cy="33" rx="4" ry="3" fill="#7d5d40"/><ellipse cx="78" cy="33" rx="4" ry="3" fill="#7d5d40"/><ellipse cx="60" cy="55" rx="36" ry="30" fill="#c39673"/><ellipse cx="60" cy="74" rx="22" ry="14" fill="#d8b08c"/><ellipse cx="48" cy="54" rx="3.5" ry="4" fill="#2a2a3a"/><ellipse cx="72" cy="54" rx="3.5" ry="4" fill="#2a2a3a"/><circle cx="49" cy="53" r="1" fill="#fff" /><circle cx="73" cy="53" r="1" fill="#fff" /><ellipse cx="36" cy="66" rx="5" ry="3" fill="#f0a89c" opacity="0.55"/><ellipse cx="84" cy="66" rx="5" ry="3" fill="#f0a89c" opacity="0.55"/><ellipse cx="60" cy="70" rx="3" ry="2" fill="#2a2a3a"/><ellipse cx="60" cy="78" rx="6" ry="3" fill="none" stroke="#2a2a3a" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="22" r="3" fill="#f4d87c"/><circle cx="30" cy="18" r="2.5" fill="#f0a89c"/><circle cx="34" cy="17" r="2.5" fill="#c9b8e0"/><circle cx="36" cy="22" r="2.5" fill="#9cc3e8"/><circle cx="32" cy="22" r="1.5" fill="#fbf7ef"/></svg></div>
+        <div class="pip-avatar"><div style="width:62px;height:62px;border-radius:50%;background:var(--paper);border:1.5px solid var(--line);display:grid;place-items:center;font-family:var(--serif);font-size:26px;font-weight:500;color:var(--ink);letter-spacing:-0.02em;">YN</div></div>
         <div class="greeting-text">
-          <div class="greeting-hello">good morning,</div>
-          <div class="greeting-name">Your Name <span class="greeting-sun-glyph">☀</span></div>
-          <div class="greeting-meta">Friday, May 29 · Pip says: <em>“take it one job at a time.”</em></div>
+          <div class="greeting-hello">Good morning,</div>
+          <div class="greeting-name">Your Name.</div>
+          <div class="greeting-meta">Monday, June 1 · <em>"small steady acts."</em></div>
         </div>
       </div>
 
       <div class="greeting-right">
         <div class="streak-pill">
-          <span class="streak-emoji">🔥</span>
+          <span class="streak-emoji">·</span>
           <div>
             <div class="streak-count">0 days</div>
-            <div class="streak-sub">fresh start</div>
+            <div class="streak-sub">days, in a row</div>
           </div>
         </div>
-        <button class="celebrate-btn" onclick="triggerCelebrate()">🎉 Celebrate today</button>
+        <button class="celebrate-btn" onclick="triggerCelebrate()">Mark today done</button>
         <span id="server-status" class="server-status">server offline</span>
       </div>
     </div>
+
+
 
 <div class="grid-2col-12-10">
   
@@ -795,14 +834,14 @@
       <div class="weekly-body">
         <div class="weekly-ring">
           <svg viewBox="0 0 152 152" width="152" height="152" aria-label="weekly goal ring">
-            <circle cx="76" cy="76" r="64" fill="none" stroke="#FBF7EF" stroke-width="14"/>
+            <circle cx="76" cy="76" r="64" fill="none" stroke="#F2EFE8" stroke-width="14"/>
             <circle cx="76" cy="76" r="64" fill="none"
-              stroke="#F4D87C" stroke-width="14" stroke-linecap="round"
+              stroke="#E8D9A8" stroke-width="14" stroke-linecap="round"
               stroke-dasharray="0.0 402.1" transform="rotate(-90 76 76)"/>
-            <circle cx="76" cy="6"   r="4" fill="#F0A89C"/>
-            <circle cx="146" cy="76" r="4" fill="#9CC3E8"/>
-            <circle cx="76" cy="146" r="4" fill="#C9B8E0"/>
-            <circle cx="6"  cy="76"  r="4" fill="#B9DBC4"/>
+            <circle cx="76" cy="6"   r="4" fill="#B87363"/>
+            <circle cx="146" cy="76" r="4" fill="#3A6A8C"/>
+            <circle cx="76" cy="146" r="4" fill="#8A8580"/>
+            <circle cx="6"  cy="76"  r="4" fill="#8FA88E"/>
           </svg>
           <div class="weekly-ring-center">
             <div class="weekly-ring-num">0</div>
@@ -810,8 +849,8 @@
           </div>
         </div>
         <div class="weekly-meta">
-          <div class="hand-accent">you're 0% of the way there</div>
-          <div class="weekly-subtitle">Mondays are fresh starts.</div>
+          <div class="hand-accent">0 of 15 this week.</div>
+          <div class="weekly-subtitle">15 more to finish the week.</div>
           <div class="day-pills"><div class="day-pill">M</div><div class="day-pill">T</div><div class="day-pill">W</div><div class="day-pill">T</div><div class="day-pill">F</div><div class="day-pill">S</div><div class="day-pill">S</div></div>
         </div>
       </div>
@@ -824,13 +863,13 @@
       </div>
       <svg viewBox="0 0 280 82" width="100%" height="82"
            preserveAspectRatio="none" class="sparkline-svg">
-        <polygon points="0,70 0.0,70.0 21.5,70.0 43.1,70.0 64.6,70.0 86.2,70.0 107.7,70.0 129.2,70.0 150.8,70.0 172.3,70.0 193.8,70.0 215.4,70.0 236.9,70.0 258.5,70.0 280.0,70.0 280,70" fill="#9CC3E8" opacity="0.25"/>
-        <polyline points="0.0,70.0 21.5,70.0 43.1,70.0 64.6,70.0 86.2,70.0 107.7,70.0 129.2,70.0 150.8,70.0 172.3,70.0 193.8,70.0 215.4,70.0 236.9,70.0 258.5,70.0 280.0,70.0" fill="none" stroke="#5B8AB8"
+        <polygon points="0,70 0.0,70.0 21.5,70.0 43.1,70.0 64.6,70.0 86.2,70.0 107.7,70.0 129.2,70.0 150.8,70.0 172.3,70.0 193.8,70.0 215.4,70.0 236.9,70.0 258.5,70.0 280.0,70.0 280,70" fill="#3A6A8C" opacity="0.25"/>
+        <polyline points="0.0,70.0 21.5,70.0 43.1,70.0 64.6,70.0 86.2,70.0 107.7,70.0 129.2,70.0 150.8,70.0 172.3,70.0 193.8,70.0 215.4,70.0 236.9,70.0 258.5,70.0 280.0,70.0" fill="none" stroke="#234B68"
           stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="0.0" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="21.5" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="43.1" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="64.6" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="86.2" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="107.7" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="129.2" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="150.8" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="172.3" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="193.8" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="215.4" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="236.9" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="258.5" cy="70.0" r="1.5" fill="#E7DFCD"/><circle cx="280.0" cy="70.0" r="1.5" fill="#E7DFCD"/>
+        <circle cx="0.0" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="21.5" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="43.1" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="64.6" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="86.2" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="107.7" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="129.2" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="150.8" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="172.3" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="193.8" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="215.4" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="236.9" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="258.5" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="280.0" cy="70.0" r="1.5" fill="#D8D4CB"/>
       </svg>
       <div class="sparkline-axis">
-        <span>May 16</span><span>today</span>
+        <span>May 19</span><span>today</span>
       </div>
       <div class="sparkline-ctx">
         <strong>Best day:</strong> no apps yet. today is a blank page.
@@ -842,85 +881,85 @@
     <div class="card">
       <div class="card-head">
         <div class="kicker">your funnel</div>
-        <div class="card-title">From discovery to dream job</div>
+        <div class="card-title">Pipeline</div>
       </div>
       <div class="funnel-grid">
         <div class="funnel-cell">
-          <div class="funnel-tile" style="background:#FBF7EF;border: 1px solid #E7DFCD;opacity:1;">
-            <div class="funnel-count">22</div>
+          <div class="funnel-tile" style="background:#F2EFE8;border: 1px solid #D8D4CB;opacity:1;">
+            <div class="funnel-count">24</div>
             <div class="funnel-label">Active postings</div>
           </div>
           <div class="funnel-arrow">→</div>
         </div>
         <div class="funnel-cell">
-          <div class="funnel-tile" style="background:#F4D87C;border: none;opacity:0.55;">
+          <div class="funnel-tile" style="background:#E8D9A8;border: none;opacity:0.55;">
             <div class="funnel-count">0</div>
             <div class="funnel-label">Strong fits</div>
           </div>
           <div class="funnel-arrow">→</div>
         </div>
         <div class="funnel-cell">
-          <div class="funnel-tile" style="background:#9CC3E8;border: none;opacity:0.55;">
+          <div class="funnel-tile" style="background:#3A6A8C;border: none;opacity:0.55;">
             <div class="funnel-count">0</div>
             <div class="funnel-label">On her radar</div>
           </div>
           <div class="funnel-arrow">→</div>
         </div>
         <div class="funnel-cell">
-          <div class="funnel-tile" style="background:#C9B8E0;border: none;opacity:0.55;">
+          <div class="funnel-tile" style="background:#8A8580;border: none;opacity:0.55;">
             <div class="funnel-count">0</div>
             <div class="funnel-label">Tailored</div>
           </div>
           <div class="funnel-arrow">→</div>
         </div>
         <div class="funnel-cell">
-          <div class="funnel-tile" style="background:#F0A89C;border: none;opacity:0.55;">
+          <div class="funnel-tile" style="background:#B87363;border: none;opacity:0.55;">
             <div class="funnel-count">0</div>
             <div class="funnel-label">Applied</div>
           </div>
           <div class="funnel-arrow">→</div>
         </div>
         <div class="funnel-cell">
-          <div class="funnel-tile" style="background:#F4D87C;border: none;opacity:0.55;">
+          <div class="funnel-tile" style="background:#E8D9A8;border: none;opacity:0.55;">
             <div class="funnel-count">0</div>
             <div class="funnel-label">Interviewing</div>
           </div>
           <div class="funnel-arrow">→</div>
         </div>
         <div class="funnel-cell">
-          <div class="funnel-tile" style="background:#B9DBC4;border: none;opacity:0.55;">
+          <div class="funnel-tile" style="background:#8FA88E;border: none;opacity:0.55;">
             <div class="funnel-count">0</div>
             <div class="funnel-label">Offers</div>
           </div>
           
         </div></div>
-      <div class="funnel-footnote">each arrow is a tiny act of courage.</div>
+      <div class="funnel-footnote">each step happened because you made it happen.</div>
     </div>
 
 <div class="grid-2col-16-10">
   
     <div class="card">
       <div class="card-head">
-        <div class="kicker">today's blue-sky picks</div>
-        <div class="card-title">Pip picked these just for you
-          <span class="card-action">Pip&#x27;s top fits today</span>
+        <div class="kicker">selected</div>
+        <div class="card-title">Today&#x27;s three
+          <span class="card-action">Jobline&#x27;s top fits today</span>
         </div>
       </div>
       <div class="picks-grid">
-        <div class="pick-card" style="border-left: 5px solid #E7DFCD;">
+        <div class="pick-card" style="border-left: 5px solid #D8D4CB;">
           <div class="pick-head">
             <div>
               <div class="pick-company">NJ Farmland Preservation Program/State Agriculture Development Committee (SADC)</div>
               <a href="https://greenjobs.greenjobsearch.org/jobs/regional-farmland-preservation-program-coordinator/" target="_blank" rel="noopener" class="pick-role">Regional Farmland Preservation Program Coordinator</a>
             </div>
-            <div class="score-chip score-chip-pick" style="background:#F4D87C">10</div>
+            <div class="score-chip score-chip-pick" style="background:#E8D9A8">10</div>
           </div>
           <div class="pick-meta">
             <span>📍 Trenton, New Jersey, United States</span>
             <span>·</span>
             <span>greenjobs</span>
             <span>·</span>
-            <span>just now</span>
+            <span>3d ago</span>
           </div>
           <div class="pick-actions">
             <a class="btn-tailor btn-pick" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Regional%20Farmland%20Preservation%20Program%20Coordinator%20at%20NJ%20Farmland%20Preservation%20Program/State%20Agriculture%20Development%20Committee%20%28SADC%29.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/regional-farmland-preservation-program-coordinator/" target="_blank" rel="noopener">Tailor →</a>
@@ -932,22 +971,22 @@
   
     <div class="card pick-me-up-card">
       <div class="card-head">
-        <div class="kicker">huckleberry's daily pick-me-up</div>
-        <div class="card-title">A little something for you
+        <div class="kicker">a small thing</div>
+        <div class="card-title">Read this slowly
           <button class="shuffle-btn" onclick="shufflePickMeUp()">🎲 new one</button>
         </div>
       </div>
       <div class="photo-placeholder" id="pickmeup-photo"
-           style="background: repeating-linear-gradient(135deg, #C5D8E8 0 14px, #bfd2e2 14px 28px);">
+           style="background: repeating-linear-gradient(135deg, #E8C5C5 0 14px, #e2bfbf 14px 28px);">
         <img id="pickmeup-img"
              alt="A friendly dog for you"
              referrerpolicy="no-referrer"
              onerror="this.style.display='none'">
-        <div class="photo-caption" id="pickmeup-caption">a small friend, just for you</div>
+        <div class="photo-caption" id="pickmeup-caption">borrowed for a moment</div>
       </div>
       <div class="joke-box">
-        <div class="joke-q hand-accent" id="joke-q">What did the cover letter say to the hiring manager?</div>
-        <div class="joke-a" id="joke-a">&#x27;Dear Sir/Madam, please love me.&#x27;</div>
+        <div class="joke-q hand-accent" id="joke-q">What&#x27;s a job seeker&#x27;s favorite tea?</div>
+        <div class="joke-a" id="joke-a">Recruitea. (It never arrives.)</div>
       </div>
     </div>
 </div>
@@ -955,7 +994,7 @@
 
     <div class="card">
       <div class="card-head">
-        <div class="kicker">your shelf</div>
+        <div class="kicker">marked</div>
         <div class="card-title">Achievements <span class="card-count">· 0 of 8</span></div>
       </div>
       <div class="achievements-grid">
@@ -1047,7 +1086,7 @@
     <div>
       <div class="kicker">all postings</div>
       <div class="card-title">The full list — search & filter
-        <span class="card-action">showing <strong id="count-visible">22</strong> of 22</span>
+        <span class="card-action">showing <strong id="count-visible">24</strong> of 24</span>
       </div>
     </div>
     <button class="add-job-toggle-btn" id="add-job-toggle-btn" onclick="toggleAddJob()">+ Add Job</button>
@@ -1132,9 +1171,33 @@
           <div class="row-meta">greenjobs · Wed, 27 Ma</div>
         </td>
         <td class="td-location">Trenton, New Jersey, United States</td>
-        <td class="td-score"><span class="score-chip" style="background:#E7DFCD">10</span></td>
+        <td class="td-score"><span class="score-chip" style="background:#D8D4CB">10</span></td>
         <td class="td-interest"><select class="interest-select interest-not_reviewed" data-posting-id="22" onchange="onInterestChange(event, 22)" title="Interest level"><option value="not_reviewed" selected>—</option><option value="very_interested">♥ Very</option><option value="interested">● Interested</option><option value="not_interested">Pass</option></select></td>
         <td class="td-action"><button type="button" class="btn-apply" data-posting-id="22" onclick="openApplyModal(22)">Apply →</button><a class="btn-tailor" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Regional%20Farmland%20Preservation%20Program%20Coordinator%20at%20NJ%20Farmland%20Preservation%20Program/State%20Agriculture%20Development%20Committee%20%28SADC%29.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/regional-farmland-preservation-program-coordinator/" target="_blank" rel="noopener">Tailor →</a></td>
+    </tr>
+
+    <tr class="job-row row-filtered app-unapplied interest-row-not_reviewed" data-app-state="unapplied" data-interest="not_reviewed" data-tier="filtered" data-source="greenjobs" data-score="0.0000" data-company="greenlight america" data-search="greenlight america industry content senior associate anywhere">
+        <td class="td-company"><span class="row-company">Greenlight America</span></td>
+        <td class="td-role">
+          <a href="https://greenjobs.greenjobsearch.org/jobs/industry-content-senior-associate/" target="_blank" rel="noopener">Industry Content Senior Associate</a>
+          <div class="row-meta">greenjobs · Fri, 29 Ma</div>
+        </td>
+        <td class="td-location">Anywhere</td>
+        <td class="td-score"><span class="score-chip score-chip-filtered">—</span></td>
+        <td class="td-interest"><select class="interest-select interest-not_reviewed" data-posting-id="41" onchange="onInterestChange(event, 41)" title="Interest level"><option value="not_reviewed" selected>—</option><option value="very_interested">♥ Very</option><option value="interested">● Interested</option><option value="not_interested">Pass</option></select></td>
+        <td class="td-action"><button type="button" class="btn-apply" data-posting-id="41" onclick="openApplyModal(41)">Apply →</button><a class="btn-tailor" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Industry%20Content%20Senior%20Associate%20at%20Greenlight%20America.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/industry-content-senior-associate/" target="_blank" rel="noopener">Tailor →</a></td>
+    </tr>
+
+    <tr class="job-row row-filtered app-unapplied interest-row-not_reviewed" data-app-state="unapplied" data-interest="not_reviewed" data-tier="filtered" data-source="greenjobs" data-score="0.0000" data-company="techcongress" data-search="techcongress congressional innovation fellow washington, district of columbia, united states">
+        <td class="td-company"><span class="row-company">TechCongress</span></td>
+        <td class="td-role">
+          <a href="https://greenjobs.greenjobsearch.org/jobs/congressional-innovation-fellow/" target="_blank" rel="noopener">Congressional Innovation Fellow</a>
+          <div class="row-meta">greenjobs · Fri, 29 Ma</div>
+        </td>
+        <td class="td-location">Washington, District of Columbia, United States</td>
+        <td class="td-score"><span class="score-chip score-chip-filtered">—</span></td>
+        <td class="td-interest"><select class="interest-select interest-not_reviewed" data-posting-id="42" onchange="onInterestChange(event, 42)" title="Interest level"><option value="not_reviewed" selected>—</option><option value="very_interested">♥ Very</option><option value="interested">● Interested</option><option value="not_interested">Pass</option></select></td>
+        <td class="td-action"><button type="button" class="btn-apply" data-posting-id="42" onclick="openApplyModal(42)">Apply →</button><a class="btn-tailor" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Congressional%20Innovation%20Fellow%20at%20TechCongress.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/congressional-innovation-fellow/" target="_blank" rel="noopener">Tailor →</a></td>
     </tr>
 
     <tr class="job-row row-filtered app-unapplied interest-row-not_reviewed" data-app-state="unapplied" data-interest="not_reviewed" data-tier="filtered" data-source="greenjobs" data-score="0.0000" data-company="smart surfaces coalition" data-search="smart surfaces coalition media/communications summer intern washington, district of columbia, united states">
@@ -1394,7 +1457,7 @@
   <div class="table-empty" id="empty-state" style="display:none;">
     <div class="hand-accent">nothing matches that combo.</div>
     <div style="font-size:12px; color: var(--sub); margin-top: 6px;">
-      Pip suggests <a href="#" onclick="resetFilters(); return false;" style="color: var(--sky-dk); font-weight: 700; text-decoration: underline;">clearing filters</a> and trying again.
+      Jobline suggests <a href="#" onclick="resetFilters(); return false;" style="color: var(--sky-dk); font-weight: 700; text-decoration: underline;">clearing filters</a> and trying again.
     </div>
   </div>
 
@@ -1483,20 +1546,20 @@
   </div>
 </div>
 
-<div class="page-footer">made with care · for Your Name · <span style="font-family: var(--font-sans); font-size: 11px;">generated May 29, 2026 at 10:53 AM · last scrape 2026-05-29</span></div>
+<div class="page-footer">made with care · for Your Name · <span style="font-family: var(--font-sans); font-size: 11px;">generated June 1, 2026 at 12:45 PM · last scrape 2026-06-01</span></div>
 <div class="page-credit">originally by <a href="https://github.com/stansond-afk" target="_blank" rel="noopener">Stanson Dobbs</a> · MIT licensed · <a href="https://github.com/stansond-afk/job-pipeline" target="_blank" rel="noopener">source</a></div>
 
 <script>
 
-const AFFIRMATIONS = ["Great job, Your Name!", "You showed up today. That's enough.", "Every 'no' is data, not a verdict.", "Look at you go \ud83d\udc40", "Beautiful work. Onward.", "Pip is so proud of you.", "You are doing the hard thing. Slowly. Bravely.", "Future you is cheering for present you.", "Tailoring is the hardest part. You did it."];
+const AFFIRMATIONS = ["You sent applications today. That is real work.", "A 'no' is not a verdict. It is information.", "You showed up. That's enough today.", "Steady effort. The work compounds.", "One more. Then rest.", "You did the thing you said you would do.", "Future you is grateful for today's effort."];
 const JOKES = [["Why did the r\u00e9sum\u00e9 go to therapy?", "Too many unresolved bullet points."], ["What did the cover letter say to the hiring manager?", "'Dear Sir/Madam, please love me.'"], ["How do you make a recruiter laugh?", "Tell them your salary expectations."], ["Why don't job searches get along with calendars?", "Too many 'we'll get back to you next week's."], ["What's a job seeker's favorite tea?", "Recruitea. (It never arrives.)"], ["How many recruiters does it take to change a lightbulb?", "We'll circle back on that."], ["Why did {mascot} apply to be a barista?", "Heard the bar was low."], ["What's the difference between an application and a black hole?", "Black holes occasionally emit something."], ["Why are job descriptions like horoscopes?", "Vague, optimistic, and require 5 years of relevant experience."], ["{mascot}'s wisdom on networking events:", "'The shrimp is free. The smiling is not.'"], ["What did the LinkedIn algorithm say to the qualified candidate?", "Have you considered relocating to Iceland?"], ["Why was the ATS rejected from improv class?", "It couldn't say 'yes, and' to a single resume."], ["How do you spot a senior engineer at a career fair?", "They're the one quietly eating all the M&Ms."], ["What's the most common ghost story?", "'They said they'd update me by Friday.'"], ["{mascot}'s take on take-home assignments:", "'Eight hours of free labor, but make it a culture fit.'"], ["What's an introvert's favorite interview format?", "The one that got cancelled."], ["Why did the candidate cross the road?", "To submit the same r\u00e9sum\u00e9 to a different portal."], ["{mascot} on the words 'rockstar' and 'ninja':", "'Neither of those people would sit in your meetings.'"]];
-const MASCOT_NAME = "Pip";
+const MASCOT_NAME = "Jobline";
 const PALETTE = {
-  sun:   '#F4D87C',
-  coral: '#F0A89C',
-  sky:   '#9CC3E8',
-  lilac: '#C9B8E0',
-  mint:  '#B9DBC4',
+  sun:   '#E8D9A8',
+  coral: '#B87363',
+  sky:   '#3A6A8C',
+  lilac: '#8A8580',
+  mint:  '#8FA88E',
 };
 const CONFETTI_PALETTE = [PALETTE.sun, PALETTE.coral, PALETTE.sky, PALETTE.lilac, PALETTE.mint];
 
