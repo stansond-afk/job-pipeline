@@ -248,6 +248,13 @@ def _truncate_to_sentence(text: str, max_chars: int) -> str:
 # Data fetching
 # ---------------------------------------------------------------------------
 
+# Dashboard render floor. Postings below this fit score don't appear in the
+# rendered table — they stay in the DB (and in the funnel's "Active postings"
+# count) but never make it to index.html. Applied-to and interest-flagged
+# rows bypass the floor regardless of score.
+RENDER_MIN_FIT_SCORE = 0.15
+
+
 def fetch_postings(conn):
     """Dedup + priority-bucket sort.
 
@@ -272,6 +279,11 @@ def fetch_postings(conn):
             FROM postings p
             LEFT JOIN applications a ON a.posting_id = p.id
             WHERE p.is_active = 1
+              AND (
+                p.fit_score >= {RENDER_MIN_FIT_SCORE}
+                OR a.id IS NOT NULL
+                OR p.interest_level IN ('interested','very_interested')
+              )
         )
         SELECT
             id, source, company, role, location, url, posted_at,

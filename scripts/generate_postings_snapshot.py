@@ -30,6 +30,11 @@ OUT_PATH = Path(__file__).resolve().parent.parent / "dashboard" / "postings.json
 # substance; longer JDs get truncated with an ellipsis.
 JD_TEXT_CAP = 3000
 
+# Match the dashboard's render floor — the Apply modal only opens for
+# postings the user can actually see, so we don't need to ship snapshots
+# for filtered-out rows. Kept in sync with generate_dashboard.RENDER_MIN_FIT_SCORE.
+SNAPSHOT_MIN_FIT_SCORE = 0.15
+
 SNAPSHOT_COLUMNS = [
     "id",
     "company",
@@ -44,11 +49,18 @@ SNAPSHOT_COLUMNS = [
 def main() -> int:
     conn = connect()
     cur = conn.execute(f"""
-        SELECT {', '.join(SNAPSHOT_COLUMNS)}
-        FROM postings
-        WHERE is_active = 1
-        ORDER BY id
-    """)
+        SELECT {', '.join('p.' + c for c in SNAPSHOT_COLUMNS)}
+        FROM postings p
+        LEFT JOIN applications a ON a.posting_id = p.id
+        WHERE p.is_active = 1
+          AND (
+            p.fit_score >= ?
+            OR a.id IS NOT NULL
+            OR p.interest_level IN ('interested','very_interested')
+          )
+        GROUP BY p.id
+        ORDER BY p.id
+    """, (SNAPSHOT_MIN_FIT_SCORE,))
     rows = []
     truncated_count = 0
     for r in cur.fetchall():

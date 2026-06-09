@@ -80,3 +80,48 @@ def cleanup_summary_message(deleted: int, deactivated: int, stale_days: int) -> 
         f"deleted {deleted} unapplied + deactivated {deactivated} applied = "
         f"{deleted + deactivated} total stale rows handled."
     )
+
+
+def cleanup_low_fit_postings(
+    conn: sqlite3.Connection,
+    min_fit_score: float,
+) -> int:
+    """Delete postings scoring below the fit-score floor.
+
+    Preserves anything the user has touched: applied-to postings and rows
+    flagged interested/very_interested stay regardless of score (a low
+    score on a flagged row means the scorer is miscalibrated, not that
+    the posting is noise).
+
+    Before deleting, NULLs out url_telemetry.posting_id references —
+    url_telemetry has a FK to postings(id) without ON DELETE CASCADE,
+    so SQLite (with foreign_keys=ON) blocks the delete otherwise.
+    Telemetry rows themselves are kept (still tells us the URL was seen).
+
+    Returns deleted_count. Caller is responsible for committing.
+    """
+    conn.execute(
+        """
+        UPDATE url_telemetry
+        SET posting_id = NULL
+        WHERE posting_id IN (
+            SELECT id FROM postings
+            WHERE fit_score < ?
+              AND id NOT IN (SELECT posting_id FROM applications)
+              AND (interest_level IS NULL
+                   OR interest_level NOT IN ('interested','very_interested'))
+        )
+        """,
+        (min_fit_score,),
+    )
+    cur = conn.execute(
+        """
+        DELETE FROM postings
+        WHERE fit_score < ?
+          AND id NOT IN (SELECT posting_id FROM applications)
+          AND (interest_level IS NULL
+               OR interest_level NOT IN ('interested','very_interested'))
+        """,
+        (min_fit_score,),
+    )
+    return cur.rowcount
