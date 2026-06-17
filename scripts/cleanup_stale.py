@@ -21,10 +21,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from jobpipeline.cleanup import (
+    DEFAULT_RETIRE_LOOKBACK_HOURS,
     DEFAULT_STALE_DAYS,
     cleanup_low_fit_postings,
     cleanup_stale_postings,
     cleanup_summary_message,
+    retire_closed_postings,
+    retire_summary_message,
 )
 from jobpipeline.db import connect
 
@@ -40,6 +43,15 @@ def main() -> int:
         help="If set, also delete unapplied + unflagged postings with fit_score below this floor (e.g. 0.05)",
     )
     parser.add_argument(
+        "--retire-lookback-hours", type=int, default=DEFAULT_RETIRE_LOOKBACK_HOURS,
+        help=("Retire postings that dropped off a board scraped successfully within "
+              f"this many hours (default: {DEFAULT_RETIRE_LOOKBACK_HOURS})"),
+    )
+    parser.add_argument(
+        "--no-retire", action="store_true",
+        help="Skip closed-posting retirement (only run time-based staleness)",
+    )
+    parser.add_argument(
         "--dry-run", action="store_true",
         help="Print what would happen without modifying the DB",
     )
@@ -49,6 +61,13 @@ def main() -> int:
     try:
         if args.dry_run:
             from datetime import datetime, timedelta, timezone
+            print("DRY RUN — no changes will be made.")
+
+            if not args.no_retire:
+                r_del, r_deact = retire_closed_postings(
+                    conn, args.retire_lookback_hours, dry_run=True
+                )
+                print(retire_summary_message(r_del, r_deact))
             cutoff = (datetime.now(timezone.utc) - timedelta(days=args.stale_days)).isoformat(timespec="seconds")
 
             would_deactivate = conn.execute(
@@ -65,7 +84,6 @@ def main() -> int:
                 (cutoff,),
             ).fetchone()[0]
 
-            print(f"DRY RUN — no changes will be made.")
             print(cleanup_summary_message(would_delete, would_deactivate, args.stale_days))
 
             if args.min_fit_score is not None:
@@ -79,6 +97,11 @@ def main() -> int:
                 ).fetchone()[0]
                 print(f"Low-fit cleanup (<{args.min_fit_score} floor): would delete {would_low_fit} rows.")
             return 0
+
+        if not args.no_retire:
+            r_deleted, r_deactivated = retire_closed_postings(conn, args.retire_lookback_hours)
+            conn.commit()
+            print(retire_summary_message(r_deleted, r_deactivated))
 
         deleted, deactivated = cleanup_stale_postings(conn, args.stale_days)
         conn.commit()
