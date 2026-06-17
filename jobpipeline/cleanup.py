@@ -60,6 +60,24 @@ def cleanup_stale_postings(
 
     # Step 2: delete stale postings with no application row.
     # Run this AFTER step 1 so the JOIN check is unambiguous.
+    #
+    # url_telemetry has a FK to postings(id) WITHOUT ON DELETE CASCADE, so
+    # SQLite (foreign_keys=ON) blocks deleting any posting that has telemetry
+    # rows — this is what was crashing the nightly. NULL those references
+    # first (same approach as cleanup_low_fit_postings); the telemetry rows
+    # themselves are kept. The predicate must match the DELETE exactly.
+    conn.execute(
+        """
+        UPDATE url_telemetry
+        SET posting_id = NULL
+        WHERE posting_id IN (
+            SELECT id FROM postings
+            WHERE last_seen < ?
+              AND id NOT IN (SELECT posting_id FROM applications)
+        )
+        """,
+        (cutoff,),
+    )
     cur = conn.execute(
         """
         DELETE FROM postings
