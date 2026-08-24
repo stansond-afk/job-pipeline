@@ -805,7 +805,7 @@
         <div class="greeting-text">
           <div class="greeting-hello">Good morning,</div>
           <div class="greeting-name">Your Name.</div>
-          <div class="greeting-meta">Friday, August 21 · <em>"small steady acts."</em></div>
+          <div class="greeting-meta">Monday, August 24 · <em>"small steady acts."</em></div>
         </div>
       </div>
 
@@ -869,7 +869,7 @@
         <circle cx="0.0" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="21.5" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="43.1" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="64.6" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="86.2" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="107.7" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="129.2" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="150.8" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="172.3" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="193.8" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="215.4" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="236.9" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="258.5" cy="70.0" r="1.5" fill="#D8D4CB"/><circle cx="280.0" cy="70.0" r="1.5" fill="#D8D4CB"/>
       </svg>
       <div class="sparkline-axis">
-        <span>Aug 8</span><span>today</span>
+        <span>Aug 11</span><span>today</span>
       </div>
       <div class="sparkline-ctx">
         <strong>Best day:</strong> no apps yet. today is a blank page.
@@ -886,7 +886,7 @@
       <div class="funnel-grid">
         <div class="funnel-cell">
           <div class="funnel-tile" style="background:#F2EFE8;border: 1px solid #D8D4CB;opacity:1;">
-            <div class="funnel-count">28</div>
+            <div class="funnel-count">30</div>
             <div class="funnel-label">Active postings</div>
           </div>
           <div class="funnel-arrow">→</div>
@@ -938,16 +938,36 @@
 
 <div class="grid-2col-16-10">
   
-        <div class="card">
-          <div class="card-head">
-            <div class="kicker">selected</div>
-            <div class="card-title">Today&#x27;s three</div>
-          </div>
-          <div class="empty-state">
-            <div class="hand-accent">an empty sky — what'll you send first?</div>
-            <div class="empty-sub">Jobline is waiting for the scrapers to find something good.</div>
-          </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="kicker">selected</div>
+        <div class="card-title">Today&#x27;s three
+          <span class="card-action">Jobline&#x27;s top fits today</span>
         </div>
+      </div>
+      <div class="picks-grid">
+        <div class="pick-card" style="border-left: 5px solid #D8D4CB;">
+          <div class="pick-head">
+            <div>
+              <div class="pick-company">Casey Trees</div>
+              <a href="https://greenjobs.greenjobsearch.org/jobs/chief-financial-officer-2/" target="_blank" rel="noopener" class="pick-role">Chief Financial Officer</a>
+            </div>
+            <div class="score-chip score-chip-pick" style="background:#E8D9A8">36</div>
+          </div>
+          <div class="pick-meta">
+            <span>📍 Washington, District of Columbia, United States</span>
+            <span>·</span>
+            <span>greenjobs</span>
+            <span>·</span>
+            <span>just now</span>
+          </div>
+          <div class="pick-actions">
+            <a class="btn-tailor btn-pick" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Chief%20Financial%20Officer%20at%20Casey%20Trees.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/chief-financial-officer-2/" target="_blank" rel="noopener">Tailor →</a>
+            <button type="button" class="btn-apply btn-pick btn-pick-apply"
+                    onclick="openApplyModal(681)">Apply →</button>
+          </div>
+        </div></div>
+    </div>
   
     <div class="card pick-me-up-card">
       <div class="card-head">
@@ -957,16 +977,16 @@
         </div>
       </div>
       <div class="photo-placeholder" id="pickmeup-photo"
-           style="background: repeating-linear-gradient(135deg, #C5E8D8 0 14px, #bfe2d2 14px 28px);">
+           style="background: repeating-linear-gradient(135deg, #E8E1C5 0 14px, #e2dbbf 14px 28px);">
         <img id="pickmeup-img"
              alt="A friendly dog for you"
              referrerpolicy="no-referrer"
              onerror="this.style.display='none'">
-        <div class="photo-caption" id="pickmeup-caption">look at those paws</div>
+        <div class="photo-caption" id="pickmeup-caption">today&#x27;s good dog</div>
       </div>
       <div class="joke-box">
-        <div class="joke-q hand-accent" id="joke-q">What&#x27;s the most common ghost story?</div>
-        <div class="joke-a" id="joke-a">&#x27;They said they&#x27;d update me by Friday.&#x27;</div>
+        <div class="joke-q hand-accent" id="joke-q">Why did the candidate cross the road?</div>
+        <div class="joke-a" id="joke-a">To submit the same résumé to a different portal.</div>
       </div>
     </div>
 </div>
@@ -1066,7 +1086,7 @@
     <div>
       <div class="kicker">all postings</div>
       <div class="card-title">The full list — search & filter
-        <span class="card-action">showing <strong id="count-visible">0</strong> of 0</span>
+        <span class="card-action">showing <strong id="count-visible">1</strong> of 1</span>
       </div>
     </div>
     <button class="add-job-toggle-btn" id="add-job-toggle-btn" onclick="toggleAddJob()">+ Add Job</button>
@@ -1144,6 +1164,17 @@
     </thead>
     <tbody id="jobs-body">
 
+    <tr class="job-row row-medium app-unapplied interest-row-not_reviewed" data-app-state="unapplied" data-interest="not_reviewed" data-tier="medium" data-source="greenjobs" data-score="0.3688" data-company="casey trees" data-search="casey trees chief financial officer washington, district of columbia, united states">
+        <td class="td-company"><span class="row-company">Casey Trees</span></td>
+        <td class="td-role">
+          <a href="https://greenjobs.greenjobsearch.org/jobs/chief-financial-officer-2/" target="_blank" rel="noopener">Chief Financial Officer</a>
+          <div class="row-meta">greenjobs · Fri, 21 Au</div>
+        </td>
+        <td class="td-location">Washington, District of Columbia, United States</td>
+        <td class="td-score"><span class="score-chip" style="background:#F2EFE8">36</span></td>
+        <td class="td-interest"><select class="interest-select interest-not_reviewed" data-posting-id="681" onchange="onInterestChange(event, 681)" title="Interest level"><option value="not_reviewed" selected>—</option><option value="very_interested">♥ Very</option><option value="interested">● Interested</option><option value="not_interested">Pass</option></select></td>
+        <td class="td-action"><button type="button" class="btn-apply" data-posting-id="681" onclick="openApplyModal(681)">Apply →</button><a class="btn-tailor" href="https://claude.ai/new?q=Please%20tailor%20Your%20Name%27s%20resume%20and%20cover%20letter%20for%20this%20role%3A%20Chief%20Financial%20Officer%20at%20Casey%20Trees.%20Job%20URL%3A%20https%3A//greenjobs.greenjobsearch.org/jobs/chief-financial-officer-2/" target="_blank" rel="noopener">Tailor →</a></td>
+    </tr>
     </tbody>
   </table>
 
@@ -1239,7 +1270,7 @@
   </div>
 </div>
 
-<div class="page-footer">made with care · for Your Name · <span style="font-family: var(--font-sans); font-size: 11px;">generated August 21, 2026 at 7:50 AM · last scrape 2026-08-21</span></div>
+<div class="page-footer">made with care · for Your Name · <span style="font-family: var(--font-sans); font-size: 11px;">generated August 24, 2026 at 8:03 AM · last scrape 2026-08-24</span></div>
 <div class="page-credit">originally by <a href="https://github.com/stansond-afk" target="_blank" rel="noopener">Stanson Dobbs</a> · MIT licensed · <a href="https://github.com/stansond-afk/job-pipeline" target="_blank" rel="noopener">source</a></div>
 
 <script>
